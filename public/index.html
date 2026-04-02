@@ -72,20 +72,20 @@
 
   /* Header */
   .header {
-    background: #fff;
+    background: #F26522;
     text-align: center;
     padding: 48px 20px 20px;
-    border-bottom: 0.5px solid #d1d1d6;
   }
   .header h1 {
     font-size: 20px;
     font-weight: 800;
     letter-spacing: 1.5px;
     text-transform: uppercase;
+    color: #fff;
   }
   .header p {
     font-size: 13px;
-    color: #8e8e93;
+    color: rgba(255,255,255,0.8);
     margin-top: 2px;
   }
 
@@ -107,7 +107,7 @@
     justify-content: center;
     width: 20px;
     height: 20px;
-    background: #1c1c1e;
+    background: #F26522;
     color: #fff;
     border-radius: 50%;
     font-size: 11px;
@@ -153,7 +153,7 @@
     line-height: 1.4;
   }
   .field-input::placeholder { color: #c7c7cc; }
-  .field-input.autofilled { color: #34c759; font-weight: 500; }
+  .field-input.autofilled { color: #F26522; font-weight: 500; }
   .field-note {
     font-size: 11px;
     color: #aeaeb2;
@@ -174,8 +174,8 @@
   /* Auto tag */
   .auto-tag {
     display: inline-block;
-    background: rgba(52,199,89,0.12);
-    color: #34c759;
+    background: rgba(242,101,34,0.12);
+    color: #F26522;
     font-size: 9px;
     padding: 1px 5px;
     border-radius: 4px;
@@ -380,8 +380,8 @@
     background: #fff;
   }
   .equip-toggle.checked {
-    background: #34c759;
-    border-color: #34c759;
+    background: #F26522;
+    border-color: #F26522;
   }
   .equip-toggle.checked::after {
     content: '';
@@ -511,15 +511,15 @@
   <div class="card">
     <div class="field">
       <div class="field-label" data-es="Nombre" data-en="First Name"></div>
-      <input class="field-input" type="text" data-ph-es="Juan" data-ph-en="John">
+      <input id="fname" class="field-input" type="text" data-ph-es="Juan" data-ph-en="John" oninput="syncFullName()">
     </div>
     <div class="field">
       <div class="field-label" data-es="Segundo Nombre" data-en="Middle Name"></div>
-      <input class="field-input" type="text" data-ph-es="Carlos" data-ph-en="Michael">
+      <input id="mname" class="field-input" type="text" data-ph-es="Carlos" data-ph-en="Michael" oninput="syncFullName()">
     </div>
     <div class="field">
       <div class="field-label" data-es="Apellido" data-en="Last Name"></div>
-      <input class="field-input" type="text" data-ph-es="López" data-ph-en="Smith">
+      <input id="lname" class="field-input" type="text" data-ph-es="López" data-ph-en="Smith" oninput="syncFullName()">
     </div>
     <div class="field ac-wrap">
       <div class="field-label"><span data-es="Dirección" data-en="Street Address"></span></div>
@@ -665,8 +665,8 @@
       <div class="policy-text" id="policyHS">
         <!-- filled by language -->
       </div>
-      <div class="field-label" data-es="Nombre Completo" data-en="Full Name"></div>
-      <input class="field-input" type="text" data-ph-es="Tu nombre completo" data-ph-en="Your full name">
+      <div class="field-label"><span data-es="Nombre Completo" data-en="Full Name"></span> <span class="auto-tag">AUTO</span></div>
+      <input class="field-input fullname-auto" type="text" data-ph-es="Se llena automáticamente" data-ph-en="Auto-filled" readonly>
     </div>
     <div class="field">
       <div class="field-label" data-es="Firma" data-en="Signature"></div>
@@ -753,8 +753,8 @@
       <div class="policy-text" id="policyHandbook">
         <!-- filled by language -->
       </div>
-      <div class="field-label" data-es="Nombre Completo" data-en="Full Name"></div>
-      <input class="field-input" type="text" data-ph-es="Tu nombre completo" data-ph-en="Your full name">
+      <div class="field-label"><span data-es="Nombre Completo" data-en="Full Name"></span> <span class="auto-tag">AUTO</span></div>
+      <input class="field-input fullname-auto" type="text" data-ph-es="Se llena automáticamente" data-ph-en="Auto-filled" readonly>
     </div>
     <div class="field">
       <div class="field-label" data-es="Firma" data-en="Signature"></div>
@@ -896,6 +896,19 @@ function toggleEquip(toggleEl) {
   }
 }
 
+// ========== AUTO-FILL NAME ==========
+function syncFullName() {
+  var f = document.getElementById('fname').value.trim();
+  var m = document.getElementById('mname').value.trim();
+  var l = document.getElementById('lname').value.trim();
+  var full = [f, m, l].filter(Boolean).join(' ');
+  document.querySelectorAll('.fullname-auto').forEach(function(el) {
+    el.value = full;
+    if (full) el.classList.add('autofilled');
+    else el.classList.remove('autofilled');
+  });
+}
+
 // ========== SEGMENTED CONTROL ==========
 function selectSeg(el) {
   el.parentNode.querySelectorAll('.seg-option').forEach(function(s) { s.classList.remove('selected'); });
@@ -960,6 +973,7 @@ function initSignatures() {
     var ctx = canvas.getContext('2d');
     var drawing = false;
     var lastX, lastY;
+    var savedImage = null; // persist signature
 
     function resizeCanvas() {
       var rect = canvas.getBoundingClientRect();
@@ -971,10 +985,23 @@ function initSignatures() {
       ctx.lineWidth = 2.5;
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
+      // Restore saved signature after resize
+      if (savedImage) {
+        var img = new Image();
+        img.onload = function() {
+          ctx.drawImage(img, 0, 0, rect.width, rect.height);
+        };
+        img.src = savedImage;
+      }
     }
 
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
+
+    function saveSignature() {
+      savedImage = canvas.toDataURL('image/png');
+      canvas._sigData = savedImage;
+    }
 
     function getPos(e) {
       var rect = canvas.getBoundingClientRect();
@@ -1004,8 +1031,11 @@ function initSignatures() {
     }
 
     function stopDraw(e) {
-      if (drawing) e.preventDefault();
-      drawing = false;
+      if (drawing) {
+        e.preventDefault();
+        drawing = false;
+        saveSignature();
+      }
     }
 
     // Touch events (mobile)
@@ -1018,16 +1048,23 @@ function initSignatures() {
     canvas.addEventListener('mousedown', startDraw);
     canvas.addEventListener('mousemove', draw);
     canvas.addEventListener('mouseup', stopDraw);
-    canvas.addEventListener('mouseleave', stopDraw);
+    canvas.addEventListener('mouseleave', function(e) {
+      if (drawing) { drawing = false; saveSignature(); }
+    });
+
+    // Store clear function on canvas for clearSig
+    canvas._clearSig = function() {
+      savedImage = null;
+      canvas._sigData = null;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      container.classList.remove('has-sig');
+    };
   });
 }
 
 function clearSig(btn) {
-  var container = btn.parentElement;
-  var canvas = container.querySelector('.sig-canvas');
-  var ctx = canvas.getContext('2d');
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  container.classList.remove('has-sig');
+  var canvas = btn.parentElement.querySelector('.sig-canvas');
+  canvas._clearSig();
 }
 
 // ========== GOOGLE PLACES (Custom Inline Dropdown) ==========
