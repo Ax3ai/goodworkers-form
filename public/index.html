@@ -214,34 +214,117 @@
   }
 
   /* Upload */
-  .upload-box {
-    background: #f2f2f7;
-    border-radius: 10px;
-    padding: 20px 16px;
-    text-align: center;
-    color: #8e8e93;
-    font-size: 14px;
+  .upload-area {
     margin-top: 6px;
-    cursor: pointer;
-    transition: background 0.15s;
-    -webkit-tap-highlight-color: transparent;
   }
-  .upload-box:active { background: #e5e5ea; }
-  .upload-box strong { color: #3a3a3c; display: block; margin-bottom: 2px; }
-
-  /* Signature */
-  .signature-box {
-    background: #f2f2f7;
-    border-radius: 10px;
-    height: 100px;
+  .upload-btn {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 8px;
+    width: 100%;
+    background: #f2f2f7;
+    border: none;
+    border-radius: 10px;
+    padding: 16px;
+    font-size: 15px;
+    font-family: inherit;
+    color: #3a3a3c;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.15s;
+  }
+  .upload-btn:active { background: #e5e5ea; }
+  .upload-btn svg { flex-shrink: 0; }
+  .upload-input { display: none; }
+  .upload-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .upload-thumb {
+    position: relative;
+    width: 72px;
+    height: 72px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #e5e5ea;
+  }
+  .upload-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .upload-thumb .file-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: 11px;
+    color: #636366;
+    text-align: center;
+    padding: 4px;
+    word-break: break-all;
+  }
+  .upload-thumb .remove-btn {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 22px;
+    height: 22px;
+    background: #ff3b30;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    font-size: 13px;
+    line-height: 18px;
+    text-align: center;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Signature */
+  .sig-container {
+    margin-top: 6px;
+    position: relative;
+  }
+  .sig-canvas {
+    width: 100%;
+    height: 120px;
+    background: #f2f2f7;
+    border-radius: 10px;
+    touch-action: none;
+    cursor: crosshair;
+    display: block;
+  }
+  .sig-placeholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     color: #c7c7cc;
     font-size: 15px;
-    margin-top: 6px;
-    cursor: pointer;
+    pointer-events: none;
+    transition: opacity 0.2s;
   }
+  .sig-container.has-sig .sig-placeholder { opacity: 0; }
+  .sig-clear {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(0,0,0,0.06);
+    border: none;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 12px;
+    color: #8e8e93;
+    cursor: pointer;
+    font-family: inherit;
+    display: none;
+  }
+  .sig-container.has-sig .sig-clear { display: block; }
 
   /* Policy */
   .policy-text {
@@ -494,17 +577,25 @@
   <div class="card">
     <div class="field">
       <div class="field-label"><span data-es="Licencia de Conducir — Frente" data-en="Driver's License — Front"></span> <span class="optional" data-es="(Opcional)" data-en="(Optional)"></span></div>
-      <div class="upload-box">
-        <strong data-es="Toca para tomar foto" data-en="Tap to take photo"></strong>
-        <span data-es="o subir archivo" data-en="or upload file"></span>
+      <div class="upload-area">
+        <button type="button" class="upload-btn" onclick="this.nextElementSibling.click()">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="14" r="4"/></svg>
+          <span data-es="Tomar foto o subir archivo" data-en="Take photo or upload file"></span>
+        </button>
+        <input type="file" class="upload-input" accept="image/*" onchange="handleUpload(this)">
+        <div class="upload-preview" data-upload="license"></div>
       </div>
     </div>
     <div class="field">
       <div class="field-label" data-es="Certificaciones Relevantes" data-en="Relevant Certifications"></div>
       <div class="field-note" data-es="First Aid, JHSC, WHMIS, u otras — si tienes alguna" data-en="First Aid, JHSC, WHMIS, or others — if you have any"></div>
-      <div class="upload-box">
-        <strong data-es="Toca para subir archivos" data-en="Tap to upload files"></strong>
-        <span data-es="Fotos o PDF — puedes subir varios" data-en="Photos or PDF — you can upload multiple"></span>
+      <div class="upload-area">
+        <button type="button" class="upload-btn" onclick="this.nextElementSibling.click()">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <span data-es="Subir archivos (fotos o PDF)" data-en="Upload files (photos or PDF)"></span>
+        </button>
+        <input type="file" class="upload-input" accept="image/*,.pdf" multiple onchange="handleUpload(this)">
+        <div class="upload-preview" data-upload="certs"></div>
       </div>
     </div>
   </div>
@@ -579,7 +670,11 @@
     </div>
     <div class="field">
       <div class="field-label" data-es="Firma" data-en="Signature"></div>
-      <div class="signature-box" data-es="Dibuja tu firma aquí con el dedo" data-en="Draw your signature here with your finger"></div>
+      <div class="sig-container">
+        <canvas class="sig-canvas"></canvas>
+        <span class="sig-placeholder" data-es="Dibuja tu firma aquí" data-en="Draw your signature here"></span>
+        <button type="button" class="sig-clear" onclick="clearSig(this)" data-es="Borrar" data-en="Clear"></button>
+      </div>
     </div>
     <div class="field">
       <div class="field-label"><span data-es="Fecha" data-en="Date"></span> <span class="auto-tag">AUTO</span></div>
@@ -637,14 +732,22 @@
         <!-- filled by language -->
       </div>
       <div class="field-label" data-es="Firma" data-en="Signature"></div>
-      <div class="signature-box" data-es="Dibuja tu firma aquí con el dedo" data-en="Draw your signature here"></div>
+      <div class="sig-container">
+        <canvas class="sig-canvas"></canvas>
+        <span class="sig-placeholder" data-es="Dibuja tu firma aquí" data-en="Draw your signature here"></span>
+        <button type="button" class="sig-clear" onclick="clearSig(this)" data-es="Borrar" data-en="Clear"></button>
+      </div>
     </div>
     <div class="field">
       <div class="policy-text" id="policyDrug">
         <!-- filled by language -->
       </div>
       <div class="field-label" data-es="Firma" data-en="Signature"></div>
-      <div class="signature-box" data-es="Dibuja tu firma aquí con el dedo" data-en="Draw your signature here"></div>
+      <div class="sig-container">
+        <canvas class="sig-canvas"></canvas>
+        <span class="sig-placeholder" data-es="Dibuja tu firma aquí" data-en="Draw your signature here"></span>
+        <button type="button" class="sig-clear" onclick="clearSig(this)" data-es="Borrar" data-en="Clear"></button>
+      </div>
     </div>
     <div class="field">
       <div class="policy-text" id="policyHandbook">
@@ -655,7 +758,11 @@
     </div>
     <div class="field">
       <div class="field-label" data-es="Firma" data-en="Signature"></div>
-      <div class="signature-box" data-es="Dibuja tu firma aquí con el dedo" data-en="Draw your signature here"></div>
+      <div class="sig-container">
+        <canvas class="sig-canvas"></canvas>
+        <span class="sig-placeholder" data-es="Dibuja tu firma aquí" data-en="Draw your signature here"></span>
+        <button type="button" class="sig-clear" onclick="clearSig(this)" data-es="Borrar" data-en="Clear"></button>
+      </div>
     </div>
     <div class="field">
       <div class="field-label"><span data-es="Fecha" data-en="Date"></span> <span class="auto-tag">AUTO</span></div>
@@ -806,6 +913,123 @@ function formatDate(input) {
   input.value = parts.join('/');
 }
 
+// ========== FILE UPLOAD ==========
+function handleUpload(input) {
+  var previewContainer = input.nextElementSibling;
+  var files = input.files;
+  for (var i = 0; i < files.length; i++) {
+    addFilePreview(previewContainer, files[i]);
+  }
+  // Reset input so same file can be re-selected
+  input.value = '';
+}
+
+function addFilePreview(container, file) {
+  var thumb = document.createElement('div');
+  thumb.className = 'upload-thumb';
+
+  var removeBtn = document.createElement('div');
+  removeBtn.className = 'remove-btn';
+  removeBtn.textContent = '×';
+  removeBtn.onclick = function() {
+    thumb.remove();
+  };
+
+  if (file.type.startsWith('image/')) {
+    var img = document.createElement('img');
+    img.src = URL.createObjectURL(file);
+    img.onload = function() { URL.revokeObjectURL(img.src); };
+    thumb.appendChild(img);
+  } else {
+    var icon = document.createElement('div');
+    icon.className = 'file-icon';
+    icon.textContent = file.name.length > 20 ? file.name.substring(0, 17) + '...' : file.name;
+    thumb.appendChild(icon);
+  }
+
+  thumb.appendChild(removeBtn);
+  // Store file reference for later submission
+  thumb._file = file;
+  container.appendChild(thumb);
+}
+
+// ========== SIGNATURE PAD ==========
+function initSignatures() {
+  document.querySelectorAll('.sig-canvas').forEach(function(canvas) {
+    var container = canvas.parentElement;
+    var ctx = canvas.getContext('2d');
+    var drawing = false;
+    var lastX, lastY;
+
+    function resizeCanvas() {
+      var rect = canvas.getBoundingClientRect();
+      var dpr = window.devicePixelRatio || 1;
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+      ctx.strokeStyle = '#1c1c1e';
+      ctx.lineWidth = 2.5;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    function getPos(e) {
+      var rect = canvas.getBoundingClientRect();
+      var touch = e.touches ? e.touches[0] : e;
+      return { x: touch.clientX - rect.left, y: touch.clientY - rect.top };
+    }
+
+    function startDraw(e) {
+      e.preventDefault();
+      drawing = true;
+      var pos = getPos(e);
+      lastX = pos.x;
+      lastY = pos.y;
+      container.classList.add('has-sig');
+    }
+
+    function draw(e) {
+      if (!drawing) return;
+      e.preventDefault();
+      var pos = getPos(e);
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+      lastX = pos.x;
+      lastY = pos.y;
+    }
+
+    function stopDraw(e) {
+      if (drawing) e.preventDefault();
+      drawing = false;
+    }
+
+    // Touch events (mobile)
+    canvas.addEventListener('touchstart', startDraw, { passive: false });
+    canvas.addEventListener('touchmove', draw, { passive: false });
+    canvas.addEventListener('touchend', stopDraw);
+    canvas.addEventListener('touchcancel', stopDraw);
+
+    // Mouse events (desktop)
+    canvas.addEventListener('mousedown', startDraw);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDraw);
+    canvas.addEventListener('mouseleave', stopDraw);
+  });
+}
+
+function clearSig(btn) {
+  var container = btn.parentElement;
+  var canvas = container.querySelector('.sig-canvas');
+  var ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  container.classList.remove('has-sig');
+}
+
 // ========== GOOGLE PLACES (Custom Inline Dropdown) ==========
 var _acSessionToken = null;
 var _acDebounceTimers = {};
@@ -923,6 +1147,7 @@ function escHtml(s) { var d = document.createElement('div'); d.textContent = s; 
 // ========== INIT ==========
 applyLang();
 initAutocomplete();
+initSignatures();
 </script>
 </body>
 </html>
