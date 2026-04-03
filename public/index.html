@@ -1020,111 +1020,105 @@ function addFilePreview(container, file) {
 function initSignatures() {
   document.querySelectorAll('.sig-canvas').forEach(function(canvas) {
     var container = canvas.parentElement;
-    var ctx = canvas.getContext('2d');
     var drawing = false;
     var lastX, lastY;
-    var savedImage = null; // persist signature
+    var savedImage = null;
+    var dpr = window.devicePixelRatio || 1;
 
-    function resizeCanvas() {
-      var rect = canvas.getBoundingClientRect();
-      var dpr = window.devicePixelRatio || 1;
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
-      ctx.scale(dpr, dpr);
+    function setupCtx() {
+      var ctx = canvas.getContext('2d');
       ctx.strokeStyle = '#1c1c1e';
       ctx.lineWidth = 2.5;
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
-      // Restore saved signature after resize
+      return ctx;
+    }
+
+    function sizeCanvas() {
+      var rect = canvas.getBoundingClientRect();
+      dpr = window.devicePixelRatio || 1;
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      var ctx = canvas.getContext('2d');
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      setupCtx();
       if (savedImage) {
         var img = new Image();
         img.onload = function() {
-          ctx.drawImage(img, 0, 0, rect.width, rect.height);
+          canvas.getContext('2d').drawImage(img, 0, 0, rect.width, rect.height);
         };
         img.src = savedImage;
       }
     }
 
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    function saveSignature() {
-      savedImage = canvas.toDataURL('image/png');
-      canvas._sigData = savedImage;
-    }
+    sizeCanvas();
+    window.addEventListener('resize', sizeCanvas);
 
     function getPos(e) {
       var rect = canvas.getBoundingClientRect();
-      var touch = e.touches ? e.touches[0] : e;
-      return { x: touch.clientX - rect.left, y: touch.clientY - rect.top };
+      if (e.touches && e.touches.length > 0) {
+        return { x: e.touches[0].clientX - rect.left, y: e.touches[0].clientY - rect.top };
+      }
+      return { x: e.clientX - rect.left, y: e.clientY - rect.top };
     }
-
-    function preventScroll(e) { e.preventDefault(); }
 
     function startDraw(e) {
       e.preventDefault();
       e.stopPropagation();
       drawing = true;
       container.classList.add('signing');
-      // Block all scrolling while signing
+      container.classList.add('has-sig');
       document.body.style.overflow = 'hidden';
-      document.addEventListener('touchmove', preventScroll, { passive: false });
+      var ctx = setupCtx();
       var pos = getPos(e);
       lastX = pos.x;
       lastY = pos.y;
-      ctx.beginPath();
-      ctx.moveTo(lastX, lastY);
-      container.classList.add('has-sig');
     }
 
     function draw(e) {
       if (!drawing) return;
       e.preventDefault();
       e.stopPropagation();
+      var ctx = canvas.getContext('2d');
+      setupCtx();
       var pos = getPos(e);
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
       ctx.lineTo(pos.x, pos.y);
       ctx.stroke();
-      ctx.beginPath();
-      ctx.moveTo(pos.x, pos.y);
       lastX = pos.x;
       lastY = pos.y;
     }
 
     function stopDraw(e) {
-      if (drawing) {
-        if (e) e.preventDefault();
-        drawing = false;
-        container.classList.remove('signing');
-        document.body.style.overflow = '';
-        document.removeEventListener('touchmove', preventScroll);
-        saveSignature();
-      }
+      if (!drawing) return;
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      drawing = false;
+      container.classList.remove('signing');
+      document.body.style.overflow = '';
+      savedImage = canvas.toDataURL('image/png');
+      canvas._sigData = savedImage;
     }
 
-    // Touch events (mobile)
     canvas.addEventListener('touchstart', startDraw, { passive: false });
     canvas.addEventListener('touchmove', draw, { passive: false });
     canvas.addEventListener('touchend', stopDraw, { passive: false });
-    // Don't stop drawing on touchcancel — often fires incorrectly on mobile
-    canvas.addEventListener('touchcancel', function(e) {
-      // Only stop if finger truly left
-      setTimeout(function() { if (drawing) stopDraw(e); }, 100);
-    });
+    canvas.addEventListener('touchcancel', stopDraw, { passive: false });
 
-    // Mouse events (desktop)
     canvas.addEventListener('mousedown', startDraw);
     canvas.addEventListener('mousemove', draw);
     canvas.addEventListener('mouseup', stopDraw);
-    canvas.addEventListener('mouseleave', function(e) {
-      if (drawing) { drawing = false; saveSignature(); }
-    });
+    canvas.addEventListener('mouseleave', function(e) { if (drawing) stopDraw(e); });
 
-    // Store clear function on canvas for clearSig
     canvas._clearSig = function() {
+      drawing = false;
       savedImage = null;
       canvas._sigData = null;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
       container.classList.remove('has-sig');
+      container.classList.remove('signing');
+      document.body.style.overflow = '';
+      // Full reset — resize recreates a fresh context
+      sizeCanvas();
     };
   });
 }
