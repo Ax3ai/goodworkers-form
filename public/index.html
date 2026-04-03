@@ -1223,28 +1223,175 @@ function setupInlineAutocomplete(inputId, dropdownId, cityId, provinceId, postal
 
 function escHtml(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
 
+// ========== SUPABASE ==========
+var SUPABASE_URL = 'https://fcgxxxxazyggnxkjswjs.supabase.co';
+var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZjZ3h4eHhhenlnZ254a2pzd2pzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUxNTc1MzAsImV4cCI6MjA5MDczMzUzMH0.8fbm8o1m913Ysc-v_D1Y51xCJ4m4GEoNwdI_BBC0gTg';
+var supabase = null;
+
+function initSupabase() {
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
+  script.onload = function() {
+    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  };
+  document.head.appendChild(script);
+}
+
+async function uploadFile(file, folder) {
+  var ext = file.name.split('.').pop();
+  var path = folder + '/' + Date.now() + '-' + Math.random().toString(36).slice(2) + '.' + ext;
+  var { data, error } = await supabase.storage.from('documents').upload(path, file);
+  if (error) { console.error('Upload error:', error); return null; }
+  return path;
+}
+
 // ========== SUBMIT ==========
-function submitForm() {
+async function submitForm() {
   var btn = document.getElementById('submitBtn');
   var status = document.getElementById('submitStatus');
-  var origText = btn.querySelector('span').textContent;
+  status.className = 'submit-status';
+
+  if (!supabase) {
+    status.textContent = currentLang === 'es' ? 'Error: cargando...' : 'Error: loading...';
+    status.className = 'submit-status show error';
+    return;
+  }
+
+  // Validate required fields
+  var fname = document.getElementById('fname').value.trim();
+  var lname = document.getElementById('lname').value.trim();
+  if (!fname || !lname) {
+    status.textContent = currentLang === 'es' ? 'Por favor ingresa tu nombre y apellido.' : 'Please enter your first and last name.';
+    status.className = 'submit-status show error';
+    return;
+  }
 
   btn.disabled = true;
   btn.querySelector('span').textContent = currentLang === 'es' ? 'Enviando...' : 'Submitting...';
 
-  // TODO: Connect to Supabase — for now show success
-  setTimeout(function() {
+  try {
+    // Get english level
+    var englishSeg = document.querySelectorAll('.section')[0].querySelector('.segmented');
+    var englishSelected = englishSeg ? englishSeg.querySelector('.selected') : null;
+    var englishMap = { 'Bajo': 'poor', 'Poor': 'poor', 'Bueno': 'good', 'Good': 'good', 'Excelente': 'excellent', 'Excellent': 'excellent' };
+    var englishLevel = englishSelected ? (englishMap[englishSelected.textContent.trim()] || null) : null;
+
+    // Upload license photo
+    var licenseThumbs = document.querySelector('[data-upload="license"]');
+    var licensePath = null;
+    if (licenseThumbs && licenseThumbs.children.length > 0 && licenseThumbs.children[0]._file) {
+      licensePath = await uploadFile(licenseThumbs.children[0]._file, 'licenses');
+    }
+
+    // Upload certifications
+    var certThumbs = document.querySelector('[data-upload="certs"]');
+    var certPaths = [];
+    if (certThumbs) {
+      for (var i = 0; i < certThumbs.children.length; i++) {
+        if (certThumbs.children[i]._file) {
+          var p = await uploadFile(certThumbs.children[i]._file, 'certs');
+          if (p) certPaths.push(p);
+        }
+      }
+    }
+
+    // Get signatures
+    var sigCanvases = document.querySelectorAll('.sig-canvas');
+    var sigHS = sigCanvases[0] ? sigCanvases[0]._sigData : null;
+    var sigDriver = sigCanvases[1] ? sigCanvases[1]._sigData : null;
+    var sigDrug = sigCanvases[2] ? sigCanvases[2]._sigData : null;
+    var sigHandbook = sigCanvases[3] ? sigCanvases[3]._sigData : null;
+
+    // Get snow plow answers
+    var driverSection = document.querySelectorAll('.segmented');
+    var snowPlowing = null, snowOncall = null;
+    if (driverSection.length >= 3) {
+      var sp = driverSection[1].querySelector('.selected');
+      if (sp) snowPlowing = sp.textContent.trim() === 'Sí' || sp.textContent.trim() === 'Yes';
+      var so = driverSection[2].querySelector('.selected');
+      if (so) snowOncall = so.textContent.trim() === 'Sí' || so.textContent.trim() === 'Yes';
+    }
+
+    // Insert employee
+    var { data: employee, error: empError } = await supabase.from('employees').insert({
+      first_name: fname,
+      middle_name: document.getElementById('mname').value.trim() || null,
+      last_name: lname,
+      address: document.getElementById('address1').value.trim() || null,
+      apt_unit: document.getElementById('apt1').value.trim() || null,
+      city: document.getElementById('city1').value.trim() || null,
+      province: document.getElementById('province1').value.trim() || null,
+      postal_code: document.getElementById('postal1').value.trim() || null,
+      phone: document.querySelector('input[type="tel"]').value.trim() || null,
+      email: document.querySelector('input[type="email"]').value.trim() || null,
+      birth_date: document.querySelector('.date-input').value.trim() || null,
+      english_level: englishLevel,
+      language: currentLang,
+      emergency_first_name: document.querySelectorAll('.section')[2] ? document.querySelectorAll('.section')[2].querySelectorAll('.field-input')[0].value.trim() || null : null,
+      emergency_last_name: document.querySelectorAll('.section')[2] ? document.querySelectorAll('.section')[2].querySelectorAll('.field-input')[1].value.trim() || null : null,
+      emergency_address: document.getElementById('address2').value.trim() || null,
+      emergency_apt_unit: document.getElementById('apt2').value.trim() || null,
+      emergency_city: document.getElementById('city2').value.trim() || null,
+      emergency_province: document.getElementById('province2').value.trim() || null,
+      emergency_postal_code: document.getElementById('postal2').value.trim() || null,
+      emergency_phone: document.querySelectorAll('.section')[2] ? document.querySelectorAll('.section')[2].querySelectorAll('input[type="tel"]')[0].value.trim() || null : null,
+      emergency_phone_alt: document.querySelectorAll('.section')[2] ? document.querySelectorAll('.section')[2].querySelectorAll('input[type="tel"]')[1].value.trim() || null : null,
+      emergency_relationship: document.querySelectorAll('.section')[2] ? document.querySelectorAll('.section')[2].querySelectorAll('.field-input')[6].value.trim() || null : null,
+      license_photo: licensePath,
+      certifications: certPaths.length > 0 ? certPaths : null,
+      signature_hs: sigHS,
+      signature_driver: sigDriver,
+      signature_drug: sigDrug,
+      signature_handbook: sigHandbook,
+      snow_plowing: snowPlowing,
+      snow_plow_oncall: snowOncall
+    }).select().single();
+
+    if (empError) throw empError;
+
+    // Insert equipment experience
+    var equipItems = document.querySelectorAll('.equip-item.active');
+    for (var j = 0; j < equipItems.length; j++) {
+      var item = equipItems[j];
+      var select = item.querySelector('select');
+      if (!select || !select.value) continue;
+      var nameEl = item.querySelector('.equip-name');
+      var equipName = nameEl.textContent.split('\n')[0].trim();
+      var isTruck = item.closest('#truckList') !== null;
+      var yearsVal = select.value.replace(/[^0-9+\-]/g, '');
+      if (yearsVal.startsWith('1')) yearsVal = '1-5';
+      else if (yearsVal.startsWith('5')) yearsVal = '5-10';
+      else yearsVal = '10+';
+
+      await supabase.from('equipment_experience').insert({
+        employee_id: employee.id,
+        equipment_type: equipName,
+        category: isTruck ? 'truck' : 'heavy_equipment',
+        years: yearsVal
+      });
+    }
+
+    // Success
     btn.querySelector('span').textContent = currentLang === 'es' ? 'Enviado' : 'Submitted';
+    btn.style.background = '#34c759';
     status.textContent = currentLang === 'es' ? '¡Registro completado! Gracias.' : 'Registration complete! Thank you.';
     status.className = 'submit-status show';
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, 1500);
+
+  } catch(err) {
+    console.error('Submit error:', err);
+    btn.disabled = false;
+    btn.querySelector('span').textContent = currentLang === 'es' ? 'Enviar Formulario' : 'Submit Form';
+    status.textContent = (currentLang === 'es' ? 'Error al enviar. Intenta de nuevo. ' : 'Error submitting. Try again. ') + (err.message || '');
+    status.className = 'submit-status show error';
+  }
 }
 
 // ========== INIT ==========
 applyLang();
 initAutocomplete();
 initSignatures();
+initSupabase();
 </script>
 </body>
 </html>
