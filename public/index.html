@@ -401,16 +401,13 @@
     border-bottom: 2.5px solid #fff;
     transform: rotate(-45deg) translateY(-1px);
   }
-  .equip-emoji {
-    width: 40px;
-    height: 40px;
+  .equip-img {
+    width: 44px;
+    height: 44px;
     border-radius: 10px;
     margin-right: 10px;
     flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
+    object-fit: cover;
     background: #f2f2f7;
   }
   .equip-name {
@@ -820,37 +817,37 @@
 <script>
 // ========== DATA ==========
 var trucks = [
-  { en: 'Dump Truck', es: 'Camión de volteo', icon: '🚛' },
-  { en: 'Roll-Off', es: 'Contenedor rodante', icon: '🗑️' },
-  { en: 'Snow Plow', es: 'Quitanieves', icon: '❄️' },
-  { en: 'Tow Snow', es: 'Remolque de nieve', icon: '🌨️' },
-  { en: 'Water Truck', es: 'Camión cisterna', icon: '💧' },
-  { en: 'Vac Truck', es: 'Camión de vacío', icon: '🌀' },
-  { en: 'Slinger', es: 'Lanzadora de material', icon: '⛰️' },
-  { en: 'Live Bottom', es: 'Camión de fondo móvil', icon: '📦' },
-  { en: 'Rock Truck', es: 'Camión de roca', icon: '🪨' },
-  { en: 'Sweeper', es: 'Barredora', icon: '🧹' },
-  { en: 'Cement Truck', es: 'Camión revolvedora', icon: '🏗️' },
-  { en: 'Fuel Truck', es: 'Camión de combustible', icon: '⛽' },
-  { en: 'Crane Truck', es: 'Camión grúa', icon: '🏗️' },
-  { en: 'Line Painting', es: 'Pintura de líneas', icon: '🎨' },
-  { en: 'Crash Truck', es: 'Camión de impacto', icon: '🛡️' },
-  { en: 'Float Equipment', es: 'Plataforma de transporte', icon: '🚚' },
-  { en: 'Tow Truck', es: 'Grúa de remolque', icon: '🚗' },
-  { en: 'Pickup Plow', es: 'Camioneta quitanieves', icon: '🛻' }
+  { en: 'Dump Truck', es: 'Camión de volteo', img: '/machines/01-dump-truck.png' },
+  { en: 'Roll-Off', es: 'Contenedor rodante', img: '/machines/02-roll-off-container-truck.png' },
+  { en: 'Snow Plow', es: 'Quitanieves', img: '/machines/03-snow-plow-truck.png' },
+  { en: 'Tow Snow', es: 'Remolque de nieve', img: '/machines/04-tow-snow-truck.png' },
+  { en: 'Water Truck', es: 'Camión cisterna', img: '/machines/05-water-tank-truck.png' },
+  { en: 'Vac Truck', es: 'Camión de vacío', img: '/machines/06-vacuum-truck.png' },
+  { en: 'Slinger', es: 'Lanzadora de material', img: '/machines/07-slinger-truck.png' },
+  { en: 'Live Bottom', es: 'Camión de fondo móvil', img: '/machines/08-live-bottom-trailer.png' },
+  { en: 'Rock Truck', es: 'Camión de roca', img: '/machines/09-rock-truck.png' },
+  { en: 'Sweeper', es: 'Barredora', img: '/machines/10-street-sweeper.png' },
+  { en: 'Cement Truck', es: 'Camión revolvedora', img: '/machines/11-cement-mixer-truck.png' },
+  { en: 'Fuel Truck', es: 'Camión de combustible', img: '/machines/12-fuel-tanker-truck.png' },
+  { en: 'Crane Truck', es: 'Camión grúa', img: '/machines/13-crane-truck.png' },
+  { en: 'Line Painting', es: 'Pintura de líneas', img: '/machines/14-line-painting-truck.png' },
+  { en: 'Crash Truck', es: 'Camión de impacto', img: '/machines/15-crash-attenuator-truck.png' },
+  { en: 'Float Equipment', es: 'Plataforma de transporte', img: '/machines/16-flatbed-float-truck.png' },
+  { en: 'Tow Truck', es: 'Grúa de remolque', img: '/machines/17-tow-truck.png' },
+  { en: 'Pickup Plow', es: 'Camioneta quitanieves', img: '/machines/18-pickup-snow-plow.png' }
 ];
 
 var equips = [
-  { en: 'Excavator', es: 'Excavadora', icon: '⛏️' },
-  { en: 'Front Loader', es: 'Cargador frontal', icon: '🚜' },
-  { en: 'Bobcat', es: 'Minicargador', icon: '🔧' },
-  { en: 'Backhoe', es: 'Retroexcavadora', icon: '🦾' },
-  { en: 'Roller / Packer', es: 'Rodillo compactador', icon: '🛞' },
-  { en: 'Dozer / Blade', es: 'Bulldozer / Topadora', icon: '🚧' },
-  { en: 'Grader', es: 'Motoniveladora', icon: '🛤️' },
-  { en: 'Trencher', es: 'Zanjadora', icon: '🕳️' },
-  { en: 'Spreader', es: 'Esparcidora', icon: '🌾' },
-  { en: 'Forklift', es: 'Montacargas', icon: '📐' }
+  { en: 'Excavator', es: 'Excavadora', img: '/machines/19-excavator.png' },
+  { en: 'Front Loader', es: 'Cargador frontal', img: '/machines/20-front-loader.png' },
+  { en: 'Bobcat', es: 'Minicargador', img: '/machines/21-bobcat-skid-steer.png' },
+  { en: 'Backhoe', es: 'Retroexcavadora', img: '/machines/22-backhoe-loader.png' },
+  { en: 'Roller / Packer', es: 'Rodillo compactador', img: '/machines/23-road-roller-compactor.png' },
+  { en: 'Dozer / Blade', es: 'Bulldozer / Topadora', img: '/machines/24-bulldozer.png' },
+  { en: 'Grader', es: 'Motoniveladora', img: '/machines/25-motor-grader.png' },
+  { en: 'Trencher', es: 'Zanjadora', img: '/machines/26-trencher-machine.png' },
+  { en: 'Spreader', es: 'Esparcidora', img: '/machines/27-material-spreader.png' },
+  { en: 'Forklift', es: 'Montacargas', img: '/machines/28-forklift.png' }
 ];
 
 var policies = {
@@ -917,7 +914,7 @@ function buildEquipList(containerId, items) {
     div.className = 'equip-item';
     div.innerHTML =
       '<div class="equip-toggle" onclick="toggleEquip(this)"></div>' +
-      '<div class="equip-emoji">' + item.icon + '</div>' +
+      '<img src="' + item.img + '" alt="" class="equip-img">' +
       '<div class="equip-name" onclick="toggleEquip(this.parentElement.querySelector(\'.equip-toggle\'))">' +
         (currentLang === 'es' ? item.es + '<small>' + item.en + '</small>' : item.en + '<small>' + item.es + '</small>') +
       '</div>' +
