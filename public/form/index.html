@@ -22,34 +22,59 @@
   .lang-screen {
     position: fixed;
     inset: 0;
-    background: #fff;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
     z-index: 100;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    transition: opacity 0.3s, transform 0.3s;
+    gap: 0;
+    transition: opacity 0.4s, transform 0.4s;
   }
   .lang-screen.hidden {
     opacity: 0;
     transform: translateY(20px);
     pointer-events: none;
   }
+  .lang-inner {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 24px;
+    padding: 48px 36px;
+    text-align: center;
+    width: 320px;
+    box-shadow: 0 24px 48px rgba(0,0,0,0.3);
+  }
   .lang-screen h1 {
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 800;
     letter-spacing: 2px;
     text-transform: uppercase;
-    margin-bottom: 4px;
+    color: #fff;
+    margin-bottom: 2px;
+  }
+  .lang-screen h1 .accent { color: #F26522; }
+  .lang-screen .lang-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 8px;
+  }
+  .lang-screen .lang-divider {
+    width: 40px;
+    height: 2px;
+    background: rgba(242,101,34,0.3);
+    border-radius: 2px;
+    margin: 20px auto;
   }
   .lang-screen p {
     font-size: 15px;
-    color: #8e8e93;
-    margin-bottom: 32px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 28px;
   }
   .lang-btn {
-    width: 260px;
+    width: 100%;
     padding: 16px;
     border: none;
     border-radius: 14px;
@@ -58,36 +83,21 @@
     cursor: pointer;
     font-family: inherit;
     transition: transform 0.1s;
+    margin-bottom: 10px;
   }
+  .lang-btn:last-child { margin-bottom: 0; }
   .lang-btn:active { transform: scale(0.97); }
   .lang-btn-es {
-    background: #1c1c1e;
+    background: #F26522;
     color: #fff;
   }
   .lang-btn-en {
-    background: #f2f2f7;
-    color: #1c1c1e;
-    border: 1.5px solid #d1d1d6;
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.8);
+    border: 1px solid rgba(255,255,255,0.12);
   }
 
-  /* Header */
-  .header {
-    background: #F26522;
-    text-align: center;
-    padding: 48px 20px 20px;
-  }
-  .header h1 {
-    font-size: 20px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: #fff;
-  }
-  .header p {
-    font-size: 13px;
-    color: rgba(255,255,255,0.8);
-    margin-top: 2px;
-  }
+  /* No header — form starts directly after language selection */
 
   /* Section (iOS grouped style) */
   .section {
@@ -392,12 +402,13 @@
     transform: rotate(-45deg) translateY(-1px);
   }
   .equip-img {
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
     margin-right: 10px;
     flex-shrink: 0;
-    object-fit: contain;
+    object-fit: cover;
+    background: #f2f2f7;
   }
   .equip-name {
     flex: 1;
@@ -533,16 +544,14 @@
 
 <!-- Language Selection Screen -->
 <div class="lang-screen" id="langScreen">
-  <h1>GoodWorkers</h1>
-  <p>Selecciona tu idioma / Select your language</p>
-  <button class="lang-btn lang-btn-es" onclick="setLang('es')">Continuar en Español</button>
-  <button class="lang-btn lang-btn-en" onclick="setLang('en')">Continue in English</button>
-</div>
-
-<!-- Header -->
-<div class="header">
-  <h1>GoodWorkers</h1>
-  <p data-es="Formulario de Registro de Empleado" data-en="Employee Registration Form"></p>
+  <div class="lang-inner">
+    <h1>Good<span class="accent">Workers</span></h1>
+    <div class="lang-sub">Employee Registration</div>
+    <div class="lang-divider"></div>
+    <p>Selecciona tu idioma<br>Select your language</p>
+    <button class="lang-btn lang-btn-es" onclick="setLang('es')">Español</button>
+    <button class="lang-btn lang-btn-en" onclick="setLang('en')">English</button>
+  </div>
 </div>
 
 <!-- PASO 1: Info Personal -->
@@ -705,10 +714,6 @@
       <div class="policy-text" id="policyHS">
         <!-- filled by language -->
       </div>
-      <div class="field-label"><span data-es="Nombre Completo" data-en="Full Name"></span> <span class="auto-tag">AUTO</span></div>
-      <input class="field-input fullname-auto" type="text" data-ph-es="Se llena automáticamente" data-ph-en="Auto-filled" readonly>
-    </div>
-    <div class="field">
       <div class="field-label" data-es="Firma" data-en="Signature"></div>
       <div class="sig-container">
         <canvas class="sig-canvas"></canvas>
@@ -789,10 +794,6 @@
       <div class="policy-text" id="policyHandbook">
         <!-- filled by language -->
       </div>
-      <div class="field-label"><span data-es="Nombre Completo" data-en="Full Name"></span> <span class="auto-tag">AUTO</span></div>
-      <input class="field-input fullname-auto" type="text" data-ph-es="Se llena automáticamente" data-ph-en="Auto-filled" readonly>
-    </div>
-    <div class="field">
       <div class="field-label" data-es="Firma" data-en="Signature"></div>
       <div class="sig-container">
         <canvas class="sig-canvas"></canvas>
@@ -816,37 +817,37 @@
 <script>
 // ========== DATA ==========
 var trucks = [
-  { en: 'Dump Truck', es: 'Camión de volteo', img: 'https://img.icons8.com/fluency/48/dump-truck.png' },
-  { en: 'Roll-Off', es: 'Contenedor rodante', img: 'https://img.icons8.com/fluency/48/garbage-truck.png' },
-  { en: 'Snow Plow', es: 'Quitanieves', img: 'https://img.icons8.com/fluency/48/snowplow.png' },
-  { en: 'Tow Snow', es: 'Remolque de nieve', img: 'https://img.icons8.com/fluency/48/snow-storm.png' },
-  { en: 'Water Truck', es: 'Camión cisterna', img: 'https://img.icons8.com/fluency/48/water-transportation.png' },
-  { en: 'Vac Truck', es: 'Camión de vacío', img: 'https://img.icons8.com/fluency/48/vacuum-cleaner.png' },
-  { en: 'Slinger', es: 'Lanzadora de material', img: 'https://img.icons8.com/fluency/48/truck.png' },
-  { en: 'Live Bottom', es: 'Camión de fondo móvil', img: 'https://img.icons8.com/fluency/48/trailer.png' },
-  { en: 'Rock Truck', es: 'Camión de roca', img: 'https://img.icons8.com/fluency/48/quarry.png' },
-  { en: 'Sweeper', es: 'Barredora', img: 'https://img.icons8.com/fluency/48/street-cleaning.png' },
-  { en: 'Cement Truck', es: 'Camión revolvedora', img: 'https://img.icons8.com/fluency/48/concrete-mixer.png' },
-  { en: 'Fuel Truck', es: 'Camión de combustible', img: 'https://img.icons8.com/fluency/48/gas-station.png' },
-  { en: 'Crane Truck', es: 'Camión grúa', img: 'https://img.icons8.com/fluency/48/crane.png' },
-  { en: 'Line Painting', es: 'Pintura de líneas', img: 'https://img.icons8.com/fluency/48/road.png' },
-  { en: 'Crash Truck', es: 'Camión de impacto', img: 'https://img.icons8.com/fluency/48/warning-shield.png' },
-  { en: 'Float Equipment', es: 'Plataforma de transporte', img: 'https://img.icons8.com/fluency/48/flatbed-truck.png' },
-  { en: 'Tow Truck', es: 'Grúa de remolque', img: 'https://img.icons8.com/fluency/48/tow-truck.png' },
-  { en: 'Pickup Plow', es: 'Camioneta quitanieves', img: 'https://img.icons8.com/fluency/48/pickup.png' }
+  { en: 'Dump Truck', es: 'Camión de volteo', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Dump_truck_in_Nauru.jpg/120px-Dump_truck_in_Nauru.jpg' },
+  { en: 'Roll-Off', es: 'Contenedor rodante', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Roll-off_dumpster.jpg/120px-Roll-off_dumpster.jpg' },
+  { en: 'Snow Plow', es: 'Quitanieves', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Snow_plow_on_a_truck_in_Michigan.jpg/120px-Snow_plow_on_a_truck_in_Michigan.jpg' },
+  { en: 'Tow Snow', es: 'Remolque de nieve', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Snow_plow_on_a_truck_in_Michigan.jpg/120px-Snow_plow_on_a_truck_in_Michigan.jpg' },
+  { en: 'Water Truck', es: 'Camión cisterna', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Water_tank_truck.JPG/120px-Water_tank_truck.JPG' },
+  { en: 'Vac Truck', es: 'Camión de vacío', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Vacuum_truck.jpg/120px-Vacuum_truck.jpg' },
+  { en: 'Slinger', es: 'Lanzadora de material', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Dump_truck_in_Nauru.jpg/120px-Dump_truck_in_Nauru.jpg' },
+  { en: 'Live Bottom', es: 'Camión de fondo móvil', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/B-double_road_train_on_the_Plenty_Highway.jpg/120px-B-double_road_train_on_the_Plenty_Highway.jpg' },
+  { en: 'Rock Truck', es: 'Camión de roca', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Caterpillar_797F.jpg/120px-Caterpillar_797F.jpg' },
+  { en: 'Sweeper', es: 'Barredora', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Streetsweeper.jpg/120px-Streetsweeper.jpg' },
+  { en: 'Cement Truck', es: 'Camión revolvedora', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Concrete_mixer_-_geograph.org.uk_-_1066307.jpg/120px-Concrete_mixer_-_geograph.org.uk_-_1066307.jpg' },
+  { en: 'Fuel Truck', es: 'Camión de combustible', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/JET-A1_Tanker_Truck.jpg/120px-JET-A1_Tanker_Truck.jpg' },
+  { en: 'Crane Truck', es: 'Camión grúa', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Truck_mounted_crane.jpg/120px-Truck_mounted_crane.jpg' },
+  { en: 'Line Painting', es: 'Pintura de líneas', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Thermoplastic_road_marking.jpg/120px-Thermoplastic_road_marking.jpg' },
+  { en: 'Crash Truck', es: 'Camión de impacto', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Truck_Mounted_Attenuator.jpg/120px-Truck_Mounted_Attenuator.jpg' },
+  { en: 'Float Equipment', es: 'Plataforma de transporte', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Flatbed_truck.jpg/120px-Flatbed_truck.jpg' },
+  { en: 'Tow Truck', es: 'Grúa de remolque', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Flatbed_Tow_Truck.jpg/120px-Flatbed_Tow_Truck.jpg' },
+  { en: 'Pickup Plow', es: 'Camioneta quitanieves', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Snow_plow_on_a_truck_in_Michigan.jpg/120px-Snow_plow_on_a_truck_in_Michigan.jpg' }
 ];
 
 var equips = [
-  { en: 'Excavator', es: 'Excavadora', img: 'https://img.icons8.com/fluency/48/excavator.png' },
-  { en: 'Front Loader', es: 'Cargador frontal', img: 'https://img.icons8.com/fluency/48/front-loader.png' },
-  { en: 'Bobcat', es: 'Minicargador', img: 'https://img.icons8.com/fluency/48/skid-steer-loader.png' },
-  { en: 'Backhoe', es: 'Retroexcavadora', img: 'https://img.icons8.com/fluency/48/backhoe.png' },
-  { en: 'Roller / Packer', es: 'Rodillo compactador', img: 'https://img.icons8.com/fluency/48/road-roller.png' },
-  { en: 'Dozer / Blade', es: 'Bulldozer / Topadora', img: 'https://img.icons8.com/fluency/48/bulldozer.png' },
-  { en: 'Grader', es: 'Motoniveladora', img: 'https://img.icons8.com/fluency/48/tractor.png' },
-  { en: 'Trencher', es: 'Zanjadora', img: 'https://img.icons8.com/fluency/48/drilling-rig.png' },
-  { en: 'Spreader', es: 'Esparcidora', img: 'https://img.icons8.com/fluency/48/fertilizing.png' },
-  { en: 'Forklift', es: 'Montacargas', img: 'https://img.icons8.com/fluency/48/forklift.png' }
+  { en: 'Excavator', es: 'Excavadora', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Excavator_Volvo_EC210B.jpg/120px-Excavator_Volvo_EC210B.jpg' },
+  { en: 'Front Loader', es: 'Cargador frontal', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Caterpillar_950G_Front_Loader.jpg/120px-Caterpillar_950G_Front_Loader.jpg' },
+  { en: 'Bobcat', es: 'Minicargador', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Bobcat_S175_skid-steer_loader_-_001.jpg/120px-Bobcat_S175_skid-steer_loader_-_001.jpg' },
+  { en: 'Backhoe', es: 'Retroexcavadora', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Baggerlader_JCB_3CX.jpg/120px-Baggerlader_JCB_3CX.jpg' },
+  { en: 'Roller / Packer', es: 'Rodillo compactador', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Tandem_road_roller.jpg/120px-Tandem_road_roller.jpg' },
+  { en: 'Dozer / Blade', es: 'Bulldozer / Topadora', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Caterpillar_D9T.jpg/120px-Caterpillar_D9T.jpg' },
+  { en: 'Grader', es: 'Motoniveladora', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Motor_grader.jpg/120px-Motor_grader.jpg' },
+  { en: 'Trencher', es: 'Zanjadora', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Trencher_%28machine%29.jpg/120px-Trencher_%28machine%29.jpg' },
+  { en: 'Spreader', es: 'Esparcidora', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Dump_truck_in_Nauru.jpg/120px-Dump_truck_in_Nauru.jpg' },
+  { en: 'Forklift', es: 'Montacargas', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Forklift_Truck.jpg/120px-Forklift_Truck.jpg' }
 ];
 
 var policies = {
