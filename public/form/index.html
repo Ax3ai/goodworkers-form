@@ -391,6 +391,14 @@
     border-bottom: 2.5px solid #fff;
     transform: rotate(-45deg) translateY(-1px);
   }
+  .equip-img {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    margin-right: 10px;
+    flex-shrink: 0;
+    object-fit: contain;
+  }
   .equip-name {
     flex: 1;
     font-size: 15px;
@@ -474,6 +482,38 @@
     color: #1c1c1e;
     letter-spacing: 1px;
   }
+
+  /* Submit button */
+  .submit-btn {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    background: #F26522;
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-size: 17px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: transform 0.1s, opacity 0.15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .submit-btn:active { transform: scale(0.98); opacity: 0.9; }
+  .submit-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+  .submit-status {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 14px;
+    color: #34c759;
+    display: none;
+  }
+  .submit-status.show { display: block; }
+  .submit-status.error { color: #ff3b30; }
 
   /* Footer */
   .footer {
@@ -763,42 +803,50 @@
   </div>
 </div>
 
+<!-- SUBMIT -->
+<div class="section">
+  <button type="button" id="submitBtn" class="submit-btn" onclick="submitForm()">
+    <span id="submitText" data-es="Enviar Formulario" data-en="Submit Form"></span>
+  </button>
+  <div id="submitStatus" class="submit-status"></div>
+</div>
+
 <div class="footer">GoodWorkers Equipment LTD.</div>
 
 <script>
 // ========== DATA ==========
 var trucks = [
-  { en: 'Dump Truck', es: 'Camión de volteo' },
-  { en: 'Roll-Off', es: 'Contenedor rodante' },
-  { en: 'Snow Plow', es: 'Quitanieves' },
-  { en: 'Tow Snow', es: 'Remolque de nieve' },
-  { en: 'Water Truck', es: 'Camión cisterna' },
-  { en: 'Vac Truck', es: 'Camión de vacío' },
-  { en: 'Slinger', es: 'Lanzadora de material' },
-  { en: 'Live Bottom', es: 'Camión de fondo móvil' },
-  { en: 'Rock Truck', es: 'Camión de roca' },
-  { en: 'Sweeper', es: 'Barredora' },
-  { en: 'Cement Truck', es: 'Camión revolvedora' },
-  { en: 'Fuel Truck', es: 'Camión de combustible' },
-  { en: 'Crane Truck', es: 'Camión grúa' },
-  { en: 'Line Painting', es: 'Pintura de líneas' },
-  { en: 'Crash Truck', es: 'Camión de impacto' },
-  { en: 'Float Equipment', es: 'Plataforma de transporte' },
-  { en: 'Tow Truck', es: 'Grúa de remolque' },
-  { en: 'Pickup Plow', es: 'Camioneta quitanieves' }
+  { en: 'Dump Truck', es: 'Camión de volteo', img: 'https://img.icons8.com/fluency/48/dump-truck.png' },
+  { en: 'Roll-Off', es: 'Contenedor rodante', img: 'https://img.icons8.com/fluency/48/garbage-truck.png' },
+  { en: 'Snow Plow', es: 'Quitanieves', img: 'https://img.icons8.com/fluency/48/snowplow.png' },
+  { en: 'Tow Snow', es: 'Remolque de nieve', img: 'https://img.icons8.com/fluency/48/snow-storm.png' },
+  { en: 'Water Truck', es: 'Camión cisterna', img: 'https://img.icons8.com/fluency/48/water-transportation.png' },
+  { en: 'Vac Truck', es: 'Camión de vacío', img: 'https://img.icons8.com/fluency/48/vacuum-cleaner.png' },
+  { en: 'Slinger', es: 'Lanzadora de material', img: 'https://img.icons8.com/fluency/48/truck.png' },
+  { en: 'Live Bottom', es: 'Camión de fondo móvil', img: 'https://img.icons8.com/fluency/48/trailer.png' },
+  { en: 'Rock Truck', es: 'Camión de roca', img: 'https://img.icons8.com/fluency/48/quarry.png' },
+  { en: 'Sweeper', es: 'Barredora', img: 'https://img.icons8.com/fluency/48/street-cleaning.png' },
+  { en: 'Cement Truck', es: 'Camión revolvedora', img: 'https://img.icons8.com/fluency/48/concrete-mixer.png' },
+  { en: 'Fuel Truck', es: 'Camión de combustible', img: 'https://img.icons8.com/fluency/48/gas-station.png' },
+  { en: 'Crane Truck', es: 'Camión grúa', img: 'https://img.icons8.com/fluency/48/crane.png' },
+  { en: 'Line Painting', es: 'Pintura de líneas', img: 'https://img.icons8.com/fluency/48/road.png' },
+  { en: 'Crash Truck', es: 'Camión de impacto', img: 'https://img.icons8.com/fluency/48/warning-shield.png' },
+  { en: 'Float Equipment', es: 'Plataforma de transporte', img: 'https://img.icons8.com/fluency/48/flatbed-truck.png' },
+  { en: 'Tow Truck', es: 'Grúa de remolque', img: 'https://img.icons8.com/fluency/48/tow-truck.png' },
+  { en: 'Pickup Plow', es: 'Camioneta quitanieves', img: 'https://img.icons8.com/fluency/48/pickup.png' }
 ];
 
 var equips = [
-  { en: 'Excavator', es: 'Excavadora' },
-  { en: 'Front Loader', es: 'Cargador frontal' },
-  { en: 'Bobcat', es: 'Minicargador' },
-  { en: 'Backhoe', es: 'Retroexcavadora' },
-  { en: 'Roller / Packer', es: 'Rodillo compactador' },
-  { en: 'Dozer / Blade', es: 'Bulldozer / Topadora' },
-  { en: 'Grader', es: 'Motoniveladora' },
-  { en: 'Trencher', es: 'Zanjadora' },
-  { en: 'Spreader', es: 'Esparcidora' },
-  { en: 'Forklift', es: 'Montacargas' }
+  { en: 'Excavator', es: 'Excavadora', img: 'https://img.icons8.com/fluency/48/excavator.png' },
+  { en: 'Front Loader', es: 'Cargador frontal', img: 'https://img.icons8.com/fluency/48/front-loader.png' },
+  { en: 'Bobcat', es: 'Minicargador', img: 'https://img.icons8.com/fluency/48/skid-steer-loader.png' },
+  { en: 'Backhoe', es: 'Retroexcavadora', img: 'https://img.icons8.com/fluency/48/backhoe.png' },
+  { en: 'Roller / Packer', es: 'Rodillo compactador', img: 'https://img.icons8.com/fluency/48/road-roller.png' },
+  { en: 'Dozer / Blade', es: 'Bulldozer / Topadora', img: 'https://img.icons8.com/fluency/48/bulldozer.png' },
+  { en: 'Grader', es: 'Motoniveladora', img: 'https://img.icons8.com/fluency/48/tractor.png' },
+  { en: 'Trencher', es: 'Zanjadora', img: 'https://img.icons8.com/fluency/48/drilling-rig.png' },
+  { en: 'Spreader', es: 'Esparcidora', img: 'https://img.icons8.com/fluency/48/fertilizing.png' },
+  { en: 'Forklift', es: 'Montacargas', img: 'https://img.icons8.com/fluency/48/forklift.png' }
 ];
 
 var policies = {
@@ -865,7 +913,8 @@ function buildEquipList(containerId, items) {
     div.className = 'equip-item';
     div.innerHTML =
       '<div class="equip-toggle" onclick="toggleEquip(this)"></div>' +
-      '<div class="equip-name" onclick="toggleEquip(this.previousElementSibling)">' +
+      '<img src="' + item.img + '" alt="" class="equip-img">' +
+      '<div class="equip-name" onclick="toggleEquip(this.parentElement.querySelector(\'.equip-toggle\'))">' +
         item.en + '<small>' + item.es + '</small>' +
       '</div>' +
       '<div class="equip-years">' +
@@ -1172,6 +1221,24 @@ function setupInlineAutocomplete(inputId, dropdownId, cityId, provinceId, postal
 }
 
 function escHtml(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+// ========== SUBMIT ==========
+function submitForm() {
+  var btn = document.getElementById('submitBtn');
+  var status = document.getElementById('submitStatus');
+  var origText = btn.querySelector('span').textContent;
+
+  btn.disabled = true;
+  btn.querySelector('span').textContent = currentLang === 'es' ? 'Enviando...' : 'Submitting...';
+
+  // TODO: Connect to Supabase — for now show success
+  setTimeout(function() {
+    btn.querySelector('span').textContent = currentLang === 'es' ? 'Enviado' : 'Submitted';
+    status.textContent = currentLang === 'es' ? '¡Registro completado! Gracias.' : 'Registration complete! Thank you.';
+    status.className = 'submit-status show';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, 1500);
+}
 
 // ========== INIT ==========
 applyLang();
