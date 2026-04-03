@@ -302,12 +302,20 @@
   }
   .sig-canvas {
     width: 100%;
-    height: 120px;
+    height: 150px;
     background: #f2f2f7;
     border-radius: 10px;
     touch-action: none;
+    -ms-touch-action: none;
     cursor: crosshair;
     display: block;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  .sig-container.signing .sig-canvas {
+    outline: 2px solid #F26522;
+    outline-offset: -2px;
+    border-radius: 10px;
   }
   .sig-placeholder {
     position: absolute;
@@ -1051,31 +1059,44 @@ function initSignatures() {
       return { x: touch.clientX - rect.left, y: touch.clientY - rect.top };
     }
 
+    function preventScroll(e) { e.preventDefault(); }
+
     function startDraw(e) {
       e.preventDefault();
+      e.stopPropagation();
       drawing = true;
+      container.classList.add('signing');
+      // Block all scrolling while signing
+      document.body.style.overflow = 'hidden';
+      document.addEventListener('touchmove', preventScroll, { passive: false });
       var pos = getPos(e);
       lastX = pos.x;
       lastY = pos.y;
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
       container.classList.add('has-sig');
     }
 
     function draw(e) {
       if (!drawing) return;
       e.preventDefault();
+      e.stopPropagation();
       var pos = getPos(e);
-      ctx.beginPath();
-      ctx.moveTo(lastX, lastY);
       ctx.lineTo(pos.x, pos.y);
       ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(pos.x, pos.y);
       lastX = pos.x;
       lastY = pos.y;
     }
 
     function stopDraw(e) {
       if (drawing) {
-        e.preventDefault();
+        if (e) e.preventDefault();
         drawing = false;
+        container.classList.remove('signing');
+        document.body.style.overflow = '';
+        document.removeEventListener('touchmove', preventScroll);
         saveSignature();
       }
     }
@@ -1083,8 +1104,12 @@ function initSignatures() {
     // Touch events (mobile)
     canvas.addEventListener('touchstart', startDraw, { passive: false });
     canvas.addEventListener('touchmove', draw, { passive: false });
-    canvas.addEventListener('touchend', stopDraw);
-    canvas.addEventListener('touchcancel', stopDraw);
+    canvas.addEventListener('touchend', stopDraw, { passive: false });
+    // Don't stop drawing on touchcancel — often fires incorrectly on mobile
+    canvas.addEventListener('touchcancel', function(e) {
+      // Only stop if finger truly left
+      setTimeout(function() { if (drawing) stopDraw(e); }, 100);
+    });
 
     // Mouse events (desktop)
     canvas.addEventListener('mousedown', startDraw);
