@@ -503,6 +503,26 @@
     letter-spacing: 1px;
   }
 
+  /* Checkbox pills */
+  .check-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: #f2f2f7;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.15s;
+    user-select: none;
+  }
+  .check-pill input { display: none; }
+  .check-pill:has(input:checked) {
+    background: #F26522;
+    color: #fff;
+  }
+
   /* Submit button */
   .submit-btn {
     display: block;
@@ -563,6 +583,7 @@
   </div>
 </div>
 
+<div id="page1">
 <!-- PASO 1: Info Personal -->
 <div class="section">
   <div class="section-title"><span class="step-num">1</span> <span data-es="Información Personal" data-en="Personal Information"></span></div>
@@ -813,13 +834,197 @@
   </div>
 </div>
 
+<!-- PAGE 1 NEXT BUTTON -->
+<div class="section" id="page1Next">
+  <button type="button" class="submit-btn" onclick="goToPage2()">
+    <span data-es="Siguiente — Aplicación Rafat" data-en="Next — Rafat Application"></span>
+  </button>
+</div>
+</div><!-- end page1 -->
+
+<!-- ==================== PAGE 2: RAFAT APPLICATION ==================== -->
+<div id="page2" style="display:none;">
+
+<!-- PASO 6: Position -->
+<div class="section">
+  <div class="section-title"><span class="step-num">6</span> <span data-es="Posición" data-en="Position"></span></div>
+  <div class="card">
+    <div class="field">
+      <div class="field-label" data-es="Posición a la que aplica" data-en="Position Applied For"></div>
+      <div class="field-note" data-es="Selecciona todas las que apliquen" data-en="Select all that apply"></div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;" id="positionChecks">
+        <label class="check-pill"><input type="checkbox" value="Operator"> <span>Operator</span></label>
+        <label class="check-pill"><input type="checkbox" value="Driver"> <span>Driver</span></label>
+        <label class="check-pill"><input type="checkbox" value="Labour"> <span>Labour</span></label>
+        <label class="check-pill"><input type="checkbox" value="Mechanic"> <span>Mechanic</span></label>
+        <label class="check-pill"><input type="checkbox" value="Administration"> <span>Administration</span></label>
+        <label class="check-pill"><input type="checkbox" value="Fleet"> <span>Fleet</span></label>
+        <label class="check-pill"><input type="checkbox" value="Other"> <span>Other</span></label>
+      </div>
+    </div>
+    <div class="field-split">
+      <div class="field">
+        <div class="field-label" data-es="Fecha disponible para empezar" data-en="Date Available to Start"></div>
+        <input class="field-input date-input" id="dateAvailable" type="text" placeholder="dd/mm/aaaa" maxlength="10" oninput="formatDate(this)">
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Tipo de posición" data-en="Position Type"></div>
+        <div class="segmented">
+          <div class="seg-option" onclick="selectSeg(this)">Full Time</div>
+          <div class="seg-option" onclick="selectSeg(this)">Part Time</div>
+          <div class="seg-option" onclick="selectSeg(this)">Seasonal</div>
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label" data-es="¿Referido por alguien?" data-en="Referred by anyone?"></div>
+      <input class="field-input" id="referredBy" type="text" data-ph-es="Nombre de quien te refirió" data-ph-en="Name of who referred you">
+    </div>
+  </div>
+</div>
+
+<!-- PASO 7: Legal -->
+<div class="section">
+  <div class="section-title"><span class="step-num">7</span> <span data-es="Información Legal" data-en="Legal Information"></span></div>
+  <div class="card">
+    <div class="field">
+      <div class="field-label" data-es="¿Estás legalmente autorizado para trabajar en Canadá?" data-en="Are you legally entitled to work in Canada?"></div>
+      <div class="segmented" id="legallyEntitled">
+        <div class="seg-option" onclick="selectSeg(this)" data-es="Sí" data-en="Yes"></div>
+        <div class="seg-option" onclick="selectSeg(this)">No</div>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label" data-es="¿Has sido condenado por un delito sin perdón?" data-en="Criminal conviction without pardon?"></div>
+      <div class="segmented" id="criminalConviction">
+        <div class="seg-option" onclick="selectSeg(this)" data-es="Sí" data-en="Yes"></div>
+        <div class="seg-option" onclick="selectSeg(this)">No</div>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label" data-es="¿Tienes familiares trabajando para Rafat?" data-en="Do you have relatives working for Rafat?"></div>
+      <div class="segmented" id="relativesRafat">
+        <div class="seg-option" onclick="selectSeg(this)" data-es="Sí" data-en="Yes"></div>
+        <div class="seg-option" onclick="selectSeg(this)">No</div>
+      </div>
+      <input class="field-input" id="relativesDetails" type="text" style="margin-top:8px;" data-ph-es="Nombre y relación" data-ph-en="Name and relationship">
+    </div>
+    <div class="field">
+      <div class="field-label" data-es="Tipo de Licencia de Conducir" data-en="Driver's License Type"></div>
+      <div class="segmented" id="licenseType">
+        <div class="seg-option" onclick="selectSeg(this)">AZ</div>
+        <div class="seg-option" onclick="selectSeg(this)">DZ</div>
+        <div class="seg-option" onclick="selectSeg(this)" data-es="Otra" data-en="Other"></div>
+        <div class="seg-option" onclick="selectSeg(this)" data-es="Ninguna" data-en="None"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PASO 8: Education -->
+<div class="section">
+  <div class="section-title"><span class="step-num">8</span> <span data-es="Educación" data-en="Education"></span></div>
+  <div class="card">
+    <div class="field">
+      <div class="field-label">High School / Secundaria</div>
+      <input class="field-input" id="eduHS" type="text" data-ph-es="Nombre de la escuela" data-ph-en="School name">
+    </div>
+    <div class="field">
+      <div class="field-label">College</div>
+      <input class="field-input" id="eduCollege" type="text" data-ph-es="Nombre de la institución" data-ph-en="Institution name">
+    </div>
+    <div class="field">
+      <div class="field-label" data-es="Universidad" data-en="University"></div>
+      <input class="field-input" id="eduUni" type="text" data-ph-es="Nombre de la universidad" data-ph-en="University name">
+    </div>
+    <div class="field">
+      <div class="field-label" data-es="Cursos o certificaciones adicionales" data-en="Additional courses or certifications"></div>
+      <input class="field-input" id="eduExtra" type="text" data-ph-es="Cursos, seminarios, etc." data-ph-en="Courses, seminars, etc.">
+    </div>
+  </div>
+</div>
+
+<!-- PASO 9: Work Experience -->
+<div class="section">
+  <div class="section-title"><span class="step-num">9</span> <span data-es="Experiencia Laboral" data-en="Work Experience"></span></div>
+  <div class="card">
+    <div class="field">
+      <div class="field-label" data-es="Último Empleador" data-en="Last Employer"></div>
+      <input class="field-input" id="workEmployer" type="text" data-ph-es="Nombre de la empresa" data-ph-en="Company name">
+    </div>
+    <div class="field">
+      <div class="field-label" data-es="Tipo de Negocio" data-en="Type of Business"></div>
+      <input class="field-input" id="workBusiness" type="text" data-ph-es="Construcción, transporte, etc." data-ph-en="Construction, transport, etc.">
+    </div>
+    <div class="field-split">
+      <div class="field">
+        <div class="field-label" data-es="Tu Puesto" data-en="Your Job Title"></div>
+        <input class="field-input" id="workTitle" type="text" data-ph-es="Operador, conductor..." data-ph-en="Operator, driver...">
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Período" data-en="Period"></div>
+        <input class="field-input" id="workPeriod" type="text" data-ph-es="Ej: 2020-2024" data-ph-en="E.g: 2020-2024">
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label" data-es="Supervisor" data-en="Supervisor Name"></div>
+      <input class="field-input" id="workSupervisor" type="text" data-ph-es="Nombre del supervisor" data-ph-en="Supervisor name">
+    </div>
+    <div class="field">
+      <div class="field-label" data-es="Razón de salida" data-en="Reason for Leaving"></div>
+      <input class="field-input" id="workReason" type="text" data-ph-es="¿Por qué dejaste ese trabajo?" data-ph-en="Why did you leave?">
+    </div>
+  </div>
+</div>
+
+<!-- PASO 10: Reference -->
+<div class="section">
+  <div class="section-title"><span class="step-num">10</span> <span data-es="Referencia" data-en="Reference"></span></div>
+  <div class="card">
+    <div class="field">
+      <div class="field-label" data-es="Nombre" data-en="Name"></div>
+      <input class="field-input" id="refName" type="text" data-ph-es="Nombre completo" data-ph-en="Full name">
+    </div>
+    <div class="field-split">
+      <div class="field">
+        <div class="field-label" data-es="Teléfono" data-en="Phone"></div>
+        <input class="field-input" id="refPhone" type="tel" placeholder="(416) 555-1234">
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Relación" data-en="Relationship"></div>
+        <input class="field-input" id="refRelationship" type="text" data-ph-es="Compañero, jefe, amigo..." data-ph-en="Coworker, boss, friend...">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PASO 11: Consent -->
+<div class="section">
+  <div class="section-title"><span class="step-num">11</span> <span data-es="Consentimiento" data-en="Consent"></span></div>
+  <div class="card">
+    <div class="field">
+      <div class="policy-text" id="policyConsent"></div>
+      <div class="field-label" data-es="Firma" data-en="Signature"></div>
+      <div class="sig-container">
+        <canvas class="sig-canvas"></canvas>
+        <span class="sig-placeholder" data-es="Dibuja tu firma aquí" data-en="Draw your signature here"></span>
+        <button type="button" class="sig-clear" onclick="clearSig(this)" data-es="Borrar" data-en="Clear"></button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- SUBMIT -->
 <div class="section">
   <button type="button" id="submitBtn" class="submit-btn" onclick="submitForm()">
     <span id="submitText" data-es="Enviar Formulario" data-en="Submit Form"></span>
   </button>
+  <p style="text-align:center;margin-top:8px;">
+    <button type="button" onclick="goToPage1()" style="background:none;border:none;color:#8e8e93;font-size:13px;font-family:inherit;cursor:pointer;" data-es="← Volver a página anterior" data-en="← Back to previous page"></button>
+  </p>
   <div id="submitStatus" class="submit-status"></div>
 </div>
+</div><!-- end page2 -->
 
 <div class="footer">GoodWorkers Equipment LTD.</div>
 
@@ -875,6 +1080,10 @@ var policies = {
   handbook: {
     es: 'Acuso recibo de este Manual del Empleado. Entiendo y acepto que este Manual describe las políticas y procedimientos aplicables a mi empleo con GoodWorkers. Certifico que entiendo completamente su contenido y acepto cumplirlo en su totalidad. Cualquier incumplimiento está sujeto a medidas disciplinarias.',
     en: 'I acknowledge receipt of this Employee Handbook. I understand and agree that this Handbook describes the policies and procedures applicable to my employment with GoodWorkers. I certify that I fully understand its content and agree to comply. Any failure to comply is liable to disciplinary measures.'
+  },
+  consent: {
+    es: 'Autorizo a Rafat General Contractor Inc. y cualquier otra firma a contactar a mis empleadores anteriores y cualquier otra fuente para obtener información necesaria para la evaluación de esta solicitud.<br><br>Certifico que toda la información proporcionada en este formulario es verdadera y completa. Reconozco que cualquier declaración falsa o engañosa puede resultar en la imposibilidad de ser empleado o en mi despido.<br><br>Yo, el abajo firmante, he leído y entendido lo anterior y he dado mi consentimiento libre y voluntariamente.',
+    en: 'I authorize Rafat General Contractor Inc. and any other firm to contact my former employers and any other source to obtain information necessary for the evaluation of this application.<br><br>I certify that all information supplied in this form is true and complete. I recognize that any false or misleading statement may render me unable to be employed or result in my dismissal.<br><br>I, the undersigned, have read and understood the above and have freely and knowingly given my consent.'
   }
 };
 
@@ -905,6 +1114,7 @@ function applyLang() {
   document.getElementById('policyDriver').innerHTML = policies.driver[currentLang];
   document.getElementById('policyDrug').innerHTML = policies.drug[currentLang];
   document.getElementById('policyHandbook').innerHTML = policies.handbook[currentLang];
+  if (document.getElementById('policyConsent')) document.getElementById('policyConsent').innerHTML = policies.consent[currentLang];
 
   // Equipment lists
   buildEquipList('truckList', trucks);
@@ -1243,6 +1453,28 @@ function setupInlineAutocomplete(inputId, dropdownId, cityId, provinceId, postal
 
 function escHtml(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
 
+// ========== PAGE NAVIGATION ==========
+function goToPage2() {
+  // Validate page 1
+  var fname = document.getElementById('fname').value.trim();
+  var lname = document.getElementById('lname').value.trim();
+  if (!fname || !lname) {
+    alert(currentLang === 'es' ? 'Por favor ingresa tu nombre y apellido.' : 'Please enter your first and last name.');
+    return;
+  }
+  document.getElementById('page1').style.display = 'none';
+  document.getElementById('page2').style.display = 'block';
+  window.scrollTo({ top: 0 });
+  applyLang();
+  initSignatures();
+}
+
+function goToPage1() {
+  document.getElementById('page2').style.display = 'none';
+  document.getElementById('page1').style.display = 'block';
+  window.scrollTo({ top: 0 });
+}
+
 // ========== SUPABASE ==========
 var SUPABASE_URL = 'https://fcgxxxxazyggnxkjswjs.supabase.co';
 var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZjZ3h4eHhhenlnZ254a2pzd2pzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUxNTc1MzAsImV4cCI6MjA5MDczMzUzMH0.8fbm8o1m913Ysc-v_D1Y51xCJ4m4GEoNwdI_BBC0gTg';
@@ -1364,7 +1596,36 @@ async function submitForm() {
       signature_drug: sigDrug,
       signature_handbook: sigHandbook,
       snow_plowing: snowPlowing,
-      snow_plow_oncall: snowOncall
+      snow_plow_oncall: snowOncall,
+
+      // Page 2: Rafat Application
+      position_applied: Array.from(document.querySelectorAll('#positionChecks input:checked')).map(function(cb) { return cb.value; }),
+      date_available: (document.getElementById('dateAvailable') || {}).value || null,
+      position_type: (function() { var s = document.querySelectorAll('#page2 .segmented')[0]; var sel = s ? s.querySelector('.selected') : null; return sel ? sel.textContent.trim().toLowerCase().replace(' ', '_') : null; })(),
+      referred_by: (document.getElementById('referredBy') || {}).value || null,
+      legally_entitled: (function() { var s = document.getElementById('legallyEntitled'); var sel = s ? s.querySelector('.selected') : null; return sel ? (sel.textContent.trim() === 'Sí' || sel.textContent.trim() === 'Yes') : null; })(),
+      criminal_conviction: (function() { var s = document.getElementById('criminalConviction'); var sel = s ? s.querySelector('.selected') : null; return sel ? (sel.textContent.trim() === 'Sí' || sel.textContent.trim() === 'Yes') : null; })(),
+      relatives_at_rafat: (function() { var s = document.getElementById('relativesRafat'); var sel = s ? s.querySelector('.selected') : null; return sel ? (sel.textContent.trim() === 'Sí' || sel.textContent.trim() === 'Yes') : null; })(),
+      relatives_at_rafat_details: (document.getElementById('relativesDetails') || {}).value || null,
+      license_type: (function() { var s = document.getElementById('licenseType'); var sel = s ? s.querySelector('.selected') : null; return sel ? sel.textContent.trim() : null; })(),
+      education: {
+        high_school: (document.getElementById('eduHS') || {}).value || null,
+        college: (document.getElementById('eduCollege') || {}).value || null,
+        university: (document.getElementById('eduUni') || {}).value || null,
+        additional: (document.getElementById('eduExtra') || {}).value || null
+      },
+      work_experience: {
+        employer: (document.getElementById('workEmployer') || {}).value || null,
+        business_type: (document.getElementById('workBusiness') || {}).value || null,
+        job_title: (document.getElementById('workTitle') || {}).value || null,
+        period: (document.getElementById('workPeriod') || {}).value || null,
+        supervisor: (document.getElementById('workSupervisor') || {}).value || null,
+        reason_leaving: (document.getElementById('workReason') || {}).value || null
+      },
+      reference_name: (document.getElementById('refName') || {}).value || null,
+      reference_phone: (document.getElementById('refPhone') || {}).value || null,
+      reference_relationship: (document.getElementById('refRelationship') || {}).value || null,
+      signature_consent: (function() { var canvases = document.querySelectorAll('#page2 .sig-canvas'); return canvases.length > 0 && canvases[0]._sigData ? canvases[0]._sigData : null; })()
     }).select().single();
 
     if (empError) throw empError;
