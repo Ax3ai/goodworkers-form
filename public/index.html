@@ -453,6 +453,41 @@
     cursor: pointer;
   }
 
+  /* Acknowledgement items */
+  .ack-item {
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .ack-item:last-of-type { border-bottom: none; }
+  .ack-check {
+    width: 24px; height: 24px;
+    border-radius: 6px;
+    border: 2px solid #ccc;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    font-size: 14px;
+  }
+  .ack-item.checked .ack-check {
+    background: #F26522;
+    border-color: #F26522;
+    color: #fff;
+  }
+  .ack-item.checked .ack-check::after { content: '✓'; }
+  .ack-detail {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    font-size: 13px;
+    color: #666;
+    line-height: 1.5;
+    padding: 0 34px;
+  }
+  .ack-item.expanded .ack-detail {
+    max-height: 500px;
+    padding: 10px 34px;
+  }
+
   /* Address autocomplete dropdown */
   .ac-wrap { position: relative; }
   .ac-dropdown {
@@ -749,23 +784,7 @@
   </div>
 </div>
 
-<!-- PASO 4: Salud y Seguridad -->
-<div class="section">
-  <div class="section-title"><span class="step-num">4</span> <span data-es="Salud y Seguridad" data-en="Health &amp; Safety"></span></div>
-  <div class="card">
-    <div class="field">
-      <div class="policy-text" id="policyHS">
-        <!-- filled by language -->
-      </div>
-      <div class="field-label" data-es="Firma" data-en="Signature"></div>
-      <div class="sig-container">
-        <canvas class="sig-canvas"></canvas>
-        <span class="sig-placeholder" data-es="Dibuja tu firma aquí" data-en="Draw your signature here"></span>
-        <button type="button" class="sig-clear" onclick="clearSig(this)" data-es="Borrar" data-en="Clear"></button>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- H&S section removed — now part of unified signature section -->
 
 <!-- PASO 5: Conductor -->
 <div class="section">
@@ -807,61 +826,7 @@
   </div>
 </div>
 
-<!-- Driver Signatures -->
-<div class="section">
-  <div class="section-title"><span data-es="Reconocimientos del Conductor" data-en="Driver Acknowledgements"></span> <span class="optional" data-es="(Opcional)" data-en="(Optional)"></span></div>
-  <div class="card">
-    <div class="field">
-      <div class="policy-text" id="policyDriver">
-        <!-- filled by language -->
-      </div>
-      <div class="field-label" data-es="Firma" data-en="Signature"></div>
-      <div class="sig-container">
-        <canvas class="sig-canvas"></canvas>
-        <span class="sig-placeholder" data-es="Dibuja tu firma aquí" data-en="Draw your signature here"></span>
-        <button type="button" class="sig-clear" onclick="clearSig(this)" data-es="Borrar" data-en="Clear"></button>
-      </div>
-    </div>
-    <div class="field">
-      <div class="policy-text" id="policyDrug">
-        <!-- filled by language -->
-      </div>
-      <div class="field-label" data-es="Firma" data-en="Signature"></div>
-      <div class="sig-container">
-        <canvas class="sig-canvas"></canvas>
-        <span class="sig-placeholder" data-es="Dibuja tu firma aquí" data-en="Draw your signature here"></span>
-        <button type="button" class="sig-clear" onclick="clearSig(this)" data-es="Borrar" data-en="Clear"></button>
-      </div>
-    </div>
-    <div class="field">
-      <div class="policy-text" id="policyHandbook">
-        <!-- filled by language -->
-      </div>
-      <div class="field-label" data-es="Firma" data-en="Signature"></div>
-      <div class="sig-container">
-        <canvas class="sig-canvas"></canvas>
-        <span class="sig-placeholder" data-es="Dibuja tu firma aquí" data-en="Draw your signature here"></span>
-        <button type="button" class="sig-clear" onclick="clearSig(this)" data-es="Borrar" data-en="Clear"></button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Disclaimer Signature -->
-<div class="section">
-  <div class="section-title"><span data-es="Declaración" data-en="Disclaimer"></span></div>
-  <div class="card">
-    <div class="field">
-      <div class="policy-text" id="policyDisclaimer"></div>
-      <div class="field-label" data-es="Firma" data-en="Signature"></div>
-      <div class="sig-container">
-        <canvas class="sig-canvas"></canvas>
-        <span class="sig-placeholder" data-es="Dibuja tu firma aquí" data-en="Draw your signature here"></span>
-        <button type="button" class="sig-clear" onclick="clearSig(this)" data-es="Borrar" data-en="Clear"></button>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- Driver/Disclaimer signatures removed — now part of unified signature section -->
 
 <!-- PAGE 1 NEXT BUTTON -->
 <div class="section" id="page1Next">
@@ -1053,20 +1018,73 @@
   </div>
 </div>
 
-<!-- PASO 11: Consent -->
+<!-- UNIFIED SIGNATURE SECTION -->
 <div class="section">
-  <div class="section-title"><span class="step-num">11</span> <span data-es="Consentimiento" data-en="Consent"></span></div>
+  <div class="section-title"><span class="step-num">11</span> <span data-es="Reconocimientos y Firma" data-en="Acknowledgements & Signature"></span></div>
   <div class="card">
     <div class="field">
-      <div class="policy-text" id="policyConsent"></div>
+      <div class="field-note" data-es="Selecciona cada punto para confirmar que lo leíste y entendiste. Toca para ver el detalle." data-en="Select each item to confirm you read and understood it. Tap to see details."></div>
+    </div>
+
+    <div class="ack-item" onclick="toggleAck(this)">
+      <div style="display:flex;align-items:center;gap:10px;cursor:pointer">
+        <div class="ack-check"></div>
+        <strong data-es="1. Salud y Seguridad" data-en="1. Health & Safety"></strong>
+      </div>
+      <div class="ack-detail" id="ackDetailHS"></div>
+    </div>
+
+    <div class="ack-item" onclick="toggleAck(this)">
+      <div style="display:flex;align-items:center;gap:10px;cursor:pointer">
+        <div class="ack-check"></div>
+        <strong data-es="2. Entrenamiento de Conductor" data-en="2. Driver Training & Orientation"></strong>
+      </div>
+      <div class="ack-detail" id="ackDetailDriver"></div>
+    </div>
+
+    <div class="ack-item" onclick="toggleAck(this)">
+      <div style="display:flex;align-items:center;gap:10px;cursor:pointer">
+        <div class="ack-check"></div>
+        <strong data-es="3. Drogas y Alcohol" data-en="3. Drug & Alcohol Policy"></strong>
+      </div>
+      <div class="ack-detail" id="ackDetailDrug"></div>
+    </div>
+
+    <div class="ack-item" onclick="toggleAck(this)">
+      <div style="display:flex;align-items:center;gap:10px;cursor:pointer">
+        <div class="ack-check"></div>
+        <strong data-es="4. Manual del Empleado" data-en="4. Employee Handbook"></strong>
+      </div>
+      <div class="ack-detail" id="ackDetailHandbook"></div>
+    </div>
+
+    <div class="ack-item" onclick="toggleAck(this)">
+      <div style="display:flex;align-items:center;gap:10px;cursor:pointer">
+        <div class="ack-check"></div>
+        <strong data-es="5. Declaración de Veracidad" data-en="5. Disclaimer"></strong>
+      </div>
+      <div class="ack-detail" id="ackDetailDisclaimer"></div>
+    </div>
+
+    <div class="ack-item" onclick="toggleAck(this)">
+      <div style="display:flex;align-items:center;gap:10px;cursor:pointer">
+        <div class="ack-check"></div>
+        <strong data-es="6. Consentimiento" data-en="6. Consent"></strong>
+      </div>
+      <div class="ack-detail" id="ackDetailConsent"></div>
+    </div>
+
+    <div class="field" style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(0,0,0,0.08)">
       <div class="field-label" data-es="Firma" data-en="Signature"></div>
       <div class="sig-container">
-        <canvas class="sig-canvas"></canvas>
+        <canvas class="sig-canvas" id="unifiedSigCanvas"></canvas>
         <span class="sig-placeholder" data-es="Dibuja tu firma aquí" data-en="Draw your signature here"></span>
         <button type="button" class="sig-clear" onclick="clearSig(this)" data-es="Borrar" data-en="Clear"></button>
       </div>
     </div>
   </div>
+</div>
+
 </div>
 
 <!-- SUBMIT -->
@@ -1175,6 +1193,7 @@ function applyLang() {
   document.getElementById('policyHandbook').innerHTML = policies.handbook[currentLang];
   if (document.getElementById('policyConsent')) document.getElementById('policyConsent').innerHTML = policies.consent[currentLang];
   if (document.getElementById('policyDisclaimer')) document.getElementById('policyDisclaimer').innerHTML = policies.disclaimer[currentLang];
+  fillAckDetails();
 
   // Equipment lists
   buildEquipList('truckList', trucks);
@@ -1610,11 +1629,14 @@ async function submitForm() {
 
     // Get signatures
     var sigCanvases = document.querySelectorAll('.sig-canvas');
-    var sigHS = sigCanvases[0] ? sigCanvases[0]._sigData : null;
-    var sigDriver = sigCanvases[1] ? sigCanvases[1]._sigData : null;
-    var sigDrug = sigCanvases[2] ? sigCanvases[2]._sigData : null;
-    var sigHandbook = sigCanvases[3] ? sigCanvases[3]._sigData : null;
-    var sigDisclaimer = sigCanvases[4] ? sigCanvases[4]._sigData : null;
+    // Unified signature — one signature for all acknowledgements
+    var unifiedCanvas = document.getElementById('unifiedSigCanvas');
+    var unifiedSig = unifiedCanvas && unifiedCanvas._sigData ? unifiedCanvas._sigData : null;
+    var sigHS = unifiedSig;
+    var sigDriver = unifiedSig;
+    var sigDrug = unifiedSig;
+    var sigHandbook = unifiedSig;
+    var sigDisclaimer = unifiedSig;
 
     // Get snow plow answers
     var driverSection = document.querySelectorAll('.segmented');
@@ -1687,7 +1709,7 @@ async function submitForm() {
       reference_name: (document.getElementById('refName') || {}).value || null,
       reference_phone: (document.getElementById('refPhone') || {}).value || null,
       reference_relationship: (document.getElementById('refRelationship') || {}).value || null,
-      signature_consent: (function() { var canvases = document.querySelectorAll('#page2 .sig-canvas'); return canvases.length > 0 && canvases[0]._sigData ? canvases[0]._sigData : null; })()
+      signature_consent: unifiedSig
     }).select().single();
 
     if (empError) throw empError;
@@ -1725,6 +1747,27 @@ async function submitForm() {
     status.textContent = (currentLang === 'es' ? 'Error al enviar. Intenta de nuevo. ' : 'Error submitting. Try again. ') + (err.message || '');
     status.className = 'submit-status show error';
   }
+}
+
+// ========== ACKNOWLEDGEMENTS ==========
+function toggleAck(item) {
+  item.classList.toggle('expanded');
+  item.classList.toggle('checked');
+}
+
+function fillAckDetails() {
+  var d = document.getElementById('ackDetailHS');
+  if (d) d.innerHTML = policies.hs[currentLang];
+  d = document.getElementById('ackDetailDriver');
+  if (d) d.innerHTML = policies.driver[currentLang];
+  d = document.getElementById('ackDetailDrug');
+  if (d) d.innerHTML = policies.drug[currentLang];
+  d = document.getElementById('ackDetailHandbook');
+  if (d) d.innerHTML = policies.handbook[currentLang];
+  d = document.getElementById('ackDetailDisclaimer');
+  if (d) d.innerHTML = policies.disclaimer[currentLang];
+  d = document.getElementById('ackDetailConsent');
+  if (d) d.innerHTML = policies.consent[currentLang];
 }
 
 // ========== EDUCATION ==========
