@@ -954,33 +954,15 @@
 <div class="section">
   <div class="section-title"><span class="step-num">8</span> <span data-es="Educación" data-en="Education"></span></div>
   <div class="card">
-    <div class="field">
-      <div class="field-label">High School / Secundaria</div>
-      <input class="field-input" id="eduHS" type="text" data-ph-es="Nombre de la escuela" data-ph-en="School name">
-      <div class="field-split" style="margin-top:6px">
-        <input class="field-input" id="eduHSProgram" type="text" style="flex:2" data-ph-es="Programa / Título" data-ph-en="Program / Degree">
-        <input class="field-input" id="eduHSYear" type="text" style="flex:0.8" data-ph-es="Año" data-ph-en="Year">
+    <div id="eduList">
+      <div class="edu-entry" style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
+        <input class="field-input edu-institution" type="text" style="flex:2;min-width:140px" data-ph-es="Institución" data-ph-en="Institution">
+        <input class="field-input edu-program" type="text" style="flex:2;min-width:120px" data-ph-es="Programa / Título" data-ph-en="Program / Degree">
+        <input class="field-input edu-year" type="text" style="flex:0.7;min-width:60px" data-ph-es="Año" data-ph-en="Year">
       </div>
     </div>
-    <div class="field">
-      <div class="field-label">College</div>
-      <input class="field-input" id="eduCollege" type="text" data-ph-es="Nombre de la institución" data-ph-en="Institution name">
-      <div class="field-split" style="margin-top:6px">
-        <input class="field-input" id="eduCollegeProgram" type="text" style="flex:2" data-ph-es="Programa / Título" data-ph-en="Program / Degree">
-        <input class="field-input" id="eduCollegeYear" type="text" style="flex:0.8" data-ph-es="Año" data-ph-en="Year">
-      </div>
-    </div>
-    <div class="field">
-      <div class="field-label" data-es="Universidad" data-en="University"></div>
-      <input class="field-input" id="eduUni" type="text" data-ph-es="Nombre de la universidad" data-ph-en="University name">
-      <div class="field-split" style="margin-top:6px">
-        <input class="field-input" id="eduUniProgram" type="text" style="flex:2" data-ph-es="Programa / Título" data-ph-en="Program / Degree">
-        <input class="field-input" id="eduUniYear" type="text" style="flex:0.8" data-ph-es="Año" data-ph-en="Year">
-      </div>
-    </div>
-    <div id="eduExtraList"></div>
-    <button type="button" onclick="addEduExtra()" style="background:none;border:1px dashed #ccc;border-radius:10px;padding:10px;width:100%;color:#888;font-size:14px;cursor:pointer;font-family:inherit;margin-top:8px">
-      <span data-es="+ Agregar curso o certificación" data-en="+ Add course or certification"></span>
+    <button type="button" onclick="addEduEntry()" style="background:none;border:1px dashed #ccc;border-radius:10px;padding:10px;width:100%;color:#888;font-size:14px;cursor:pointer;font-family:inherit">
+      <span data-es="+ Agregar educación" data-en="+ Add education"></span>
     </button>
   </div>
 </div>
@@ -1728,46 +1710,31 @@ async function submitForm() {
 }
 
 // ========== EDUCATION ==========
-function addEduExtra() {
-  var list = document.getElementById('eduExtraList');
+function addEduEntry() {
+  var list = document.getElementById('eduList');
   var div = document.createElement('div');
-  div.className = 'field';
-  div.style.cssText = 'position:relative;';
+  div.className = 'edu-entry';
+  div.style.cssText = 'display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;';
   div.innerHTML =
-    '<div class="field-label">' + (currentLang === 'es' ? 'Curso / Certificación' : 'Course / Certification') + '</div>' +
-    '<input class="field-input edu-extra-name" type="text" placeholder="' + (currentLang === 'es' ? 'Nombre del curso' : 'Course name') + '">' +
-    '<div class="field-split" style="margin-top:6px">' +
-      '<input class="field-input edu-extra-program" type="text" style="flex:2" placeholder="' + (currentLang === 'es' ? 'Institución' : 'Institution') + '">' +
-      '<input class="field-input edu-extra-year" type="text" style="flex:0.8" placeholder="' + (currentLang === 'es' ? 'Año' : 'Year') + '">' +
-    '</div>' +
-    '<button type="button" onclick="this.parentElement.remove()" style="position:absolute;top:4px;right:4px;background:none;border:none;color:#e74c3c;font-size:18px;cursor:pointer;padding:0 8px">×</button>';
+    '<input class="field-input edu-institution" type="text" style="flex:2;min-width:140px" placeholder="' + (currentLang === 'es' ? 'Institución' : 'Institution') + '">' +
+    '<input class="field-input edu-program" type="text" style="flex:2;min-width:120px" placeholder="' + (currentLang === 'es' ? 'Programa / Título' : 'Program / Degree') + '">' +
+    '<input class="field-input edu-year" type="text" style="flex:0.7;min-width:60px" placeholder="' + (currentLang === 'es' ? 'Año' : 'Year') + '">' +
+    '<button type="button" onclick="this.parentElement.remove()" style="background:none;border:none;color:#e74c3c;font-size:18px;cursor:pointer;padding:0 4px">×</button>';
   list.appendChild(div);
 }
 
 function getEducationData() {
-  var data = {
-    high_school: (document.getElementById('eduHS') || {}).value || null,
-    high_school_program: (document.getElementById('eduHSProgram') || {}).value || null,
-    high_school_year: (document.getElementById('eduHSYear') || {}).value || null,
-    college: (document.getElementById('eduCollege') || {}).value || null,
-    college_program: (document.getElementById('eduCollegeProgram') || {}).value || null,
-    college_year: (document.getElementById('eduCollegeYear') || {}).value || null,
-    university: (document.getElementById('eduUni') || {}).value || null,
-    university_program: (document.getElementById('eduUniProgram') || {}).value || null,
-    university_year: (document.getElementById('eduUniYear') || {}).value || null,
-    additional: []
-  };
-  var extras = document.querySelectorAll('#eduExtraList .field');
-  for (var i = 0; i < extras.length; i++) {
-    var name = extras[i].querySelector('.edu-extra-name').value.trim();
-    var prog = extras[i].querySelector('.edu-extra-program').value.trim();
-    var year = extras[i].querySelector('.edu-extra-year').value.trim();
-    if (name || prog || year) {
-      data.additional.push({ name: name, institution: prog, year: year });
+  var entries = document.querySelectorAll('.edu-entry');
+  var data = [];
+  for (var i = 0; i < entries.length; i++) {
+    var inst = entries[i].querySelector('.edu-institution').value.trim();
+    var prog = entries[i].querySelector('.edu-program').value.trim();
+    var year = entries[i].querySelector('.edu-year').value.trim();
+    if (inst || prog || year) {
+      data.push({ institution: inst, program: prog, year: year });
     }
   }
-  if (data.additional.length === 0) data.additional = null;
-  return data;
+  return data.length > 0 ? data : null;
 }
 
 // ========== INIT ==========
