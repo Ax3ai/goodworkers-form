@@ -677,19 +677,6 @@
         <div class="upload-preview" data-upload="certs"></div>
       </div>
     </div>
-    <div class="field">
-      <div class="field-label" data-es="Certificaciones y Cursos" data-en="Certifications & Courses"></div>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;" id="certChecks">
-        <label class="check-pill"><input type="checkbox" value="First Aid CPR"> <span>First Aid CPR</span></label>
-        <label class="check-pill"><input type="checkbox" value="WHMIS"> <span>WHMIS</span></label>
-        <label class="check-pill"><input type="checkbox" value="OHSA"> <span>OHSA</span></label>
-        <label class="check-pill"><input type="checkbox" value="AODA"> <span>AODA</span></label>
-        <label class="check-pill"><input type="checkbox" value="Working at Heights"> <span>Working at Heights</span></label>
-        <label class="check-pill"><input type="checkbox" value="Confined Space"> <span>Confined Space</span></label>
-        <label class="check-pill"><input type="checkbox" value="Forklift / Lift Truck"> <span>Forklift / Lift Truck</span></label>
-        <label class="check-pill"><input type="checkbox" value="Fall Protection"> <span>Fall Protection</span></label>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -847,26 +834,10 @@
   </div>
 </div>
 
-<!-- Disclaimer Signature -->
-<div class="section">
-  <div class="section-title"><span data-es="Declaración" data-en="Disclaimer"></span></div>
-  <div class="card">
-    <div class="field">
-      <div class="policy-text" id="policyDisclaimer"></div>
-      <div class="field-label" data-es="Firma" data-en="Signature"></div>
-      <div class="sig-container">
-        <canvas class="sig-canvas"></canvas>
-        <span class="sig-placeholder" data-es="Dibuja tu firma aquí" data-en="Draw your signature here"></span>
-        <button type="button" class="sig-clear" onclick="clearSig(this)" data-es="Borrar" data-en="Clear"></button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- PAGE 1 NEXT BUTTON -->
 <div class="section" id="page1Next">
   <button type="button" class="submit-btn" onclick="goToPage2()">
-    <span data-es="Siguiente — Aplicación" data-en="Next — Application"></span>
+    <span data-es="Siguiente — Aplicación Rafat" data-en="Next — Rafat Application"></span>
   </button>
 </div>
 </div><!-- end page1 -->
@@ -931,7 +902,7 @@
       </div>
     </div>
     <div class="field">
-      <div class="field-label" data-es="¿Tienes familiares trabajando para Good Workers?" data-en="Do you have relatives working for Good Workers?"></div>
+      <div class="field-label" data-es="¿Tienes familiares trabajando para Rafat?" data-en="Do you have relatives working for Rafat?"></div>
       <div class="segmented" id="relativesRafat">
         <div class="seg-option" onclick="selectSeg(this)" data-es="Sí" data-en="Yes"></div>
         <div class="seg-option" onclick="selectSeg(this)">No</div>
@@ -954,16 +925,22 @@
 <div class="section">
   <div class="section-title"><span class="step-num">8</span> <span data-es="Educación" data-en="Education"></span></div>
   <div class="card">
-    <div id="eduList">
-      <div class="edu-entry" style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
-        <input class="field-input edu-institution" type="text" style="flex:2;min-width:140px" data-ph-es="Institución" data-ph-en="Institution">
-        <input class="field-input edu-program" type="text" style="flex:2;min-width:120px" data-ph-es="Programa / Título" data-ph-en="Program / Degree">
-        <input class="field-input edu-year" type="text" style="flex:0.7;min-width:60px" data-ph-es="Año" data-ph-en="Year">
-      </div>
+    <div class="field">
+      <div class="field-label">High School / Secundaria</div>
+      <input class="field-input" id="eduHS" type="text" data-ph-es="Nombre de la escuela" data-ph-en="School name">
     </div>
-    <button type="button" onclick="addEduEntry()" style="background:none;border:1px dashed #ccc;border-radius:10px;padding:10px;width:100%;color:#888;font-size:14px;cursor:pointer;font-family:inherit">
-      <span data-es="+ Agregar educación" data-en="+ Add education"></span>
-    </button>
+    <div class="field">
+      <div class="field-label">College</div>
+      <input class="field-input" id="eduCollege" type="text" data-ph-es="Nombre de la institución" data-ph-en="Institution name">
+    </div>
+    <div class="field">
+      <div class="field-label" data-es="Universidad" data-en="University"></div>
+      <input class="field-input" id="eduUni" type="text" data-ph-es="Nombre de la universidad" data-ph-en="University name">
+    </div>
+    <div class="field">
+      <div class="field-label" data-es="Cursos o certificaciones adicionales" data-en="Additional courses or certifications"></div>
+      <input class="field-input" id="eduExtra" type="text" data-ph-es="Cursos, seminarios, etc." data-ph-en="Courses, seminars, etc.">
+    </div>
   </div>
 </div>
 
@@ -976,10 +953,6 @@
       <input class="field-input" id="workEmployer" type="text" data-ph-es="Nombre de la empresa" data-ph-en="Company name">
     </div>
     <div class="field">
-      <div class="field-label" data-es="Dirección del Empleador" data-en="Employer Address / Phone"></div>
-      <input class="field-input" id="workAddress" type="text" data-ph-es="Dirección y teléfono" data-ph-en="Address and phone">
-    </div>
-    <div class="field">
       <div class="field-label" data-es="Tipo de Negocio" data-en="Type of Business"></div>
       <input class="field-input" id="workBusiness" type="text" data-ph-es="Construcción, transporte, etc." data-ph-en="Construction, transport, etc.">
     </div>
@@ -990,26 +963,16 @@
       </div>
       <div class="field">
         <div class="field-label" data-es="Período" data-en="Period"></div>
-        <input class="field-input" id="workPeriod" type="text" data-ph-es="Ej: 01/2020 - 06/2024" data-ph-en="E.g: 01/2020 - 06/2024">
+        <input class="field-input" id="workPeriod" type="text" data-ph-es="Ej: 2020-2024" data-ph-en="E.g: 2020-2024">
       </div>
     </div>
-    <div class="field-split">
-      <div class="field">
-        <div class="field-label" data-es="Salario Final" data-en="Final Salary"></div>
-        <input class="field-input" id="workSalary" type="text" data-ph-es="Ej: $20/hr" data-ph-en="E.g: $20/hr">
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="Supervisor" data-en="Supervisor Name"></div>
-        <input class="field-input" id="workSupervisor" type="text" data-ph-es="Nombre del supervisor" data-ph-en="Supervisor name">
-      </div>
+    <div class="field">
+      <div class="field-label" data-es="Supervisor" data-en="Supervisor Name"></div>
+      <input class="field-input" id="workSupervisor" type="text" data-ph-es="Nombre del supervisor" data-ph-en="Supervisor name">
     </div>
     <div class="field">
       <div class="field-label" data-es="Razón de salida" data-en="Reason for Leaving"></div>
       <input class="field-input" id="workReason" type="text" data-ph-es="¿Por qué dejaste ese trabajo?" data-ph-en="Why did you leave?">
-    </div>
-    <div class="field">
-      <div class="field-label" data-es="Descripción de funciones" data-en="Job Duties & Responsibilities"></div>
-      <textarea class="field-input" id="workDuties" rows="2" style="resize:vertical" data-ph-es="¿Qué hacías en ese trabajo?" data-ph-en="What did you do at that job?"></textarea>
     </div>
   </div>
 </div>
@@ -1119,12 +1082,8 @@ var policies = {
     en: 'I acknowledge receipt of this Employee Handbook. I understand and agree that this Handbook describes the policies and procedures applicable to my employment with GoodWorkers. I certify that I fully understand its content and agree to comply. Any failure to comply is liable to disciplinary measures.'
   },
   consent: {
-    es: 'Autorizo a Good Workers Equipment LTD y cualquier otra firma a contactar a mis empleadores anteriores y cualquier otra fuente para obtener información necesaria para la evaluación de esta solicitud.<br><br>Certifico que toda la información proporcionada en este formulario es verdadera y completa. Reconozco que cualquier declaración falsa o engañosa puede resultar en la imposibilidad de ser empleado o en mi despido.<br><br>Yo, el abajo firmante, he leído y entendido lo anterior y he dado mi consentimiento libre y voluntariamente.',
-    en: 'I authorize Good Workers Equipment LTD and any other firm to contact my former employers and any other source to obtain information necessary for the evaluation of this application.<br><br>I certify that all information supplied in this form is true and complete. I recognize that any false or misleading statement may render me unable to be employed or result in my dismissal.<br><br>I, the undersigned, have read and understood the above and have freely and knowingly given my consent.'
-  },
-  disclaimer: {
-    es: 'Certifico que mis respuestas son verdaderas y completas a mi mejor conocimiento. Si esta solicitud lleva a empleo, entiendo que información falsa o engañosa en mi solicitud o entrevista puede resultar en mi despido.',
-    en: 'I certify that my answers are true and complete to the best of my knowledge. If this application leads to employment, I understand that false or misleading information in my application or interview may result in my release.'
+    es: 'Autorizo a Rafat General Contractor Inc. y cualquier otra firma a contactar a mis empleadores anteriores y cualquier otra fuente para obtener información necesaria para la evaluación de esta solicitud.<br><br>Certifico que toda la información proporcionada en este formulario es verdadera y completa. Reconozco que cualquier declaración falsa o engañosa puede resultar en la imposibilidad de ser empleado o en mi despido.<br><br>Yo, el abajo firmante, he leído y entendido lo anterior y he dado mi consentimiento libre y voluntariamente.',
+    en: 'I authorize Rafat General Contractor Inc. and any other firm to contact my former employers and any other source to obtain information necessary for the evaluation of this application.<br><br>I certify that all information supplied in this form is true and complete. I recognize that any false or misleading statement may render me unable to be employed or result in my dismissal.<br><br>I, the undersigned, have read and understood the above and have freely and knowingly given my consent.'
   }
 };
 
@@ -1156,7 +1115,6 @@ function applyLang() {
   document.getElementById('policyDrug').innerHTML = policies.drug[currentLang];
   document.getElementById('policyHandbook').innerHTML = policies.handbook[currentLang];
   if (document.getElementById('policyConsent')) document.getElementById('policyConsent').innerHTML = policies.consent[currentLang];
-  if (document.getElementById('policyDisclaimer')) document.getElementById('policyDisclaimer').innerHTML = policies.disclaimer[currentLang];
 
   // Equipment lists
   buildEquipList('truckList', trucks);
@@ -1167,8 +1125,7 @@ function applyLang() {
 function buildEquipList(containerId, items) {
   var container = document.getElementById(containerId);
   container.innerHTML = '';
-  var yearsLabel = currentLang === 'es' ? ['< 1 año', '1-3 años', '3+ años'] : ['< 1 year', '1-3 years', '3+ years'];
-  var yearsValues = ['-1', '1-3', '3+'];
+  var yearsLabel = currentLang === 'es' ? ['1-5 años', '5-10 años', '10+ años'] : ['1-5 years', '5-10 years', '10+ years'];
   var selectLabel = currentLang === 'es' ? 'Años' : 'Years';
 
   items.forEach(function(item) {
@@ -1182,9 +1139,9 @@ function buildEquipList(containerId, items) {
       '</div>' +
       '<div class="equip-years">' +
         '<select><option value="" disabled selected>' + selectLabel + '</option>' +
-        '<option value="' + yearsValues[0] + '">' + yearsLabel[0] + '</option>' +
-        '<option value="' + yearsValues[1] + '">' + yearsLabel[1] + '</option>' +
-        '<option value="' + yearsValues[2] + '">' + yearsLabel[2] + '</option>' +
+        '<option>' + yearsLabel[0] + '</option>' +
+        '<option>' + yearsLabel[1] + '</option>' +
+        '<option>' + yearsLabel[2] + '</option>' +
         '</select>' +
       '</div>';
     container.appendChild(div);
@@ -1596,7 +1553,6 @@ async function submitForm() {
     var sigDriver = sigCanvases[1] ? sigCanvases[1]._sigData : null;
     var sigDrug = sigCanvases[2] ? sigCanvases[2]._sigData : null;
     var sigHandbook = sigCanvases[3] ? sigCanvases[3]._sigData : null;
-    var sigDisclaimer = sigCanvases[4] ? sigCanvases[4]._sigData : null;
 
     // Get snow plow answers
     var driverSection = document.querySelectorAll('.segmented');
@@ -1639,7 +1595,6 @@ async function submitForm() {
       signature_driver: sigDriver,
       signature_drug: sigDrug,
       signature_handbook: sigHandbook,
-      signature_disclaimer: sigDisclaimer,
       snow_plowing: snowPlowing,
       snow_plow_oncall: snowOncall,
 
@@ -1653,19 +1608,20 @@ async function submitForm() {
       relatives_at_rafat: (function() { var s = document.getElementById('relativesRafat'); var sel = s ? s.querySelector('.selected') : null; return sel ? (sel.textContent.trim() === 'Sí' || sel.textContent.trim() === 'Yes') : null; })(),
       relatives_at_rafat_details: (document.getElementById('relativesDetails') || {}).value || null,
       license_type: (function() { var s = document.getElementById('licenseType'); var sel = s ? s.querySelector('.selected') : null; return sel ? sel.textContent.trim() : null; })(),
-      education: getEducationData(),
+      education: {
+        high_school: (document.getElementById('eduHS') || {}).value || null,
+        college: (document.getElementById('eduCollege') || {}).value || null,
+        university: (document.getElementById('eduUni') || {}).value || null,
+        additional: (document.getElementById('eduExtra') || {}).value || null
+      },
       work_experience: {
         employer: (document.getElementById('workEmployer') || {}).value || null,
-        employer_address: (document.getElementById('workAddress') || {}).value || null,
         business_type: (document.getElementById('workBusiness') || {}).value || null,
         job_title: (document.getElementById('workTitle') || {}).value || null,
         period: (document.getElementById('workPeriod') || {}).value || null,
-        final_salary: (document.getElementById('workSalary') || {}).value || null,
         supervisor: (document.getElementById('workSupervisor') || {}).value || null,
-        reason_leaving: (document.getElementById('workReason') || {}).value || null,
-        job_duties: (document.getElementById('workDuties') || {}).value || null
+        reason_leaving: (document.getElementById('workReason') || {}).value || null
       },
-      certification_types: Array.from(document.querySelectorAll('#certChecks input:checked')).map(function(cb) { return cb.value; }),
       reference_name: (document.getElementById('refName') || {}).value || null,
       reference_phone: (document.getElementById('refPhone') || {}).value || null,
       reference_relationship: (document.getElementById('refRelationship') || {}).value || null,
@@ -1683,7 +1639,10 @@ async function submitForm() {
       var nameEl = item.querySelector('.equip-name');
       var equipName = nameEl.textContent.split('\n')[0].trim();
       var isTruck = item.closest('#truckList') !== null;
-      var yearsVal = select.value;
+      var yearsVal = select.value.replace(/[^0-9+\-]/g, '');
+      if (yearsVal.startsWith('1')) yearsVal = '1-5';
+      else if (yearsVal.startsWith('5')) yearsVal = '5-10';
+      else yearsVal = '10+';
 
       await supabase.from('equipment_experience').insert({
         employee_id: employee.id,
@@ -1707,34 +1666,6 @@ async function submitForm() {
     status.textContent = (currentLang === 'es' ? 'Error al enviar. Intenta de nuevo. ' : 'Error submitting. Try again. ') + (err.message || '');
     status.className = 'submit-status show error';
   }
-}
-
-// ========== EDUCATION ==========
-function addEduEntry() {
-  var list = document.getElementById('eduList');
-  var div = document.createElement('div');
-  div.className = 'edu-entry';
-  div.style.cssText = 'display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;';
-  div.innerHTML =
-    '<input class="field-input edu-institution" type="text" style="flex:2;min-width:140px" placeholder="' + (currentLang === 'es' ? 'Institución' : 'Institution') + '">' +
-    '<input class="field-input edu-program" type="text" style="flex:2;min-width:120px" placeholder="' + (currentLang === 'es' ? 'Programa / Título' : 'Program / Degree') + '">' +
-    '<input class="field-input edu-year" type="text" style="flex:0.7;min-width:60px" placeholder="' + (currentLang === 'es' ? 'Año' : 'Year') + '">' +
-    '<button type="button" onclick="this.parentElement.remove()" style="background:none;border:none;color:#e74c3c;font-size:18px;cursor:pointer;padding:0 4px">×</button>';
-  list.appendChild(div);
-}
-
-function getEducationData() {
-  var entries = document.querySelectorAll('.edu-entry');
-  var data = [];
-  for (var i = 0; i < entries.length; i++) {
-    var inst = entries[i].querySelector('.edu-institution').value.trim();
-    var prog = entries[i].querySelector('.edu-program').value.trim();
-    var year = entries[i].querySelector('.edu-year').value.trim();
-    if (inst || prog || year) {
-      data.push({ institution: inst, program: prog, year: year });
-    }
-  }
-  return data.length > 0 ? data : null;
 }
 
 // ========== INIT ==========
