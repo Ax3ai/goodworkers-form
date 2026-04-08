@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>GoodWorkers — Registro</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+    color: #1c1c1e;
+    line-height: 1.5;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 0 0 80px;
+    background: #f2f2f7;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  /* Language selector splash */
+  html, body { background: #1a1a1a; }
+  .lang-screen {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    transition: opacity 0.4s, transform 0.4s;
+  }
+  .lang-screen.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+  }
+  .lang-inner {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 24px;
+    padding: 48px 36px;
+    text-align: center;
+    width: 320px;
+    box-shadow: 0 24px 48px rgba(0,0,0,0.3);
+  }
+  .lang-screen h1 {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 2px;
+  }
+  .lang-screen h1 .accent { color: #F26522; }
+  .lang-screen .lang-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 8px;
+  }
+  .lang-screen .lang-divider {
+    width: 40px;
+    height: 2px;
+    background: rgba(242,101,34,0.3);
+    border-radius: 2px;
+    margin: 20px auto;
+  }
+  .lang-screen p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 28px;
+  }
+  .lang-btn {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 14px;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 0.1s;
+    margin-bottom: 10px;
+  }
+  .lang-btn:last-child { margin-bottom: 0; }
+  .lang-btn:active { transform: scale(0.97); }
+  .lang-btn-es {
+    background: #F26522;
+    color: #fff;
+  }
+  .lang-btn-en {
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.8);
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+
+  /* No header — form starts directly after language selection */
+
+  /* Section (iOS grouped style) */
+  .section {
+    margin: 20px 16px;
+  }
+  .section-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #8e8e93;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0 4px 8px;
+  }
+  .section-title .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background: #F26522;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  /* Fields */
+  .field-group {
+    padding: 0;
+  }
+  .field {
+    padding: 12px 16px;
+    border-bottom: 0.5px solid #e5e5ea;
+  }
+  .field:last-child { border-bottom: none; }
+  .field-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #8e8e93;
+    margin-bottom: 4px;
+  }
+  .field-label .optional {
+    font-size: 11px;
+    color: #aeaeb2;
+    font-weight: 400;
+  }
+  .field-input {
+    border: none;
+    padding: 0;
+    font-size: 17px;
+    color: #1c1c1e;
+    background: transparent;
+    width: 100%;
+    font-family: inherit;
+    outline: none;
+    line-height: 1.4;
+  }
+  .field-input::placeholder { color: #c7c7cc; }
+  .field-input.autofilled { color: #F26522; font-weight: 500; }
+  .field-note {
+    font-size: 11px;
+    color: #aeaeb2;
+    margin-top: 2px;
+  }
+
+  /* Two column row inside card */
+  .field-split {
+    display: flex;
+  }
+  .field-split .field {
+    flex: 1;
+  }
+  .field-split .field:first-child {
+    border-right: 0.5px solid #e5e5ea;
+  }
+
+  /* Auto tag */
+  .auto-tag {
+    display: inline-block;
+    background: rgba(242,101,34,0.12);
+    color: #F26522;
+    font-size: 9px;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-weight: 700;
+    margin-left: 4px;
+    vertical-align: middle;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* Segmented control (radio) */
+  .segmented {
+    display: flex;
+    background: #f2f2f7;
+    border-radius: 9px;
+    padding: 2px;
+    margin-top: 4px;
+  }
+  .seg-option {
+    flex: 1;
+    text-align: center;
+    padding: 8px 4px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #1c1c1e;
+    cursor: pointer;
+    border-radius: 7px;
+    transition: all 0.2s;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .seg-option.selected {
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+    font-weight: 600;
+  }
+
+  /* Upload */
+  .upload-area {
+    margin-top: 6px;
+  }
+  .upload-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    background: #f2f2f7;
+    border: none;
+    border-radius: 10px;
+    padding: 16px;
+    font-size: 15px;
+    font-family: inherit;
+    color: #3a3a3c;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.15s;
+  }
+  .upload-btn:active { background: #e5e5ea; }
+  .upload-btn svg { flex-shrink: 0; }
+  .upload-input { display: none; }
+  .upload-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .upload-thumb {
+    position: relative;
+    width: 72px;
+    height: 72px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #e5e5ea;
+  }
+  .upload-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .upload-thumb .file-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: 11px;
+    color: #636366;
+    text-align: center;
+    padding: 4px;
+    word-break: break-all;
+  }
+  .upload-thumb .remove-btn {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 22px;
+    height: 22px;
+    background: #ff3b30;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    font-size: 13px;
+    line-height: 18px;
+    text-align: center;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Signature */
+  .sig-container {
+    margin-top: 6px;
+    position: relative;
+  }
+  .sig-canvas {
+    width: 100%;
+    height: 150px;
+    background: #f2f2f7;
+    border-radius: 10px;
+    touch-action: none;
+    -ms-touch-action: none;
+    cursor: crosshair;
+    display: block;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  .sig-container.signing .sig-canvas {
+    outline: 2px solid #F26522;
+    outline-offset: -2px;
+    border-radius: 10px;
+  }
+  .sig-placeholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #c7c7cc;
+    font-size: 15px;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+  .sig-container.has-sig .sig-placeholder { opacity: 0; }
+  .sig-clear {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(0,0,0,0.06);
+    border: none;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 12px;
+    color: #8e8e93;
+    cursor: pointer;
+    font-family: inherit;
+    display: none;
+  }
+  .sig-container.has-sig .sig-clear { display: block; }
+
+  /* Policy */
+  .policy-text {
+    background: #f2f2f7;
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 12px;
+    color: #636366;
+    margin-bottom: 12px;
+    line-height: 1.7;
+    max-height: 180px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Section note */
+  .section-note {
+    background: #fffbeb;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: #92400e;
+    margin-bottom: 12px;
+  }
+
+  .divider-field {
+    height: 0;
+    padding: 0 !important;
+    border-bottom: 0.5px solid #e5e5ea !important;
+  }
+
+  /* Equipment toggle list */
+  .equip-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    border-bottom: 0.5px solid #e5e5ea;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .equip-item:last-child { border-bottom: none; }
+  .equip-toggle {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid #d1d1d6;
+    margin-right: 12px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s;
+    background: #fff;
+  }
+  .equip-toggle.checked {
+    background: #F26522;
+    border-color: #F26522;
+  }
+  .equip-toggle.checked::after {
+    content: '';
+    width: 10px;
+    height: 6px;
+    border-left: 2.5px solid #fff;
+    border-bottom: 2.5px solid #fff;
+    transform: rotate(-45deg) translateY(-1px);
+  }
+  .equip-img {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    margin-right: 10px;
+    flex-shrink: 0;
+    object-fit: cover;
+    background: #f2f2f7;
+  }
+  .equip-name {
+    flex: 1;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .equip-name small {
+    display: block;
+    font-size: 12px;
+    color: #8e8e93;
+    font-weight: 400;
+  }
+  .equip-years {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+  .equip-item.active .equip-years {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .equip-years select {
+    font-family: inherit;
+    font-size: 14px;
+    padding: 6px 10px;
+    border: 1.5px solid #d1d1d6;
+    border-radius: 8px;
+    background: #f2f2f7;
+    color: #1c1c1e;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+  }
+
+  /* Address autocomplete dropdown */
+  .ac-wrap { position: relative; }
+  .ac-dropdown {
+    position: absolute;
+    top: 100%;
+    left: -16px;
+    right: -16px;
+    z-index: 50;
+    background: #fff;
+    border-top: 0.5px solid #e5e5ea;
+    max-height: 240px;
+    overflow-y: auto;
+    display: none;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    -webkit-overflow-scrolling: touch;
+  }
+  .ac-dropdown.open { display: block; }
+  .ac-item {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 15px;
+    text-align: left;
+    background: none;
+    border: none;
+    border-bottom: 0.5px solid #f0f0f0;
+    cursor: pointer;
+    font-family: inherit;
+    color: #1c1c1e;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .ac-item:last-of-type { border-bottom: none; }
+  .ac-item:active { background: #f2f2f7; }
+  .ac-item .ac-main { font-weight: 500; }
+  .ac-item .ac-secondary { font-size: 12px; color: #8e8e93; margin-top: 1px; }
+  .ac-powered {
+    padding: 6px 16px;
+    font-size: 10px;
+    color: #c7c7cc;
+    text-align: right;
+  }
+
+  /* Date input dd/mm/yyyy */
+  .date-input {
+    font-size: 17px;
+    font-family: inherit;
+    color: #1c1c1e;
+    letter-spacing: 1px;
+  }
+
+  /* Checkbox pills */
+  .check-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: #f2f2f7;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.15s;
+    user-select: none;
+  }
+  .check-pill input { display: none; }
+  .check-pill:has(input:checked) {
+    background: #F26522;
+    color: #fff;
+  }
+
+  /* Submit button */
+  .submit-btn {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    background: #F26522;
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-size: 17px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: transform 0.1s, opacity 0.15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .submit-btn:active { transform: scale(0.98); opacity: 0.9; }
+  .submit-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+  .submit-status {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 14px;
+    color: #34c759;
+    display: none;
+  }
+  .submit-status.show { display: block; }
+  .submit-status.error { color: #ff3b30; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    margin-top: 32px;
+    font-size: 11px;
+    color: #c7c7cc;
+  }
+
+  @media (max-width: 500px) {
+    body { padding: 0 0 80px; }
+    .section { margin: 16px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Language Selection Screen -->
+<div class="lang-screen" id="langScreen">
+  <div class="lang-inner">
+    <h1>Good<span class="accent">Workers</span></h1>
+    <div class="lang-sub">Employee Registration</div>
+    <div class="lang-divider"></div>
+    <p>Selecciona tu idioma<br>Select your language</p>
+    <button class="lang-btn lang-btn-es" onclick="setLang('es')">Español</button>
+    <button class="lang-btn lang-btn-en" onclick="setLang('en')">English</button>
+  </div>
+</div>
+
+<div id="page1">
+<!-- PASO 1: Info Personal -->
+<div class="section">
+  <div class="section-title"><span class="step-num">1</span> <span data-es="Información Personal" data-en="Personal Information"></span></div>
+  <div class="card">
+    <div class="field">
+      <div class="field-label" data-es="Nombre" data-en="First Name"></div>
+      <input id="fname" class="field-input" type="text" data-ph-es="Juan" data-ph-en="John" oninput="syncFullName()">
+    </div>
+    <div class="field">
+      <div class="field-label" data-es="Segundo Nombre" data-en="Middle Name"></div>
+      <input id="mname" class="field-input" type="text" data-ph-es="Carlos" data-ph-en="Michael" oninput="syncFullName()">
+    </div>
+    <div class="field">
+      <div class="field-label" data-es="Apellido" data-en="Last Name"></div>
+      <input id="lname" class="field-input" type="text" data-ph-es="López" data-ph-en="Smith" oninput="syncFullName()">
+    </div>
+    <div class="field ac-wrap">
+      <div class="field-label"><span data-es="Dirección" data-en="Street Address"></span></div>
+      <input id="address1" class="field-input" type="text" data-ph-es="Empieza a escribir tu dirección..." data-ph-en="Start typing your address..." autocomplete="off">
+      <div id="ac-dropdown1" class="ac-dropdown"></div>
+    </div>
+    <div class="field-split">
+      <div class="field">
+        <div class="field-label">Apt / Unit</div>
+        <input id="apt1" class="field-input" type="text" placeholder="4B">
+      </div>
+      <div class="field">
+        <div class="field-label"><span data-es="Ciudad" data-en="City"></span> <span class="auto-tag">AUTO</span></div>
+        <input id="city1" class="field-input" type="text" data-ph-es="Se llena automático" data-ph-en="Auto-filled">
+      </div>
+    </div>
+    <div class="field-split">
+      <div class="field">
+        <div class="field-label"><span data-es="Provincia" data-en="Province"></span> <span class="auto-tag">AUTO</span></div>
+        <input id="province1" class="field-input" type="text" data-ph-es="Se llena automático" data-ph-en="Auto-filled">
+      </div>
+      <div class="field">
+        <div class="field-label"><span data-es="Código Postal" data-en="Postal Code"></span> <span class="auto-tag">AUTO</span></div>
+        <input id="postal1" class="field-input" type="text" data-ph-es="Se llena automático" data-ph-en="Auto-filled">
+      </div>
+    </div>
+    <div class="field-split">
+      <div class="field">
+        <div class="field-label" data-es="Teléfono Celular" data-en="Cell Phone"></div>
+        <input class="field-input" type="tel" placeholder="(416) 555-1234">
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Correo Electrónico" data-en="Email"></div>
+        <input class="field-input" type="email" placeholder="juan@email.com">
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label" data-es="Fecha de Nacimiento" data-en="Date of Birth"></div>
+      <input class="field-input date-input" type="text" placeholder="dd/mm/aaaa" maxlength="10" oninput="formatDate(this)">
+    </div>
+    <div class="field">
+      <div class="field-label" data-es="Nivel de Inglés" data-en="English Level"></div>
+      <div class="segmented">
+        <div class="seg-option" onclick="selectSeg(this)" data-es="Bajo" data-en="Poor"></div>
+        <div class="seg-option" onclick="selectSeg(this)" data-es="Bueno" data-en="Good"></div>
+        <div class="seg-option" onclick="selectSeg(this)" data-es="Excelente" data-en="Excellent"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PASO 2: Documentos -->
+<div class="section">
+  <div class="section-title"><span class="step-num">2</span> <span data-es="Documentos" data-en="Documents"></span></div>
+  <div class="card">
+    <div class="field">
+      <div class="field-label"><span data-es="Licencia de Conducir — Frente" data-en="Driver's License — Front"></span> <span class="optional" data-es="(Opcional)" data-en="(Optional)"></span></div>
+      <div class="upload-area">
+        <button type="button" class="upload-btn" onclick="this.nextElementSibling.click()">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="14" r="4"/></svg>
+          <span data-es="Tomar foto o subir archivo" data-en="Take photo or upload file"></span>
+        </button>
+        <input type="file" class="upload-input" accept="image/*" onchange="handleUpload(this)">
+        <div class="upload-preview" data-upload="license"></div>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label" data-es="Certificaciones Relevantes" data-en="Relevant Certifications"></div>
+      <div class="field-note" data-es="First Aid, JHSC, WHMIS, u otras — si tienes alguna" data-en="First Aid, JHSC, WHMIS, or others — if you have any"></div>
+      <div class="upload-area">
+        <button type="button" class="upload-btn" onclick="this.nextElementSibling.click()">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <span data-es="Subir archivos (fotos o PDF)" data-en="Upload files (photos or PDF)"></span>
+        </button>
+        <input type="file" class="upload-input" accept="image/*,.pdf" multiple onchange="handleUpload(this)">
+        <div class="upload-preview" data-upload="certs"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PASO 3: Contacto de Emergencia -->
+<div class="section">
+  <div class="section-title"><span class="step-num">3</span> <span data-es="Contacto de Emergencia" data-en="Emergency Contact"></span></div>
+  <div class="card">
+    <div class="field-split">
+      <div class="field">
+        <div class="field-label" data-es="Nombre" data-en="First Name"></div>
+        <input class="field-input" type="text" data-ph-es="María" data-ph-en="Mary">
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Apellido" data-en="Last Name"></div>
+        <input class="field-input" type="text" data-ph-es="García" data-ph-en="Garcia">
+      </div>
+    </div>
+    <div class="field ac-wrap">
+      <div class="field-label"><span data-es="Dirección" data-en="Street Address"></span></div>
+      <input id="address2" class="field-input" type="text" data-ph-es="Empieza a escribir la dirección..." data-ph-en="Start typing the address..." autocomplete="off">
+      <div id="ac-dropdown2" class="ac-dropdown"></div>
+    </div>
+    <div class="field-split">
+      <div class="field">
+        <div class="field-label">Apt / Unit</div>
+        <input id="apt2" class="field-input" type="text" placeholder="2A">
+      </div>
+      <div class="field">
+        <div class="field-label"><span data-es="Ciudad" data-en="City"></span> <span class="auto-tag">AUTO</span></div>
+        <input id="city2" class="field-input" type="text" data-ph-es="Se llena automático" data-ph-en="Auto-filled">
+      </div>
+    </div>
+    <div class="field-split">
+      <div class="field">
+        <div class="field-label"><span data-es="Provincia" data-en="Province"></span> <span class="auto-tag">AUTO</span></div>
+        <input id="province2" class="field-input" type="text" data-ph-es="Se llena automático" data-ph-en="Auto-filled">
+      </div>
+      <div class="field">
+        <div class="field-label"><span data-es="Código Postal" data-en="Postal Code"></span> <span class="auto-tag">AUTO</span></div>
+        <input id="postal2" class="field-input" type="text" data-ph-es="Se llena automático" data-ph-en="Auto-filled">
+      </div>
+    </div>
+    <div class="field-split">
+      <div class="field">
+        <div class="field-label" data-es="Teléfono Principal" data-en="Primary Phone"></div>
+        <input class="field-input" type="tel" placeholder="(905) 555-6789">
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Teléfono Alterno" data-en="Alternate Phone"></div>
+        <input class="field-input" type="tel" placeholder="(416) 555-0000">
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label" data-es="Relación" data-en="Relationship"></div>
+      <input class="field-input" type="text" data-ph-es="Esposa, Hermano, Madre..." data-ph-en="Wife, Brother, Mother...">
+    </div>
+  </div>
+</div>
+
+<!-- PASO 4: Salud y Seguridad -->
+<div class="section">
+  <div class="section-title"><span class="step-num">4</span> <span data-es="Salud y Seguridad" data-en="Health &amp; Safety"></span></div>
+  <div class="card">
+    <div class="field">
+      <div class="policy-text" id="policyHS">
+        <!-- filled by language -->
+      </div>
+      <div class="field-label" data-es="Firma" data-en="Signature"></div>
+      <div class="sig-container">
+        <canvas class="sig-canvas"></canvas>
+        <span class="sig-placeholder" data-es="Dibuja tu firma aquí" data-en="Draw your signature here"></span>
+        <button type="button" class="sig-clear" onclick="clearSig(this)" data-es="Borrar" data-en="Clear"></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PASO 5: Conductor -->
+<div class="section">
+  <div class="section-title"><span class="step-num">5</span> <span data-es="Sección de Conductor" data-en="Driver Section"></span> <span class="optional" data-es="(Opcional)" data-en="(Optional)"></span></div>
+  <div class="card">
+    <div class="field">
+      <div class="section-note" data-es="Solo completa esta sección si tienes experiencia manejando camiones o equipo pesado." data-en="Only fill this section if you have truck or heavy equipment experience."></div>
+    </div>
+    <div class="field">
+      <div class="field-label" data-es="¿Involucrado en operaciones de quitanieves?" data-en="Currently involved with Snow Plowing?"></div>
+      <div class="segmented">
+        <div class="seg-option" onclick="selectSeg(this)" data-es="Sí" data-en="Yes"></div>
+        <div class="seg-option" onclick="selectSeg(this)">No</div>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label" data-es="¿Disponible para quitanieves 24/7?" data-en="Available for Snow Plow on call 24/7?"></div>
+      <div class="segmented">
+        <div class="seg-option" onclick="selectSeg(this)" data-es="Sí" data-en="Yes"></div>
+        <div class="seg-option" onclick="selectSeg(this)">No</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Truck Experience -->
+<div class="section">
+  <div class="section-title"><span data-es="Experiencia con Camiones" data-en="Truck Experience"></span> <span class="optional" data-es="(Opcional)" data-en="(Optional)"></span></div>
+  <div class="card" id="truckList">
+    <!-- filled by JS -->
+  </div>
+</div>
+
+<!-- Heavy Equipment -->
+<div class="section">
+  <div class="section-title"><span data-es="Equipo Pesado" data-en="Heavy Equipment"></span> <span class="optional" data-es="(Opcional)" data-en="(Optional)"></span></div>
+  <div class="card" id="equipList">
+    <!-- filled by JS -->
+  </div>
+</div>
+
+<!-- Driver Signatures -->
+<div class="section">
+  <div class="section-title"><span data-es="Reconocimientos del Conductor" data-en="Driver Acknowledgements"></span> <span class="optional" data-es="(Opcional)" data-en="(Optional)"></span></div>
+  <div class="card">
+    <div class="field">
+      <div class="policy-text" id="policyDriver">
+        <!-- filled by language -->
+      </div>
+      <div class="field-label" data-es="Firma" data-en="Signature"></div>
+      <div class="sig-container">
+        <canvas class="sig-canvas"></canvas>
+        <span class="sig-placeholder" data-es="Dibuja tu firma aquí" data-en="Draw your signature here"></span>
+        <button type="button" class="sig-clear" onclick="clearSig(this)" data-es="Borrar" data-en="Clear"></button>
+      </div>
+    </div>
+    <div class="field">
+      <div class="policy-text" id="policyDrug">
+        <!-- filled by language -->
+      </div>
+      <div class="field-label" data-es="Firma" data-en="Signature"></div>
+      <div class="sig-container">
+        <canvas class="sig-canvas"></canvas>
+        <span class="sig-placeholder" data-es="Dibuja tu firma aquí" data-en="Draw your signature here"></span>
+        <button type="button" class="sig-clear" onclick="clearSig(this)" data-es="Borrar" data-en="Clear"></button>
+      </div>
+    </div>
+    <div class="field">
+      <div class="policy-text" id="policyHandbook">
+        <!-- filled by language -->
+      </div>
+      <div class="field-label" data-es="Firma" data-en="Signature"></div>
+      <div class="sig-container">
+        <canvas class="sig-canvas"></canvas>
+        <span class="sig-placeholder" data-es="Dibuja tu firma aquí" data-en="Draw your signature here"></span>
+        <button type="button" class="sig-clear" onclick="clearSig(this)" data-es="Borrar" data-en="Clear"></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 1 NEXT BUTTON -->
+<div class="section" id="page1Next">
+  <button type="button" class="submit-btn" onclick="goToPage2()">
+    <span data-es="Siguiente — Aplicación Rafat" data-en="Next — Rafat Application"></span>
+  </button>
+</div>
+</div><!-- end page1 -->
+
+<!-- ==================== PAGE 2: RAFAT APPLICATION ==================== -->
+<div id="page2" style="display:none;">
+
+<!-- PASO 6: Position -->
+<div class="section">
+  <div class="section-title"><span class="step-num">6</span> <span data-es="Posición" data-en="Position"></span></div>
+  <div class="card">
+    <div class="field">
+      <div class="field-label" data-es="Posición a la que aplica" data-en="Position Applied For"></div>
+      <div class="field-note" data-es="Selecciona todas las que apliquen" data-en="Select all that apply"></div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;" id="positionChecks">
+        <label class="check-pill"><input type="checkbox" value="Operator"> <span>Operator</span></label>
+        <label class="check-pill"><input type="checkbox" value="Driver"> <span>Driver</span></label>
+        <label class="check-pill"><input type="checkbox" value="Labour"> <span>Labour</span></label>
+        <label class="check-pill"><input type="checkbox" value="Mechanic"> <span>Mechanic</span></label>
+        <label class="check-pill"><input type="checkbox" value="Administration"> <span>Administration</span></label>
+        <label class="check-pill"><input type="checkbox" value="Fleet"> <span>Fleet</span></label>
+        <label class="check-pill"><input type="checkbox" value="Other"> <span>Other</span></label>
+      </div>
+    </div>
+    <div class="field-split">
+      <div class="field">
+        <div class="field-label" data-es="Fecha disponible para empezar" data-en="Date Available to Start"></div>
+        <input class="field-input date-input" id="dateAvailable" type="text" placeholder="dd/mm/aaaa" maxlength="10" oninput="formatDate(this)">
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Tipo de posición" data-en="Position Type"></div>
+        <div class="segmented">
+          <div class="seg-option" onclick="selectSeg(this)">Full Time</div>
+          <div class="seg-option" onclick="selectSeg(this)">Part Time</div>
+          <div class="seg-option" onclick="selectSeg(this)">Seasonal</div>
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label" data-es="¿Referido por alguien?" data-en="Referred by anyone?"></div>
+      <input class="field-input" id="referredBy" type="text" data-ph-es="Nombre de quien te refirió" data-ph-en="Name of who referred you">
+    </div>
+  </div>
+</div>
+
+<!-- PASO 7: Legal -->
+<div class="section">
+  <div class="section-title"><span class="step-num">7</span> <span data-es="Información Legal" data-en="Legal Information"></span></div>
+  <div class="card">
+    <div class="field">
+      <div class="field-label" data-es="¿Estás legalmente autorizado para trabajar en Canadá?" data-en="Are you legally entitled to work in Canada?"></div>
+      <div class="segmented" id="legallyEntitled">
+        <div class="seg-option" onclick="selectSeg(this)" data-es="Sí" data-en="Yes"></div>
+        <div class="seg-option" onclick="selectSeg(this)">No</div>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label" data-es="¿Has sido condenado por un delito sin perdón?" data-en="Criminal conviction without pardon?"></div>
+      <div class="segmented" id="criminalConviction">
+        <div class="seg-option" onclick="selectSeg(this)" data-es="Sí" data-en="Yes"></div>
+        <div class="seg-option" onclick="selectSeg(this)">No</div>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label" data-es="¿Tienes familiares trabajando para Rafat?" data-en="Do you have relatives working for Rafat?"></div>
+      <div class="segmented" id="relativesRafat">
+        <div class="seg-option" onclick="selectSeg(this)" data-es="Sí" data-en="Yes"></div>
+        <div class="seg-option" onclick="selectSeg(this)">No</div>
+      </div>
+      <input class="field-input" id="relativesDetails" type="text" style="margin-top:8px;" data-ph-es="Nombre y relación" data-ph-en="Name and relationship">
+    </div>
+    <div class="field">
+      <div class="field-label" data-es="Tipo de Licencia de Conducir" data-en="Driver's License Type"></div>
+      <div class="segmented" id="licenseType">
+        <div class="seg-option" onclick="selectSeg(this)">AZ</div>
+        <div class="seg-option" onclick="selectSeg(this)">DZ</div>
+        <div class="seg-option" onclick="selectSeg(this)" data-es="Otra" data-en="Other"></div>
+        <div class="seg-option" onclick="selectSeg(this)" data-es="Ninguna" data-en="None"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PASO 8: Education -->
+<div class="section">
+  <div class="section-title"><span class="step-num">8</span> <span data-es="Educación" data-en="Education"></span></div>
+  <div class="card">
+    <div class="field">
+      <div class="field-label">High School / Secundaria</div>
+      <input class="field-input" id="eduHS" type="text" data-ph-es="Nombre de la escuela" data-ph-en="School name">
+    </div>
+    <div class="field">
+      <div class="field-label">College</div>
+      <input class="field-input" id="eduCollege" type="text" data-ph-es="Nombre de la institución" data-ph-en="Institution name">
+    </div>
+    <div class="field">
+      <div class="field-label" data-es="Universidad" data-en="University"></div>
+      <input class="field-input" id="eduUni" type="text" data-ph-es="Nombre de la universidad" data-ph-en="University name">
+    </div>
+    <div class="field">
+      <div class="field-label" data-es="Cursos o certificaciones adicionales" data-en="Additional courses or certifications"></div>
+      <input class="field-input" id="eduExtra" type="text" data-ph-es="Cursos, seminarios, etc." data-ph-en="Courses, seminars, etc.">
+    </div>
+  </div>
+</div>
+
+<!-- PASO 9: Work Experience -->
+<div class="section">
+  <div class="section-title"><span class="step-num">9</span> <span data-es="Experiencia Laboral" data-en="Work Experience"></span></div>
+  <div class="card">
+    <div class="field">
+      <div class="field-label" data-es="Último Empleador" data-en="Last Employer"></div>
+      <input class="field-input" id="workEmployer" type="text" data-ph-es="Nombre de la empresa" data-ph-en="Company name">
+    </div>
+    <div class="field">
+      <div class="field-label" data-es="Tipo de Negocio" data-en="Type of Business"></div>
+      <input class="field-input" id="workBusiness" type="text" data-ph-es="Construcción, transporte, etc." data-ph-en="Construction, transport, etc.">
+    </div>
+    <div class="field-split">
+      <div class="field">
+        <div class="field-label" data-es="Tu Puesto" data-en="Your Job Title"></div>
+        <input class="field-input" id="workTitle" type="text" data-ph-es="Operador, conductor..." data-ph-en="Operator, driver...">
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Período" data-en="Period"></div>
+        <input class="field-input" id="workPeriod" type="text" data-ph-es="Ej: 2020-2024" data-ph-en="E.g: 2020-2024">
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label" data-es="Supervisor" data-en="Supervisor Name"></div>
+      <input class="field-input" id="workSupervisor" type="text" data-ph-es="Nombre del supervisor" data-ph-en="Supervisor name">
+    </div>
+    <div class="field">
+      <div class="field-label" data-es="Razón de salida" data-en="Reason for Leaving"></div>
+      <input class="field-input" id="workReason" type="text" data-ph-es="¿Por qué dejaste ese trabajo?" data-ph-en="Why did you leave?">
+    </div>
+  </div>
+</div>
+
+<!-- PASO 10: Reference -->
+<div class="section">
+  <div class="section-title"><span class="step-num">10</span> <span data-es="Referencia" data-en="Reference"></span></div>
+  <div class="card">
+    <div class="field">
+      <div class="field-label" data-es="Nombre" data-en="Name"></div>
+      <input class="field-input" id="refName" type="text" data-ph-es="Nombre completo" data-ph-en="Full name">
+    </div>
+    <div class="field-split">
+      <div class="field">
+        <div class="field-label" data-es="Teléfono" data-en="Phone"></div>
+        <input class="field-input" id="refPhone" type="tel" placeholder="(416) 555-1234">
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Relación" data-en="Relationship"></div>
+        <input class="field-input" id="refRelationship" type="text" data-ph-es="Compañero, jefe, amigo..." data-ph-en="Coworker, boss, friend...">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PASO 11: Consent -->
+<div class="section">
+  <div class="section-title"><span class="step-num">11</span> <span data-es="Consentimiento" data-en="Consent"></span></div>
+  <div class="card">
+    <div class="field">
+      <div class="policy-text" id="policyConsent"></div>
+      <div class="field-label" data-es="Firma" data-en="Signature"></div>
+      <div class="sig-container">
+        <canvas class="sig-canvas"></canvas>
+        <span class="sig-placeholder" data-es="Dibuja tu firma aquí" data-en="Draw your signature here"></span>
+        <button type="button" class="sig-clear" onclick="clearSig(this)" data-es="Borrar" data-en="Clear"></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUBMIT -->
+<div class="section">
+  <button type="button" id="submitBtn" class="submit-btn" onclick="submitForm()">
+    <span id="submitText" data-es="Enviar Formulario" data-en="Submit Form"></span>
+  </button>
+  <p style="text-align:center;margin-top:8px;">
+    <button type="button" onclick="goToPage1()" style="background:none;border:none;color:#8e8e93;font-size:13px;font-family:inherit;cursor:pointer;" data-es="← Volver a página anterior" data-en="← Back to previous page"></button>
+  </p>
+  <div id="submitStatus" class="submit-status"></div>
+</div>
+</div><!-- end page2 -->
+
+<div class="footer">GoodWorkers Equipment LTD.</div>
+
+<script>
+// ========== DATA ==========
+var trucks = [
+  { en: 'Dump Truck', es: 'Camión de volteo', img: '/machines/01-dump-truck.png' },
+  { en: 'Roll-Off', es: 'Contenedor rodante', img: '/machines/02-roll-off-container-truck.png' },
+  { en: 'Snow Plow', es: 'Quitanieves', img: '/machines/03-snow-plow-truck.png' },
+  { en: 'Tow Snow', es: 'Remolque de nieve', img: '/machines/04-tow-snow-truck.png' },
+  { en: 'Water Truck', es: 'Camión cisterna', img: '/machines/05-water-tank-truck.png' },
+  { en: 'Vac Truck', es: 'Camión de vacío', img: '/machines/06-vacuum-truck.png' },
+  { en: 'Slinger', es: 'Lanzadora de material', img: '/machines/07-slinger-truck.png' },
+  { en: 'Live Bottom', es: 'Camión de fondo móvil', img: '/machines/08-live-bottom-trailer.png' },
+  { en: 'Rock Truck', es: 'Camión de roca', img: '/machines/09-rock-truck.png' },
+  { en: 'Sweeper', es: 'Barredora', img: '/machines/10-street-sweeper.png' },
+  { en: 'Cement Truck', es: 'Camión revolvedora', img: '/machines/11-cement-mixer-truck.png' },
+  { en: 'Fuel Truck', es: 'Camión de combustible', img: '/machines/12-fuel-tanker-truck.png' },
+  { en: 'Crane Truck', es: 'Camión grúa', img: '/machines/13-crane-truck.png' },
+  { en: 'Line Painting', es: 'Pintura de líneas', img: '/machines/14-line-painting-truck.png' },
+  { en: 'Crash Truck', es: 'Camión de impacto', img: '/machines/15-crash-attenuator-truck.png' },
+  { en: 'Float Equipment', es: 'Plataforma de transporte', img: '/machines/16-flatbed-float-truck.png' },
+  { en: 'Tow Truck', es: 'Grúa de remolque', img: '/machines/17-tow-truck.png' },
+  { en: 'Pickup Plow', es: 'Camioneta quitanieves', img: '/machines/18-pickup-snow-plow.png' }
+];
+
+var equips = [
+  { en: 'Excavator', es: 'Excavadora', img: '/machines/19-excavator.png' },
+  { en: 'Front Loader', es: 'Cargador frontal', img: '/machines/20-front-loader.png' },
+  { en: 'Bobcat', es: 'Minicargador', img: '/machines/21-bobcat-skid-steer.png' },
+  { en: 'Backhoe', es: 'Retroexcavadora', img: '/machines/22-backhoe-loader.png' },
+  { en: 'Roller / Packer', es: 'Rodillo compactador', img: '/machines/23-road-roller-compactor.png' },
+  { en: 'Dozer / Blade', es: 'Bulldozer / Topadora', img: '/machines/24-bulldozer.png' },
+  { en: 'Grader', es: 'Motoniveladora', img: '/machines/25-motor-grader.png' },
+  { en: 'Trencher', es: 'Zanjadora', img: '/machines/26-trencher-machine.png' },
+  { en: 'Spreader', es: 'Esparcidora', img: '/machines/27-material-spreader.png' },
+  { en: 'Forklift', es: 'Montacargas', img: '/machines/28-forklift.png' }
+];
+
+var policies = {
+  hs: {
+    es: '<strong>GoodWorkers</strong> se compromete a proporcionar y mantener un lugar de trabajo seguro y saludable para todos los empleados, así como a proporcionar la información, capacitación y supervisión necesarias para lograrlo.<br><br>Se alienta a cada empleado a desempeñar un papel vital y responsable en el mantenimiento de un lugar de trabajo seguro y saludable mediante:<br><br>&bull; Comprender y seguir las pautas y reglas de la empresa<br>&bull; Participar en la salud y seguridad en el lugar de trabajo<br>&bull; Usar el equipo y dispositivos de protección según lo requiera la empresa<br>&bull; Reportar inmediatamente cualquier peligro, accidente o incidente<br>&bull; Reportar equipo de protección faltante o defectuoso<br>&bull; Realizar tareas de manera segura<br>&bull; Mantener orden y limpieza en el área de trabajo<br>&bull; No remover dispositivos de protección<br>&bull; No operar equipo de manera peligrosa<br>&bull; No participar en conducta brusca o imprudente<br><br><strong>Al firmar, reconozco que he leído y entendido las Políticas de Salud y Seguridad. Cualquier violación será causa de disciplina y/o despido.</strong>',
+    en: '<strong>GoodWorkers</strong> is committed to providing and maintaining a safe and healthy workplace for all employees, as well as providing the information, training and supervision necessary to achieve this.<br><br>Each employee is encouraged to play a vital and responsible role in maintaining a safe and healthy workplace by:<br><br>&bull; Understanding and following company guidelines and rules<br>&bull; Participating in workplace health and safety<br>&bull; Using equipment and protective devices as required<br>&bull; Immediately reporting any hazards, accidents or incidents<br>&bull; Reporting missing or defective protective equipment<br>&bull; Performing tasks safely<br>&bull; Maintaining good housekeeping<br>&bull; Not removing protective devices<br>&bull; Not operating equipment dangerously<br>&bull; Not engaging in rough or reckless conduct<br><br><strong>By signing below, I acknowledge that I have read and understood the Health and Safety Policies. Any violation will be cause for discipline and/or dismissal.</strong>'
+  },
+  driver: {
+    es: 'Certifico que mis respuestas son verdaderas y completas a mi mejor conocimiento. Si esta solicitud lleva a empleo, entiendo que información falsa o engañosa puede resultar en mi despido.',
+    en: 'I certify that my answers are true and complete to the best of my knowledge. If this application leads to employment, I understand that false or misleading information may result in my release.'
+  },
+  drug: {
+    es: 'Por medio de la presente reconozco y acepto que he recibido, leído y entendido la Política de Uso de Drogas y Alcohol de GoodWorkers y acepto cumplir con sus términos. Entiendo que mi cumplimiento con la Política es un término esencial de mi empleo. Cualquier falta de firma resultará en la terminación inmediata de mi empleo.',
+    en: 'I hereby acknowledge and agree that I have received, read, and understand the Drug and Alcohol Use Policy of GoodWorkers and agree to abide by its terms. My compliance with the Policy is an essential term of my employment. Any failure to sign will result in immediate termination.'
+  },
+  handbook: {
+    es: 'Acuso recibo de este Manual del Empleado. Entiendo y acepto que este Manual describe las políticas y procedimientos aplicables a mi empleo con GoodWorkers. Certifico que entiendo completamente su contenido y acepto cumplirlo en su totalidad. Cualquier incumplimiento está sujeto a medidas disciplinarias.',
+    en: 'I acknowledge receipt of this Employee Handbook. I understand and agree that this Handbook describes the policies and procedures applicable to my employment with GoodWorkers. I certify that I fully understand its content and agree to comply. Any failure to comply is liable to disciplinary measures.'
+  },
+  consent: {
+    es: 'Autorizo a Rafat General Contractor Inc. y cualquier otra firma a contactar a mis empleadores anteriores y cualquier otra fuente para obtener información necesaria para la evaluación de esta solicitud.<br><br>Certifico que toda la información proporcionada en este formulario es verdadera y completa. Reconozco que cualquier declaración falsa o engañosa puede resultar en la imposibilidad de ser empleado o en mi despido.<br><br>Yo, el abajo firmante, he leído y entendido lo anterior y he dado mi consentimiento libre y voluntariamente.',
+    en: 'I authorize Rafat General Contractor Inc. and any other firm to contact my former employers and any other source to obtain information necessary for the evaluation of this application.<br><br>I certify that all information supplied in this form is true and complete. I recognize that any false or misleading statement may render me unable to be employed or result in my dismissal.<br><br>I, the undersigned, have read and understood the above and have freely and knowingly given my consent.'
+  }
+};
+
+// ========== LANGUAGE ==========
+var currentLang = 'es';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.getElementById('langScreen').classList.add('hidden');
+  applyLang();
+}
+
+function applyLang() {
+  // Text content
+  document.querySelectorAll('[data-' + currentLang + ']').forEach(function(el) {
+    if (el.tagName === 'INPUT') return;
+    var text = el.getAttribute('data-' + currentLang);
+    if (text) el.innerHTML = text;
+  });
+
+  // Placeholders
+  document.querySelectorAll('[data-ph-' + currentLang + ']').forEach(function(el) {
+    el.placeholder = el.getAttribute('data-ph-' + currentLang);
+  });
+
+  // Policies
+  document.getElementById('policyHS').innerHTML = policies.hs[currentLang];
+  document.getElementById('policyDriver').innerHTML = policies.driver[currentLang];
+  document.getElementById('policyDrug').innerHTML = policies.drug[currentLang];
+  document.getElementById('policyHandbook').innerHTML = policies.handbook[currentLang];
+  if (document.getElementById('policyConsent')) document.getElementById('policyConsent').innerHTML = policies.consent[currentLang];
+
+  // Equipment lists
+  buildEquipList('truckList', trucks);
+  buildEquipList('equipList', equips);
+}
+
+// ========== EQUIPMENT LISTS ==========
+function buildEquipList(containerId, items) {
+  var container = document.getElementById(containerId);
+  container.innerHTML = '';
+  var yearsLabel = currentLang === 'es' ? ['1-5 años', '5-10 años', '10+ años'] : ['1-5 years', '5-10 years', '10+ years'];
+  var selectLabel = currentLang === 'es' ? 'Años' : 'Years';
+
+  items.forEach(function(item) {
+    var div = document.createElement('div');
+    div.className = 'equip-item';
+    div.innerHTML =
+      '<div class="equip-toggle" onclick="toggleEquip(this)"></div>' +
+      '<img src="' + item.img + '" alt="" class="equip-img">' +
+      '<div class="equip-name" onclick="toggleEquip(this.parentElement.querySelector(\'.equip-toggle\'))">' +
+        (currentLang === 'es' ? item.es + '<small>' + item.en + '</small>' : item.en + '<small>' + item.es + '</small>') +
+      '</div>' +
+      '<div class="equip-years">' +
+        '<select><option value="" disabled selected>' + selectLabel + '</option>' +
+        '<option>' + yearsLabel[0] + '</option>' +
+        '<option>' + yearsLabel[1] + '</option>' +
+        '<option>' + yearsLabel[2] + '</option>' +
+        '</select>' +
+      '</div>';
+    container.appendChild(div);
+  });
+}
+
+function toggleEquip(toggleEl) {
+  var item = toggleEl.closest('.equip-item');
+  var isChecked = toggleEl.classList.toggle('checked');
+  item.classList.toggle('active', isChecked);
+  if (!isChecked) {
+    item.querySelector('select').selectedIndex = 0;
+  }
+}
+
+// ========== AUTO-FILL NAME ==========
+function syncFullName() {
+  var f = document.getElementById('fname').value.trim();
+  var m = document.getElementById('mname').value.trim();
+  var l = document.getElementById('lname').value.trim();
+  var full = [f, m, l].filter(Boolean).join(' ');
+  document.querySelectorAll('.fullname-auto').forEach(function(el) {
+    el.value = full;
+    if (full) el.classList.add('autofilled');
+    else el.classList.remove('autofilled');
+  });
+}
+
+// ========== SEGMENTED CONTROL ==========
+function selectSeg(el) {
+  el.parentNode.querySelectorAll('.seg-option').forEach(function(s) { s.classList.remove('selected'); });
+  el.classList.add('selected');
+}
+
+// ========== DATE FORMATTING ==========
+function formatDate(input) {
+  var v = input.value.replace(/\D/g, '');
+  if (v.length > 8) v = v.substring(0, 8);
+  var parts = [];
+  if (v.length > 0) parts.push(v.substring(0, Math.min(2, v.length)));
+  if (v.length > 2) parts.push(v.substring(2, Math.min(4, v.length)));
+  if (v.length > 4) parts.push(v.substring(4, 8));
+  input.value = parts.join('/');
+}
+
+// ========== FILE UPLOAD ==========
+function handleUpload(input) {
+  var previewContainer = input.nextElementSibling;
+  var files = input.files;
+  for (var i = 0; i < files.length; i++) {
+    addFilePreview(previewContainer, files[i]);
+  }
+  // Reset input so same file can be re-selected
+  input.value = '';
+}
+
+function addFilePreview(container, file) {
+  var thumb = document.createElement('div');
+  thumb.className = 'upload-thumb';
+
+  var removeBtn = document.createElement('div');
+  removeBtn.className = 'remove-btn';
+  removeBtn.textContent = '×';
+  removeBtn.onclick = function() {
+    thumb.remove();
+  };
+
+  if (file.type.startsWith('image/')) {
+    var img = document.createElement('img');
+    img.src = URL.createObjectURL(file);
+    img.onload = function() { URL.revokeObjectURL(img.src); };
+    thumb.appendChild(img);
+  } else {
+    var icon = document.createElement('div');
+    icon.className = 'file-icon';
+    icon.textContent = file.name.length > 20 ? file.name.substring(0, 17) + '...' : file.name;
+    thumb.appendChild(icon);
+  }
+
+  thumb.appendChild(removeBtn);
+  // Store file reference for later submission
+  thumb._file = file;
+  container.appendChild(thumb);
+}
+
+// ========== SIGNATURE PAD ==========
+function initSignatures() {
+  document.querySelectorAll('.sig-canvas').forEach(function(canvas) {
+    var container = canvas.parentElement;
+    var drawing = false;
+    var lastX, lastY;
+    var savedImage = null;
+    var dpr = window.devicePixelRatio || 1;
+
+    function setupCtx() {
+      var ctx = canvas.getContext('2d');
+      ctx.strokeStyle = '#1c1c1e';
+      ctx.lineWidth = 2.5;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      return ctx;
+    }
+
+    function sizeCanvas() {
+      var rect = canvas.getBoundingClientRect();
+      dpr = window.devicePixelRatio || 1;
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      var ctx = canvas.getContext('2d');
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      setupCtx();
+      if (savedImage) {
+        var img = new Image();
+        img.onload = function() {
+          canvas.getContext('2d').drawImage(img, 0, 0, rect.width, rect.height);
+        };
+        img.src = savedImage;
+      }
+    }
+
+    sizeCanvas();
+    window.addEventListener('resize', sizeCanvas);
+
+    function getPos(e) {
+      var rect = canvas.getBoundingClientRect();
+      if (e.touches && e.touches.length > 0) {
+        return { x: e.touches[0].clientX - rect.left, y: e.touches[0].clientY - rect.top };
+      }
+      return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    }
+
+    function startDraw(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      drawing = true;
+      container.classList.add('signing');
+      container.classList.add('has-sig');
+      document.body.style.overflow = 'hidden';
+      var ctx = setupCtx();
+      var pos = getPos(e);
+      lastX = pos.x;
+      lastY = pos.y;
+    }
+
+    function draw(e) {
+      if (!drawing) return;
+      e.preventDefault();
+      e.stopPropagation();
+      var ctx = canvas.getContext('2d');
+      setupCtx();
+      var pos = getPos(e);
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+      lastX = pos.x;
+      lastY = pos.y;
+    }
+
+    function stopDraw(e) {
+      if (!drawing) return;
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      drawing = false;
+      container.classList.remove('signing');
+      document.body.style.overflow = '';
+      savedImage = canvas.toDataURL('image/png');
+      canvas._sigData = savedImage;
+    }
+
+    canvas.addEventListener('touchstart', startDraw, { passive: false });
+    canvas.addEventListener('touchmove', draw, { passive: false });
+    canvas.addEventListener('touchend', stopDraw, { passive: false });
+    canvas.addEventListener('touchcancel', stopDraw, { passive: false });
+
+    canvas.addEventListener('mousedown', startDraw);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDraw);
+    canvas.addEventListener('mouseleave', function(e) { if (drawing) stopDraw(e); });
+
+    canvas._clearSig = function() {
+      drawing = false;
+      savedImage = null;
+      canvas._sigData = null;
+      container.classList.remove('has-sig');
+      container.classList.remove('signing');
+      document.body.style.overflow = '';
+      // Full reset — resize recreates a fresh context
+      sizeCanvas();
+    };
+  });
+}
+
+function clearSig(btn) {
+  var canvas = btn.parentElement.querySelector('.sig-canvas');
+  canvas._clearSig();
+}
+
+// ========== GOOGLE PLACES (Custom Inline Dropdown) ==========
+var _acSessionToken = null;
+var _acDebounceTimers = {};
+
+async function initAutocomplete() {
+  // Load Google Maps JS API
+  var script = document.createElement('script');
+  script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBHXeyL9vYMa6EbDgWhxHC7oLySEYR497Y&libraries=places&v=weekly';
+  script.async = true;
+  script.defer = true;
+  script.onload = async function() {
+    var lib = await google.maps.importLibrary('places');
+    _acSessionToken = new lib.AutocompleteSessionToken();
+    setupInlineAutocomplete('address1', 'ac-dropdown1', 'city1', 'province1', 'postal1');
+    setupInlineAutocomplete('address2', 'ac-dropdown2', 'city2', 'province2', 'postal2');
+  };
+  document.head.appendChild(script);
+}
+
+function setupInlineAutocomplete(inputId, dropdownId, cityId, provinceId, postalId) {
+  var input = document.getElementById(inputId);
+  var dropdown = document.getElementById(dropdownId);
+  var currentSuggestions = [];
+
+  input.addEventListener('input', function() {
+    clearTimeout(_acDebounceTimers[inputId]);
+    var query = input.value.trim();
+    if (query.length < 3) { closeDD(); return; }
+    _acDebounceTimers[inputId] = setTimeout(function() { fetchSugg(query); }, 300);
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('#' + inputId) && !e.target.closest('#' + dropdownId)) closeDD();
+  });
+
+  function closeDD() {
+    dropdown.classList.remove('open');
+    dropdown.innerHTML = '';
+    currentSuggestions = [];
+  }
+
+  async function fetchSugg(query) {
+    try {
+      var result = await google.maps.places.AutocompleteSuggestion.fetchAutocompleteSuggestions({
+        input: query,
+        sessionToken: _acSessionToken,
+        includedRegionCodes: ['ca'],
+        language: currentLang
+      });
+      currentSuggestions = result.suggestions || [];
+      renderDD();
+    } catch(e) { console.error(e); closeDD(); }
+  }
+
+  function renderDD() {
+    if (currentSuggestions.length === 0) { closeDD(); return; }
+    var html = '';
+    currentSuggestions.forEach(function(s, i) {
+      var p = s.placePrediction;
+      if (!p) return;
+      var main = p.mainText ? p.mainText.text : '';
+      var sec = p.secondaryText ? p.secondaryText.text : '';
+      html += '<button type="button" class="ac-item" data-i="' + i + '">' +
+        '<div class="ac-main">' + escHtml(main) + '</div>' +
+        '<div class="ac-secondary">' + escHtml(sec) + '</div></button>';
+    });
+    html += '<div class="ac-powered">Powered by Google</div>';
+    dropdown.innerHTML = html;
+    dropdown.classList.add('open');
+    dropdown.querySelectorAll('.ac-item').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        onSelect(currentSuggestions[parseInt(btn.getAttribute('data-i'))]);
+      });
+    });
+  }
+
+  async function onSelect(suggestion) {
+    closeDD();
+    var pred = suggestion.placePrediction;
+    if (!pred) return;
+    input.value = pred.mainText ? pred.mainText.text : pred.text.text;
+
+    try {
+      var place = pred.toPlace();
+      await place.fetchFields({ fields: ['addressComponents'] });
+      var comps = place.addressComponents || [];
+      var streetNum = '', route = '', city = '', prov = '', postal = '';
+      comps.forEach(function(c) {
+        var t = c.types[0];
+        if (t === 'street_number') streetNum = c.longText;
+        if (t === 'route') route = c.longText;
+        if (t === 'locality') city = c.longText;
+        if (t === 'sublocality_level_1' && !city) city = c.longText;
+        if (t === 'administrative_area_level_1') prov = c.longText;
+        if (t === 'postal_code') postal = c.longText;
+      });
+      input.value = [streetNum, route].filter(Boolean).join(' ');
+      var cityEl = document.getElementById(cityId);
+      var provEl = document.getElementById(provinceId);
+      var postalEl = document.getElementById(postalId);
+      cityEl.value = city; provEl.value = prov; postalEl.value = postal;
+      cityEl.classList.add('autofilled');
+      provEl.classList.add('autofilled');
+      postalEl.classList.add('autofilled');
+    } catch(e) { console.error(e); }
+
+    // New session token for billing
+    var lib = await google.maps.importLibrary('places');
+    _acSessionToken = new lib.AutocompleteSessionToken();
+  }
+}
+
+function escHtml(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+// ========== PAGE NAVIGATION ==========
+function goToPage2() {
+  // Validate page 1
+  var fname = document.getElementById('fname').value.trim();
+  var lname = document.getElementById('lname').value.trim();
+  if (!fname || !lname) {
+    alert(currentLang === 'es' ? 'Por favor ingresa tu nombre y apellido.' : 'Please enter your first and last name.');
+    return;
+  }
+  document.getElementById('page1').style.display = 'none';
+  document.getElementById('page2').style.display = 'block';
+  window.scrollTo({ top: 0 });
+  applyLang();
+  initSignatures();
+}
+
+function goToPage1() {
+  document.getElementById('page2').style.display = 'none';
+  document.getElementById('page1').style.display = 'block';
+  window.scrollTo({ top: 0 });
+}
+
+// ========== SUPABASE ==========
+var SUPABASE_URL = 'https://fcgxxxxazyggnxkjswjs.supabase.co';
+var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZjZ3h4eHhhenlnZ254a2pzd2pzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUxNTc1MzAsImV4cCI6MjA5MDczMzUzMH0.8fbm8o1m913Ysc-v_D1Y51xCJ4m4GEoNwdI_BBC0gTg';
+var supabase = null;
+
+function initSupabase() {
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
+  script.onload = function() {
+    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  };
+  document.head.appendChild(script);
+}
+
+async function uploadFile(file, folder) {
+  var ext = file.name.split('.').pop();
+  var path = folder + '/' + Date.now() + '-' + Math.random().toString(36).slice(2) + '.' + ext;
+  var { data, error } = await supabase.storage.from('documents').upload(path, file);
+  if (error) { console.error('Upload error:', error); return null; }
+  return path;
+}
+
+// ========== SUBMIT ==========
+async function submitForm() {
+  var btn = document.getElementById('submitBtn');
+  var status = document.getElementById('submitStatus');
+  status.className = 'submit-status';
+
+  if (!supabase) {
+    status.textContent = currentLang === 'es' ? 'Error: cargando...' : 'Error: loading...';
+    status.className = 'submit-status show error';
+    return;
+  }
+
+  // Validate required fields
+  var fname = document.getElementById('fname').value.trim();
+  var lname = document.getElementById('lname').value.trim();
+  if (!fname || !lname) {
+    status.textContent = currentLang === 'es' ? 'Por favor ingresa tu nombre y apellido.' : 'Please enter your first and last name.';
+    status.className = 'submit-status show error';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.querySelector('span').textContent = currentLang === 'es' ? 'Enviando...' : 'Submitting...';
+
+  try {
+    // Get english level
+    var englishSeg = document.querySelectorAll('.section')[0].querySelector('.segmented');
+    var englishSelected = englishSeg ? englishSeg.querySelector('.selected') : null;
+    var englishMap = { 'Bajo': 'poor', 'Poor': 'poor', 'Bueno': 'good', 'Good': 'good', 'Excelente': 'excellent', 'Excellent': 'excellent' };
+    var englishLevel = englishSelected ? (englishMap[englishSelected.textContent.trim()] || null) : null;
+
+    // Upload license photo
+    var licenseThumbs = document.querySelector('[data-upload="license"]');
+    var licensePath = null;
+    if (licenseThumbs && licenseThumbs.children.length > 0 && licenseThumbs.children[0]._file) {
+      licensePath = await uploadFile(licenseThumbs.children[0]._file, 'licenses');
+    }
+
+    // Upload certifications
+    var certThumbs = document.querySelector('[data-upload="certs"]');
+    var certPaths = [];
+    if (certThumbs) {
+      for (var i = 0; i < certThumbs.children.length; i++) {
+        if (certThumbs.children[i]._file) {
+          var p = await uploadFile(certThumbs.children[i]._file, 'certs');
+          if (p) certPaths.push(p);
+        }
+      }
+    }
+
+    // Get signatures
+    var sigCanvases = document.querySelectorAll('.sig-canvas');
+    var sigHS = sigCanvases[0] ? sigCanvases[0]._sigData : null;
+    var sigDriver = sigCanvases[1] ? sigCanvases[1]._sigData : null;
+    var sigDrug = sigCanvases[2] ? sigCanvases[2]._sigData : null;
+    var sigHandbook = sigCanvases[3] ? sigCanvases[3]._sigData : null;
+
+    // Get snow plow answers
+    var driverSection = document.querySelectorAll('.segmented');
+    var snowPlowing = null, snowOncall = null;
+    if (driverSection.length >= 3) {
+      var sp = driverSection[1].querySelector('.selected');
+      if (sp) snowPlowing = sp.textContent.trim() === 'Sí' || sp.textContent.trim() === 'Yes';
+      var so = driverSection[2].querySelector('.selected');
+      if (so) snowOncall = so.textContent.trim() === 'Sí' || so.textContent.trim() === 'Yes';
+    }
+
+    // Insert employee
+    var { data: employee, error: empError } = await supabase.from('employees').insert({
+      first_name: fname,
+      middle_name: document.getElementById('mname').value.trim() || null,
+      last_name: lname,
+      address: document.getElementById('address1').value.trim() || null,
+      apt_unit: document.getElementById('apt1').value.trim() || null,
+      city: document.getElementById('city1').value.trim() || null,
+      province: document.getElementById('province1').value.trim() || null,
+      postal_code: document.getElementById('postal1').value.trim() || null,
+      phone: document.querySelector('input[type="tel"]').value.trim() || null,
+      email: document.querySelector('input[type="email"]').value.trim() || null,
+      birth_date: document.querySelector('.date-input').value.trim() || null,
+      english_level: englishLevel,
+      language: currentLang,
+      emergency_first_name: document.querySelectorAll('.section')[2] ? document.querySelectorAll('.section')[2].querySelectorAll('.field-input')[0].value.trim() || null : null,
+      emergency_last_name: document.querySelectorAll('.section')[2] ? document.querySelectorAll('.section')[2].querySelectorAll('.field-input')[1].value.trim() || null : null,
+      emergency_address: document.getElementById('address2').value.trim() || null,
+      emergency_apt_unit: document.getElementById('apt2').value.trim() || null,
+      emergency_city: document.getElementById('city2').value.trim() || null,
+      emergency_province: document.getElementById('province2').value.trim() || null,
+      emergency_postal_code: document.getElementById('postal2').value.trim() || null,
+      emergency_phone: document.querySelectorAll('.section')[2] ? document.querySelectorAll('.section')[2].querySelectorAll('input[type="tel"]')[0].value.trim() || null : null,
+      emergency_phone_alt: document.querySelectorAll('.section')[2] ? document.querySelectorAll('.section')[2].querySelectorAll('input[type="tel"]')[1].value.trim() || null : null,
+      emergency_relationship: document.querySelectorAll('.section')[2] ? document.querySelectorAll('.section')[2].querySelectorAll('.field-input')[6].value.trim() || null : null,
+      license_photo: licensePath,
+      certifications: certPaths.length > 0 ? certPaths : null,
+      signature_hs: sigHS,
+      signature_driver: sigDriver,
+      signature_drug: sigDrug,
+      signature_handbook: sigHandbook,
+      snow_plowing: snowPlowing,
+      snow_plow_oncall: snowOncall,
+
+      // Page 2: Rafat Application
+      position_applied: Array.from(document.querySelectorAll('#positionChecks input:checked')).map(function(cb) { return cb.value; }),
+      date_available: (document.getElementById('dateAvailable') || {}).value || null,
+      position_type: (function() { var s = document.querySelectorAll('#page2 .segmented')[0]; var sel = s ? s.querySelector('.selected') : null; return sel ? sel.textContent.trim().toLowerCase().replace(' ', '_') : null; })(),
+      referred_by: (document.getElementById('referredBy') || {}).value || null,
+      legally_entitled: (function() { var s = document.getElementById('legallyEntitled'); var sel = s ? s.querySelector('.selected') : null; return sel ? (sel.textContent.trim() === 'Sí' || sel.textContent.trim() === 'Yes') : null; })(),
+      criminal_conviction: (function() { var s = document.getElementById('criminalConviction'); var sel = s ? s.querySelector('.selected') : null; return sel ? (sel.textContent.trim() === 'Sí' || sel.textContent.trim() === 'Yes') : null; })(),
+      relatives_at_rafat: (function() { var s = document.getElementById('relativesRafat'); var sel = s ? s.querySelector('.selected') : null; return sel ? (sel.textContent.trim() === 'Sí' || sel.textContent.trim() === 'Yes') : null; })(),
+      relatives_at_rafat_details: (document.getElementById('relativesDetails') || {}).value || null,
+      license_type: (function() { var s = document.getElementById('licenseType'); var sel = s ? s.querySelector('.selected') : null; return sel ? sel.textContent.trim() : null; })(),
+      education: {
+        high_school: (document.getElementById('eduHS') || {}).value || null,
+        college: (document.getElementById('eduCollege') || {}).value || null,
+        university: (document.getElementById('eduUni') || {}).value || null,
+        additional: (document.getElementById('eduExtra') || {}).value || null
+      },
+      work_experience: {
+        employer: (document.getElementById('workEmployer') || {}).value || null,
+        business_type: (document.getElementById('workBusiness') || {}).value || null,
+        job_title: (document.getElementById('workTitle') || {}).value || null,
+        period: (document.getElementById('workPeriod') || {}).value || null,
+        supervisor: (document.getElementById('workSupervisor') || {}).value || null,
+        reason_leaving: (document.getElementById('workReason') || {}).value || null
+      },
+      reference_name: (document.getElementById('refName') || {}).value || null,
+      reference_phone: (document.getElementById('refPhone') || {}).value || null,
+      reference_relationship: (document.getElementById('refRelationship') || {}).value || null,
+      signature_consent: (function() { var canvases = document.querySelectorAll('#page2 .sig-canvas'); return canvases.length > 0 && canvases[0]._sigData ? canvases[0]._sigData : null; })()
+    }).select().single();
+
+    if (empError) throw empError;
+
+    // Insert equipment experience
+    var equipItems = document.querySelectorAll('.equip-item.active');
+    for (var j = 0; j < equipItems.length; j++) {
+      var item = equipItems[j];
+      var select = item.querySelector('select');
+      if (!select || !select.value) continue;
+      var nameEl = item.querySelector('.equip-name');
+      var equipName = nameEl.textContent.split('\n')[0].trim();
+      var isTruck = item.closest('#truckList') !== null;
+      var yearsVal = select.value.replace(/[^0-9+\-]/g, '');
+      if (yearsVal.startsWith('1')) yearsVal = '1-5';
+      else if (yearsVal.startsWith('5')) yearsVal = '5-10';
+      else yearsVal = '10+';
+
+      await supabase.from('equipment_experience').insert({
+        employee_id: employee.id,
+        equipment_type: equipName,
+        category: isTruck ? 'truck' : 'heavy_equipment',
+        years: yearsVal
+      });
+    }
+
+    // Success
+    btn.querySelector('span').textContent = currentLang === 'es' ? 'Enviado' : 'Submitted';
+    btn.style.background = '#34c759';
+    status.textContent = currentLang === 'es' ? '¡Registro completado! Gracias.' : 'Registration complete! Thank you.';
+    status.className = 'submit-status show';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  } catch(err) {
+    console.error('Submit error:', err);
+    btn.disabled = false;
+    btn.querySelector('span').textContent = currentLang === 'es' ? 'Enviar Formulario' : 'Submit Form';
+    status.textContent = (currentLang === 'es' ? 'Error al enviar. Intenta de nuevo. ' : 'Error submitting. Try again. ') + (err.message || '');
+    status.className = 'submit-status show error';
+  }
+}
+
+// ========== INIT ==========
+applyLang();
+initAutocomplete();
+initSignatures();
+initSupabase();
+</script>
+</body>
+</html>

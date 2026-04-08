@@ -98,8 +98,6 @@
     border: 1px solid rgba(255,255,255,0.12);
   }
 
-  /* No header — form starts directly after language selection */
-
   /* Section (iOS grouped style) */
   .section {
     margin: 20px 16px;
@@ -133,9 +131,6 @@
   }
 
   /* Fields */
-  .field-group {
-    padding: 0;
-  }
   .field {
     padding: 12px 16px;
     border-bottom: 0.5px solid #e5e5ea;
@@ -147,7 +142,7 @@
     color: #8e8e93;
     margin-bottom: 4px;
   }
-  .field-label .optional {
+  .optional {
     font-size: 11px;
     color: #aeaeb2;
     font-weight: 400;
@@ -171,7 +166,7 @@
     margin-top: 2px;
   }
 
-  /* Two column row inside card */
+  /* Two column row */
   .field-split {
     display: flex;
   }
@@ -197,7 +192,7 @@
     text-transform: uppercase;
   }
 
-  /* Segmented control (radio) */
+  /* Segmented control */
   .segmented {
     display: flex;
     background: #f2f2f7;
@@ -225,9 +220,7 @@
   }
 
   /* Upload */
-  .upload-area {
-    margin-top: 6px;
-  }
+  .upload-area { margin-top: 6px; }
   .upload-btn {
     display: flex;
     align-items: center;
@@ -369,89 +362,106 @@
     margin-bottom: 12px;
   }
 
-  .divider-field {
-    height: 0;
-    padding: 0 !important;
-    border-bottom: 0.5px solid #e5e5ea !important;
+  /* Checkbox pills */
+  .check-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: #f2f2f7;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.15s, color 0.15s;
+    user-select: none;
+  }
+  .check-pill input { display: none; }
+  .check-pill:has(input:checked) {
+    background: #F26522;
+    color: #fff;
   }
 
-  /* Equipment toggle list */
-  .equip-item {
+  /* Industry selector */
+  .industry-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 16px;
+  }
+  .industry-pill {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    padding: 10px 16px;
-    border-bottom: 0.5px solid #e5e5ea;
+    gap: 6px;
+    padding: 16px 8px;
+    background: #f2f2f7;
+    border: 2px solid transparent;
+    border-radius: 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #3a3a3c;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: all 0.2s;
+    user-select: none;
+    text-align: center;
+  }
+  .industry-pill:active { transform: scale(0.96); }
+  .industry-pill.selected {
+    background: rgba(242,101,34,0.08);
+    border-color: #F26522;
+    color: #F26522;
+    font-weight: 600;
+  }
+  .industry-pill .ind-icon {
+    font-size: 28px;
+    line-height: 1;
+  }
+  .industry-pill .ind-label {
+    font-size: 12px;
+    line-height: 1.2;
+  }
+
+  /* Industry blocks hidden by default */
+  .industry-block {
+    display: none;
+  }
+  .industry-block.visible {
+    display: block;
+  }
+
+  /* Submit button */
+  .submit-btn {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    background: #F26522;
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-size: 17px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: transform 0.1s, opacity 0.15s;
     -webkit-tap-highlight-color: transparent;
   }
-  .equip-item:last-child { border-bottom: none; }
-  .equip-toggle {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    border: 2px solid #d1d1d6;
-    margin-right: 12px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.15s;
-    background: #fff;
+  .submit-btn:active { transform: scale(0.98); opacity: 0.9; }
+  .submit-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
   }
-  .equip-toggle.checked {
-    background: #F26522;
-    border-color: #F26522;
-  }
-  .equip-toggle.checked::after {
-    content: '';
-    width: 10px;
-    height: 6px;
-    border-left: 2.5px solid #fff;
-    border-bottom: 2.5px solid #fff;
-    transform: rotate(-45deg) translateY(-1px);
-  }
-  .equip-img {
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
-    margin-right: 10px;
-    flex-shrink: 0;
-    object-fit: cover;
-    background: #f2f2f7;
-  }
-  .equip-name {
-    flex: 1;
-    font-size: 15px;
-    cursor: pointer;
-  }
-  .equip-name small {
-    display: block;
-    font-size: 12px;
-    color: #8e8e93;
-    font-weight: 400;
-  }
-  .equip-years {
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s;
-  }
-  .equip-item.active .equip-years {
-    opacity: 1;
-    pointer-events: auto;
-  }
-  .equip-years select {
-    font-family: inherit;
+  .submit-status {
+    text-align: center;
+    margin-top: 12px;
     font-size: 14px;
-    padding: 6px 10px;
-    border: 1.5px solid #d1d1d6;
-    border-radius: 8px;
-    background: #f2f2f7;
-    color: #1c1c1e;
-    outline: none;
-    -webkit-appearance: none;
-    appearance: none;
-    cursor: pointer;
+    color: #34c759;
+    display: none;
   }
+  .submit-status.show { display: block; }
+  .submit-status.error { color: #ff3b30; }
 
   /* Address autocomplete dropdown */
   .ac-wrap { position: relative; }
@@ -495,7 +505,7 @@
     text-align: right;
   }
 
-  /* Date input dd/mm/yyyy */
+  /* Date input */
   .date-input {
     font-size: 17px;
     font-family: inherit;
@@ -503,57 +513,21 @@
     letter-spacing: 1px;
   }
 
-  /* Checkbox pills */
-  .check-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 14px;
-    background: #f2f2f7;
-    border-radius: 20px;
-    font-size: 14px;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    transition: background 0.15s;
-    user-select: none;
-  }
-  .check-pill input { display: none; }
-  .check-pill:has(input:checked) {
-    background: #F26522;
-    color: #fff;
-  }
-
-  /* Submit button */
-  .submit-btn {
-    display: block;
-    width: 100%;
-    padding: 16px;
-    background: #F26522;
-    color: #fff;
-    border: none;
-    border-radius: 14px;
-    font-size: 17px;
-    font-weight: 600;
+  /* Years select */
+  .years-select {
     font-family: inherit;
-    cursor: pointer;
-    transition: transform 0.1s, opacity 0.15s;
-    -webkit-tap-highlight-color: transparent;
+    font-size: 15px;
+    padding: 8px 12px;
+    border: 1.5px solid #d1d1d6;
+    border-radius: 8px;
+    background: #f2f2f7;
+    color: #1c1c1e;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    margin-top: 4px;
   }
-  .submit-btn:active { transform: scale(0.98); opacity: 0.9; }
-  .submit-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
-  }
-  .submit-status {
-    text-align: center;
-    margin-top: 12px;
-    font-size: 14px;
-    color: #34c759;
-    display: none;
-  }
-  .submit-status.show { display: block; }
-  .submit-status.error { color: #ff3b30; }
 
   /* Footer */
   .footer {
@@ -578,31 +552,30 @@
     <div class="lang-sub">Employee Registration</div>
     <div class="lang-divider"></div>
     <p>Selecciona tu idioma<br>Select your language</p>
-    <button class="lang-btn lang-btn-es" onclick="setLang('es')">Español</button>
+    <button class="lang-btn lang-btn-es" onclick="setLang('es')">Espa&ntilde;ol</button>
     <button class="lang-btn lang-btn-en" onclick="setLang('en')">English</button>
   </div>
 </div>
 
-<div id="page1">
-<!-- PASO 1: Info Personal -->
+<!-- ==================== STEP 1: PERSONAL INFO ==================== -->
 <div class="section">
-  <div class="section-title"><span class="step-num">1</span> <span data-es="Información Personal" data-en="Personal Information"></span></div>
+  <div class="section-title"><span class="step-num">1</span> <span data-es="Informaci&oacute;n Personal" data-en="Personal Information"></span></div>
   <div class="card">
     <div class="field">
       <div class="field-label" data-es="Nombre" data-en="First Name"></div>
-      <input id="fname" class="field-input" type="text" data-ph-es="Juan" data-ph-en="John" oninput="syncFullName()">
+      <input id="fname" class="field-input" type="text" data-ph-es="Juan" data-ph-en="John">
     </div>
     <div class="field">
       <div class="field-label" data-es="Segundo Nombre" data-en="Middle Name"></div>
-      <input id="mname" class="field-input" type="text" data-ph-es="Carlos" data-ph-en="Michael" oninput="syncFullName()">
+      <input id="mname" class="field-input" type="text" data-ph-es="Carlos" data-ph-en="Michael">
     </div>
     <div class="field">
       <div class="field-label" data-es="Apellido" data-en="Last Name"></div>
-      <input id="lname" class="field-input" type="text" data-ph-es="López" data-ph-en="Smith" oninput="syncFullName()">
+      <input id="lname" class="field-input" type="text" data-ph-es="L&oacute;pez" data-ph-en="Smith">
     </div>
     <div class="field ac-wrap">
-      <div class="field-label"><span data-es="Dirección" data-en="Street Address"></span></div>
-      <input id="address1" class="field-input" type="text" data-ph-es="Empieza a escribir tu dirección..." data-ph-en="Start typing your address..." autocomplete="off">
+      <div class="field-label"><span data-es="Direcci&oacute;n" data-en="Street Address"></span></div>
+      <input id="address1" class="field-input" type="text" data-ph-es="Empieza a escribir tu direcci&oacute;n..." data-ph-en="Start typing your address..." autocomplete="off">
       <div id="ac-dropdown1" class="ac-dropdown"></div>
     </div>
     <div class="field-split">
@@ -612,36 +585,36 @@
       </div>
       <div class="field">
         <div class="field-label"><span data-es="Ciudad" data-en="City"></span> <span class="auto-tag">AUTO</span></div>
-        <input id="city1" class="field-input" type="text" data-ph-es="Se llena automático" data-ph-en="Auto-filled">
+        <input id="city1" class="field-input" type="text" data-ph-es="Se llena autom&aacute;tico" data-ph-en="Auto-filled">
       </div>
     </div>
     <div class="field-split">
       <div class="field">
         <div class="field-label"><span data-es="Provincia" data-en="Province"></span> <span class="auto-tag">AUTO</span></div>
-        <input id="province1" class="field-input" type="text" data-ph-es="Se llena automático" data-ph-en="Auto-filled">
+        <input id="province1" class="field-input" type="text" data-ph-es="Se llena autom&aacute;tico" data-ph-en="Auto-filled">
       </div>
       <div class="field">
-        <div class="field-label"><span data-es="Código Postal" data-en="Postal Code"></span> <span class="auto-tag">AUTO</span></div>
-        <input id="postal1" class="field-input" type="text" data-ph-es="Se llena automático" data-ph-en="Auto-filled">
+        <div class="field-label"><span data-es="C&oacute;digo Postal" data-en="Postal Code"></span> <span class="auto-tag">AUTO</span></div>
+        <input id="postal1" class="field-input" type="text" data-ph-es="Se llena autom&aacute;tico" data-ph-en="Auto-filled">
       </div>
     </div>
     <div class="field-split">
       <div class="field">
-        <div class="field-label" data-es="Teléfono Celular" data-en="Cell Phone"></div>
-        <input class="field-input" type="tel" placeholder="(416) 555-1234">
+        <div class="field-label" data-es="Tel&eacute;fono Celular" data-en="Cell Phone"></div>
+        <input id="phone" class="field-input" type="tel" placeholder="(416) 555-1234">
       </div>
       <div class="field">
-        <div class="field-label" data-es="Correo Electrónico" data-en="Email"></div>
-        <input class="field-input" type="email" placeholder="juan@email.com">
+        <div class="field-label" data-es="Correo Electr&oacute;nico" data-en="Email"></div>
+        <input id="email" class="field-input" type="email" placeholder="juan@email.com">
       </div>
     </div>
     <div class="field">
       <div class="field-label" data-es="Fecha de Nacimiento" data-en="Date of Birth"></div>
-      <input class="field-input date-input" type="text" placeholder="dd/mm/aaaa" maxlength="10" oninput="formatDate(this)">
+      <input id="birthDate" class="field-input date-input" type="text" placeholder="dd/mm/aaaa" maxlength="10" oninput="formatDate(this)">
     </div>
     <div class="field">
-      <div class="field-label" data-es="Nivel de Inglés" data-en="English Level"></div>
-      <div class="segmented">
+      <div class="field-label" data-es="Nivel de Ingl&eacute;s" data-en="English Level"></div>
+      <div class="segmented" id="englishLevel">
         <div class="seg-option" onclick="selectSeg(this)" data-es="Bajo" data-en="Poor"></div>
         <div class="seg-option" onclick="selectSeg(this)" data-es="Bueno" data-en="Good"></div>
         <div class="seg-option" onclick="selectSeg(this)" data-es="Excelente" data-en="Excellent"></div>
@@ -650,12 +623,605 @@
   </div>
 </div>
 
-<!-- PASO 2: Documentos -->
+<!-- ==================== STEP 2: INDUSTRY SELECTOR ==================== -->
 <div class="section">
-  <div class="section-title"><span class="step-num">2</span> <span data-es="Documentos" data-en="Documents"></span></div>
+  <div class="section-title"><span class="step-num">2</span> <span data-es="&iquest;En qu&eacute; &aacute;rea trabajas?" data-en="What area do you work in?"></span></div>
+  <div class="card">
+    <div class="field" style="border-bottom:none;">
+      <div class="section-note" data-es="Selecciona una o m&aacute;s industrias. Se agregar&aacute;n preguntas espec&iacute;ficas." data-en="Select one or more industries. Specific questions will be added."></div>
+    </div>
+    <div class="industry-grid" id="industryGrid">
+      <div class="industry-pill" onclick="toggleIndustry(this)" data-industry="construction">
+        <span class="ind-icon">&#x1F3D7;&#xFE0F;</span>
+        <span class="ind-label" data-es="Construcci&oacute;n" data-en="Construction"></span>
+      </div>
+      <div class="industry-pill" onclick="toggleIndustry(this)" data-industry="mechanic">
+        <span class="ind-icon">&#x1F527;</span>
+        <span class="ind-label" data-es="Mec&aacute;nica" data-en="Mechanic"></span>
+      </div>
+      <div class="industry-pill" onclick="toggleIndustry(this)" data-industry="cleaning">
+        <span class="ind-icon">&#x1F9F9;</span>
+        <span class="ind-label" data-es="Limpieza" data-en="Cleaning"></span>
+      </div>
+      <div class="industry-pill" onclick="toggleIndustry(this)" data-industry="kitchen">
+        <span class="ind-icon">&#x1F373;</span>
+        <span class="ind-label" data-es="Cocina" data-en="Kitchen"></span>
+      </div>
+      <div class="industry-pill" onclick="toggleIndustry(this)" data-industry="electrical">
+        <span class="ind-icon">&#x26A1;</span>
+        <span class="ind-label" data-es="Electricidad" data-en="Electrical"></span>
+      </div>
+      <div class="industry-pill" onclick="toggleIndustry(this)" data-industry="painting">
+        <span class="ind-icon">&#x1F3A8;</span>
+        <span class="ind-label" data-es="Pintura" data-en="Painting"></span>
+      </div>
+      <div class="industry-pill" onclick="toggleIndustry(this)" data-industry="service">
+        <span class="ind-icon">&#x1F37D;&#xFE0F;</span>
+        <span class="ind-label" data-es="Mesero / Servicio" data-en="Server / Service"></span>
+      </div>
+      <div class="industry-pill" onclick="toggleIndustry(this)" data-industry="warehouse">
+        <span class="ind-icon">&#x1F4E6;</span>
+        <span class="ind-label" data-es="Almac&eacute;n" data-en="Warehouse"></span>
+      </div>
+      <div class="industry-pill" onclick="toggleIndustry(this)" data-industry="maintenance">
+        <span class="ind-icon">&#x1F6E0;&#xFE0F;</span>
+        <span class="ind-label" data-es="Mantenimiento" data-en="Maintenance"></span>
+      </div>
+      <div class="industry-pill" onclick="toggleIndustry(this)" data-industry="general_labour">
+        <span class="ind-icon">&#x1F4AA;</span>
+        <span class="ind-label" data-es="Trabajo General" data-en="General Labour"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== INDUSTRY: CONSTRUCTION ==================== -->
+<div class="industry-block" id="ind-construction">
+  <div class="section">
+    <div class="section-title"><span data-es="Construcci&oacute;n" data-en="Construction"></span></div>
+    <div class="card">
+      <div class="field">
+        <div class="field-label" data-es="A&ntilde;os de experiencia" data-en="Years of experience"></div>
+        <select class="years-select" id="construction_years">
+          <option value="" disabled selected data-es="Seleccionar" data-en="Select"></option>
+          <option value="0-1" data-es="Menos de 1 a&ntilde;o" data-en="Less than 1 year"></option>
+          <option value="1-3" data-es="1-3 a&ntilde;os" data-en="1-3 years"></option>
+          <option value="3-5" data-es="3-5 a&ntilde;os" data-en="3-5 years"></option>
+          <option value="5-10" data-es="5-10 a&ntilde;os" data-en="5-10 years"></option>
+          <option value="10+" data-es="10+ a&ntilde;os" data-en="10+ years"></option>
+        </select>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Tipo de construcci&oacute;n" data-en="Construction type"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+          <label class="check-pill"><input type="checkbox" value="residential" data-ind="construction" data-field="type"> <span data-es="Residencial" data-en="Residential"></span></label>
+          <label class="check-pill"><input type="checkbox" value="commercial" data-ind="construction" data-field="type"> <span data-es="Comercial" data-en="Commercial"></span></label>
+          <label class="check-pill"><input type="checkbox" value="industrial" data-ind="construction" data-field="type"> <span>Industrial</span></label>
+          <label class="check-pill"><input type="checkbox" value="civil" data-ind="construction" data-field="type"> <span>Civil</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Certificaciones" data-en="Certifications"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+          <label class="check-pill"><input type="checkbox" value="working_at_heights" data-ind="construction" data-field="certs"> <span>Working at Heights</span></label>
+          <label class="check-pill"><input type="checkbox" value="whmis" data-ind="construction" data-field="certs"> <span>WHMIS</span></label>
+          <label class="check-pill"><input type="checkbox" value="first_aid_cpr" data-ind="construction" data-field="certs"> <span>First Aid / CPR</span></label>
+          <label class="check-pill"><input type="checkbox" value="ohsa" data-ind="construction" data-field="certs"> <span>OHSA</span></label>
+          <label class="check-pill"><input type="checkbox" value="confined_space" data-ind="construction" data-field="certs"> <span>Confined Space</span></label>
+          <label class="check-pill"><input type="checkbox" value="fall_arrest" data-ind="construction" data-field="certs"> <span>Fall Arrest</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Equipo que puedes operar" data-en="Equipment you can operate"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+          <label class="check-pill"><input type="checkbox" value="excavator" data-ind="construction" data-field="equipment"> <span data-es="Excavadora" data-en="Excavator"></span></label>
+          <label class="check-pill"><input type="checkbox" value="backhoe" data-ind="construction" data-field="equipment"> <span data-es="Retroexcavadora" data-en="Backhoe"></span></label>
+          <label class="check-pill"><input type="checkbox" value="skid_steer" data-ind="construction" data-field="equipment"> <span>Skid Steer / Bobcat</span></label>
+          <label class="check-pill"><input type="checkbox" value="bulldozer" data-ind="construction" data-field="equipment"> <span>Bulldozer</span></label>
+          <label class="check-pill"><input type="checkbox" value="front_loader" data-ind="construction" data-field="equipment"> <span data-es="Cargador frontal" data-en="Front Loader"></span></label>
+          <label class="check-pill"><input type="checkbox" value="boom_lift" data-ind="construction" data-field="equipment"> <span>Boom Lift</span></label>
+          <label class="check-pill"><input type="checkbox" value="scissor_lift" data-ind="construction" data-field="equipment"> <span>Scissor Lift</span></label>
+          <label class="check-pill"><input type="checkbox" value="forklift" data-ind="construction" data-field="equipment"> <span data-es="Montacargas" data-en="Forklift"></span></label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="PPE propio" data-en="Own PPE"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+          <label class="check-pill"><input type="checkbox" value="hard_hat" data-ind="construction" data-field="ppe"> <span data-es="Casco" data-en="Hard Hat"></span></label>
+          <label class="check-pill"><input type="checkbox" value="safety_boots" data-ind="construction" data-field="ppe"> <span data-es="Botas" data-en="Safety Boots"></span></label>
+          <label class="check-pill"><input type="checkbox" value="safety_glasses" data-ind="construction" data-field="ppe"> <span data-es="Lentes" data-en="Safety Glasses"></span></label>
+          <label class="check-pill"><input type="checkbox" value="hi_vis" data-ind="construction" data-field="ppe"> <span data-es="Chaleco" data-en="Hi-Vis Vest"></span></label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Transporte propio al sitio" data-en="Own transportation to site"></div>
+        <div class="segmented" id="construction_transport">
+          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
+          <div class="seg-option" onclick="selectSeg(this)">No</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== INDUSTRY: MECHANIC ==================== -->
+<div class="industry-block" id="ind-mechanic">
+  <div class="section">
+    <div class="section-title"><span data-es="Mec&aacute;nica" data-en="Mechanic"></span></div>
+    <div class="card">
+      <div class="field">
+        <div class="field-label" data-es="Tipo de mec&aacute;nica" data-en="Mechanic type"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+          <label class="check-pill"><input type="checkbox" value="automotive" data-ind="mechanic" data-field="type"> <span data-es="Automotriz" data-en="Automotive"></span></label>
+          <label class="check-pill"><input type="checkbox" value="heavy_duty" data-ind="mechanic" data-field="type"> <span>Heavy Duty</span></label>
+          <label class="check-pill"><input type="checkbox" value="industrial" data-ind="mechanic" data-field="type"> <span>Industrial</span></label>
+          <label class="check-pill"><input type="checkbox" value="diesel" data-ind="mechanic" data-field="type"> <span>Diesel</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Certificaciones" data-en="Certifications"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+          <label class="check-pill"><input type="checkbox" value="310S" data-ind="mechanic" data-field="certs"> <span>310S (Auto)</span></label>
+          <label class="check-pill"><input type="checkbox" value="310T" data-ind="mechanic" data-field="certs"> <span>310T (Truck)</span></label>
+          <label class="check-pill"><input type="checkbox" value="421A" data-ind="mechanic" data-field="certs"> <span>421A (Millwright)</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="N&uacute;mero de licencia de oficio" data-en="Trade licence number"></div>
+        <input class="field-input" type="text" id="mechanic_license" data-ph-es="N&uacute;mero (si aplica)" data-ph-en="Number (if applicable)">
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Herramientas propias" data-en="Own tools"></div>
+        <div class="segmented" id="mechanic_tools">
+          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
+          <div class="seg-option" onclick="selectSeg(this)">No</div>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="A&ntilde;os de experiencia" data-en="Years of experience"></div>
+        <select class="years-select" id="mechanic_years">
+          <option value="" disabled selected data-es="Seleccionar" data-en="Select"></option>
+          <option value="0-1" data-es="Menos de 1 a&ntilde;o" data-en="Less than 1 year"></option>
+          <option value="1-3" data-es="1-3 a&ntilde;os" data-en="1-3 years"></option>
+          <option value="3-5" data-es="3-5 a&ntilde;os" data-en="3-5 years"></option>
+          <option value="5-10" data-es="5-10 a&ntilde;os" data-en="5-10 years"></option>
+          <option value="10+" data-es="10+ a&ntilde;os" data-en="10+ years"></option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== INDUSTRY: CLEANING ==================== -->
+<div class="industry-block" id="ind-cleaning">
+  <div class="section">
+    <div class="section-title"><span data-es="Limpieza" data-en="Cleaning"></span></div>
+    <div class="card">
+      <div class="field">
+        <div class="field-label" data-es="Tipo de limpieza" data-en="Cleaning type"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+          <label class="check-pill"><input type="checkbox" value="residential" data-ind="cleaning" data-field="type"> <span data-es="Residencial" data-en="Residential"></span></label>
+          <label class="check-pill"><input type="checkbox" value="commercial" data-ind="cleaning" data-field="type"> <span data-es="Comercial" data-en="Commercial"></span></label>
+          <label class="check-pill"><input type="checkbox" value="industrial" data-ind="cleaning" data-field="type"> <span>Industrial</span></label>
+          <label class="check-pill"><input type="checkbox" value="post_construction" data-ind="cleaning" data-field="type"> <span data-es="Post-construcci&oacute;n" data-en="Post-construction"></span></label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Entrenamiento WHMIS" data-en="WHMIS training"></div>
+        <div class="segmented" id="cleaning_whmis">
+          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
+          <div class="seg-option" onclick="selectSeg(this)">No</div>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Experiencia con m&aacute;quinas de piso" data-en="Floor machine experience"></div>
+        <div class="segmented" id="cleaning_machines">
+          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
+          <div class="seg-option" onclick="selectSeg(this)">No</div>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Transporte propio" data-en="Own transportation"></div>
+        <div class="segmented" id="cleaning_transport">
+          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
+          <div class="seg-option" onclick="selectSeg(this)">No</div>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="A&ntilde;os de experiencia" data-en="Years of experience"></div>
+        <select class="years-select" id="cleaning_years">
+          <option value="" disabled selected data-es="Seleccionar" data-en="Select"></option>
+          <option value="0-1" data-es="Menos de 1 a&ntilde;o" data-en="Less than 1 year"></option>
+          <option value="1-3" data-es="1-3 a&ntilde;os" data-en="1-3 years"></option>
+          <option value="3-5" data-es="3-5 a&ntilde;os" data-en="3-5 years"></option>
+          <option value="5-10" data-es="5-10 a&ntilde;os" data-en="5-10 years"></option>
+          <option value="10+" data-es="10+ a&ntilde;os" data-en="10+ years"></option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== INDUSTRY: KITCHEN ==================== -->
+<div class="industry-block" id="ind-kitchen">
+  <div class="section">
+    <div class="section-title"><span data-es="Cocina" data-en="Kitchen"></span></div>
+    <div class="card">
+      <div class="field">
+        <div class="field-label" data-es="Certificado de Manipulaci&oacute;n de Alimentos" data-en="Food Handler Certificate"></div>
+        <div class="segmented" id="kitchen_food_handler">
+          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
+          <div class="seg-option" onclick="selectSeg(this)">No</div>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Smart Serve</div>
+        <div class="segmented" id="kitchen_smart_serve">
+          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
+          <div class="seg-option" onclick="selectSeg(this)">No</div>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Tipo de posici&oacute;n" data-en="Position type"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+          <label class="check-pill"><input type="checkbox" value="prep_cook" data-ind="kitchen" data-field="position"> <span data-es="Preparaci&oacute;n" data-en="Prep Cook"></span></label>
+          <label class="check-pill"><input type="checkbox" value="line_cook" data-ind="kitchen" data-field="position"> <span data-es="L&iacute;nea" data-en="Line Cook"></span></label>
+          <label class="check-pill"><input type="checkbox" value="grill" data-ind="kitchen" data-field="position"> <span data-es="Parrilla" data-en="Grill"></span></label>
+          <label class="check-pill"><input type="checkbox" value="dishwasher" data-ind="kitchen" data-field="position"> <span data-es="Lavaplatos" data-en="Dishwasher"></span></label>
+          <label class="check-pill"><input type="checkbox" value="sous_chef" data-ind="kitchen" data-field="position"> <span>Sous Chef</span></label>
+          <label class="check-pill"><input type="checkbox" value="chef" data-ind="kitchen" data-field="position"> <span>Chef</span></label>
+          <label class="check-pill"><input type="checkbox" value="pastry" data-ind="kitchen" data-field="position"> <span data-es="Reposter&iacute;a" data-en="Pastry"></span></label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Cuchillos propios" data-en="Own knife kit"></div>
+        <div class="segmented" id="kitchen_knives">
+          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
+          <div class="seg-option" onclick="selectSeg(this)">No</div>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="A&ntilde;os de experiencia" data-en="Years of experience"></div>
+        <select class="years-select" id="kitchen_years">
+          <option value="" disabled selected data-es="Seleccionar" data-en="Select"></option>
+          <option value="0-1" data-es="Menos de 1 a&ntilde;o" data-en="Less than 1 year"></option>
+          <option value="1-3" data-es="1-3 a&ntilde;os" data-en="1-3 years"></option>
+          <option value="3-5" data-es="3-5 a&ntilde;os" data-en="3-5 years"></option>
+          <option value="5-10" data-es="5-10 a&ntilde;os" data-en="5-10 years"></option>
+          <option value="10+" data-es="10+ a&ntilde;os" data-en="10+ years"></option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== INDUSTRY: ELECTRICAL ==================== -->
+<div class="industry-block" id="ind-electrical">
+  <div class="section">
+    <div class="section-title"><span data-es="Electricidad" data-en="Electrical"></span></div>
+    <div class="card">
+      <div class="field">
+        <div class="field-label" data-es="Licencia" data-en="License"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+          <label class="check-pill"><input type="radio" name="electrical_license" value="309A" data-ind="electrical" data-field="license"> <span>309A</span></label>
+          <label class="check-pill"><input type="radio" name="electrical_license" value="442A" data-ind="electrical" data-field="license"> <span>442A</span></label>
+          <label class="check-pill"><input type="radio" name="electrical_license" value="apprentice" data-ind="electrical" data-field="license"> <span data-es="Aprendiz" data-en="Apprentice"></span></label>
+          <label class="check-pill"><input type="radio" name="electrical_license" value="none" data-ind="electrical" data-field="license"> <span data-es="Ninguna" data-en="None"></span></label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="N&uacute;mero de licencia ESA" data-en="ESA licence number"></div>
+        <input class="field-input" type="text" id="electrical_esa" data-ph-es="N&uacute;mero (si aplica)" data-ph-en="Number (if applicable)">
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Tipo de experiencia" data-en="Experience type"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+          <label class="check-pill"><input type="checkbox" value="residential" data-ind="electrical" data-field="type"> <span data-es="Residencial" data-en="Residential"></span></label>
+          <label class="check-pill"><input type="checkbox" value="commercial" data-ind="electrical" data-field="type"> <span data-es="Comercial" data-en="Commercial"></span></label>
+          <label class="check-pill"><input type="checkbox" value="industrial" data-ind="electrical" data-field="type"> <span>Industrial</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Lectura de planos" data-en="Blueprint reading"></div>
+        <div class="segmented" id="electrical_blueprints">
+          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
+          <div class="seg-option" onclick="selectSeg(this)">No</div>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="A&ntilde;os de experiencia" data-en="Years of experience"></div>
+        <select class="years-select" id="electrical_years">
+          <option value="" disabled selected data-es="Seleccionar" data-en="Select"></option>
+          <option value="0-1" data-es="Menos de 1 a&ntilde;o" data-en="Less than 1 year"></option>
+          <option value="1-3" data-es="1-3 a&ntilde;os" data-en="1-3 years"></option>
+          <option value="3-5" data-es="3-5 a&ntilde;os" data-en="3-5 years"></option>
+          <option value="5-10" data-es="5-10 a&ntilde;os" data-en="5-10 years"></option>
+          <option value="10+" data-es="10+ a&ntilde;os" data-en="10+ years"></option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== INDUSTRY: PAINTING ==================== -->
+<div class="industry-block" id="ind-painting">
+  <div class="section">
+    <div class="section-title"><span data-es="Pintura" data-en="Painting"></span></div>
+    <div class="card">
+      <div class="field">
+        <div class="field-label" data-es="Tipo de pintura" data-en="Painting type"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+          <label class="check-pill"><input type="checkbox" value="interior" data-ind="painting" data-field="type"> <span>Interior</span></label>
+          <label class="check-pill"><input type="checkbox" value="exterior" data-ind="painting" data-field="type"> <span>Exterior</span></label>
+          <label class="check-pill"><input type="checkbox" value="spray" data-ind="painting" data-field="type"> <span>Spray</span></label>
+          <label class="check-pill"><input type="checkbox" value="industrial" data-ind="painting" data-field="type"> <span>Industrial</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Escala" data-en="Scale"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+          <label class="check-pill"><input type="checkbox" value="residential" data-ind="painting" data-field="scale"> <span data-es="Residencial" data-en="Residential"></span></label>
+          <label class="check-pill"><input type="checkbox" value="commercial" data-ind="painting" data-field="scale"> <span data-es="Comercial" data-en="Commercial"></span></label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Equipo propio" data-en="Own equipment"></div>
+        <div class="segmented" id="painting_equipment">
+          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
+          <div class="seg-option" onclick="selectSeg(this)">No</div>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="C&oacute;modo trabajando en alturas" data-en="Comfortable working at heights"></div>
+        <div class="segmented" id="painting_heights">
+          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
+          <div class="seg-option" onclick="selectSeg(this)">No</div>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="A&ntilde;os de experiencia" data-en="Years of experience"></div>
+        <select class="years-select" id="painting_years">
+          <option value="" disabled selected data-es="Seleccionar" data-en="Select"></option>
+          <option value="0-1" data-es="Menos de 1 a&ntilde;o" data-en="Less than 1 year"></option>
+          <option value="1-3" data-es="1-3 a&ntilde;os" data-en="1-3 years"></option>
+          <option value="3-5" data-es="3-5 a&ntilde;os" data-en="3-5 years"></option>
+          <option value="5-10" data-es="5-10 a&ntilde;os" data-en="5-10 years"></option>
+          <option value="10+" data-es="10+ a&ntilde;os" data-en="10+ years"></option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== INDUSTRY: SERVICE ==================== -->
+<div class="industry-block" id="ind-service">
+  <div class="section">
+    <div class="section-title"><span data-es="Mesero / Servicio" data-en="Server / Service"></span></div>
+    <div class="card">
+      <div class="field">
+        <div class="field-label">Smart Serve <span class="optional" data-es="(obligatorio en Ontario)" data-en="(required in Ontario)"></span></div>
+        <div class="segmented" id="service_smart_serve">
+          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
+          <div class="seg-option" onclick="selectSeg(this)">No</div>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Certificado de Manipulaci&oacute;n de Alimentos" data-en="Food Handler Certificate"></div>
+        <div class="segmented" id="service_food_handler">
+          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
+          <div class="seg-option" onclick="selectSeg(this)">No</div>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Tipo de establecimiento" data-en="Establishment type"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+          <label class="check-pill"><input type="checkbox" value="fine_dining" data-ind="service" data-field="type"> <span>Fine Dining</span></label>
+          <label class="check-pill"><input type="checkbox" value="casual" data-ind="service" data-field="type"> <span>Casual</span></label>
+          <label class="check-pill"><input type="checkbox" value="bar" data-ind="service" data-field="type"> <span>Bar</span></label>
+          <label class="check-pill"><input type="checkbox" value="catering" data-ind="service" data-field="type"> <span>Catering</span></label>
+          <label class="check-pill"><input type="checkbox" value="hotel" data-ind="service" data-field="type"> <span>Hotel</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Sistemas POS que conoces" data-en="POS systems you know"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+          <label class="check-pill"><input type="checkbox" value="toast" data-ind="service" data-field="pos"> <span>Toast</span></label>
+          <label class="check-pill"><input type="checkbox" value="square" data-ind="service" data-field="pos"> <span>Square</span></label>
+          <label class="check-pill"><input type="checkbox" value="lightspeed" data-ind="service" data-field="pos"> <span>Lightspeed</span></label>
+          <label class="check-pill"><input type="checkbox" value="other_pos" data-ind="service" data-field="pos"> <span data-es="Otro" data-en="Other"></span></label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="A&ntilde;os de experiencia" data-en="Years of experience"></div>
+        <select class="years-select" id="service_years">
+          <option value="" disabled selected data-es="Seleccionar" data-en="Select"></option>
+          <option value="0-1" data-es="Menos de 1 a&ntilde;o" data-en="Less than 1 year"></option>
+          <option value="1-3" data-es="1-3 a&ntilde;os" data-en="1-3 years"></option>
+          <option value="3-5" data-es="3-5 a&ntilde;os" data-en="3-5 years"></option>
+          <option value="5-10" data-es="5-10 a&ntilde;os" data-en="5-10 years"></option>
+          <option value="10+" data-es="10+ a&ntilde;os" data-en="10+ years"></option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== INDUSTRY: WAREHOUSE ==================== -->
+<div class="industry-block" id="ind-warehouse">
+  <div class="section">
+    <div class="section-title"><span data-es="Almac&eacute;n" data-en="Warehouse"></span></div>
+    <div class="card">
+      <div class="field">
+        <div class="field-label" data-es="Certificado de montacargas" data-en="Forklift certificate"></div>
+        <div class="segmented" id="warehouse_forklift">
+          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
+          <div class="seg-option" onclick="selectSeg(this)">No</div>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Tipo de montacargas" data-en="Forklift type"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+          <label class="check-pill"><input type="checkbox" value="counterbalance" data-ind="warehouse" data-field="forklift_type"> <span>Counterbalance</span></label>
+          <label class="check-pill"><input type="checkbox" value="reach_truck" data-ind="warehouse" data-field="forklift_type"> <span>Reach Truck</span></label>
+          <label class="check-pill"><input type="checkbox" value="order_picker" data-ind="warehouse" data-field="forklift_type"> <span>Order Picker</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Experiencia con RF Scanner" data-en="RF Scanner experience"></div>
+        <div class="segmented" id="warehouse_rf">
+          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
+          <div class="seg-option" onclick="selectSeg(this)">No</div>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Experiencia en cuarto fr&iacute;o" data-en="Cold storage experience"></div>
+        <div class="segmented" id="warehouse_cold">
+          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
+          <div class="seg-option" onclick="selectSeg(this)">No</div>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Capacidad de carga" data-en="Lifting capacity"></div>
+        <div class="segmented" id="warehouse_lifting">
+          <div class="seg-option" onclick="selectSeg(this)">25 lbs</div>
+          <div class="seg-option" onclick="selectSeg(this)">50 lbs</div>
+          <div class="seg-option" onclick="selectSeg(this)">75+ lbs</div>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Turno preferido" data-en="Preferred shift"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+          <label class="check-pill"><input type="checkbox" value="day" data-ind="warehouse" data-field="shift"> <span data-es="D&iacute;a" data-en="Day"></span></label>
+          <label class="check-pill"><input type="checkbox" value="night" data-ind="warehouse" data-field="shift"> <span data-es="Noche" data-en="Night"></span></label>
+          <label class="check-pill"><input type="checkbox" value="rotating" data-ind="warehouse" data-field="shift"> <span data-es="Rotativo" data-en="Rotating"></span></label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="A&ntilde;os de experiencia" data-en="Years of experience"></div>
+        <select class="years-select" id="warehouse_years">
+          <option value="" disabled selected data-es="Seleccionar" data-en="Select"></option>
+          <option value="0-1" data-es="Menos de 1 a&ntilde;o" data-en="Less than 1 year"></option>
+          <option value="1-3" data-es="1-3 a&ntilde;os" data-en="1-3 years"></option>
+          <option value="3-5" data-es="3-5 a&ntilde;os" data-en="3-5 years"></option>
+          <option value="5-10" data-es="5-10 a&ntilde;os" data-en="5-10 years"></option>
+          <option value="10+" data-es="10+ a&ntilde;os" data-en="10+ years"></option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== INDUSTRY: MAINTENANCE ==================== -->
+<div class="industry-block" id="ind-maintenance">
+  <div class="section">
+    <div class="section-title"><span data-es="Mantenimiento" data-en="Maintenance"></span></div>
+    <div class="card">
+      <div class="field">
+        <div class="field-label" data-es="Tipo de edificio" data-en="Building type"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+          <label class="check-pill"><input type="checkbox" value="residential" data-ind="maintenance" data-field="building_type"> <span data-es="Residencial" data-en="Residential"></span></label>
+          <label class="check-pill"><input type="checkbox" value="commercial" data-ind="maintenance" data-field="building_type"> <span data-es="Comercial" data-en="Commercial"></span></label>
+          <label class="check-pill"><input type="checkbox" value="institutional" data-ind="maintenance" data-field="building_type"> <span data-es="Institucional" data-en="Institutional"></span></label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Sistemas que conoces" data-en="Systems you know"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+          <label class="check-pill"><input type="checkbox" value="hvac" data-ind="maintenance" data-field="systems"> <span>HVAC</span></label>
+          <label class="check-pill"><input type="checkbox" value="plumbing" data-ind="maintenance" data-field="systems"> <span data-es="Plomer&iacute;a" data-en="Plumbing"></span></label>
+          <label class="check-pill"><input type="checkbox" value="electrical" data-ind="maintenance" data-field="systems"> <span data-es="El&eacute;ctrico" data-en="Electrical"></span></label>
+          <label class="check-pill"><input type="checkbox" value="painting" data-ind="maintenance" data-field="systems"> <span data-es="Pintura" data-en="Painting"></span></label>
+          <label class="check-pill"><input type="checkbox" value="general" data-ind="maintenance" data-field="systems"> <span>General</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Disponibilidad on-call" data-en="On-call availability"></div>
+        <div class="segmented" id="maintenance_oncall">
+          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
+          <div class="seg-option" onclick="selectSeg(this)">No</div>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Licencia de conducir" data-en="Driver's license"></div>
+        <div class="segmented" id="maintenance_license">
+          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
+          <div class="seg-option" onclick="selectSeg(this)">No</div>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="A&ntilde;os de experiencia" data-en="Years of experience"></div>
+        <select class="years-select" id="maintenance_years">
+          <option value="" disabled selected data-es="Seleccionar" data-en="Select"></option>
+          <option value="0-1" data-es="Menos de 1 a&ntilde;o" data-en="Less than 1 year"></option>
+          <option value="1-3" data-es="1-3 a&ntilde;os" data-en="1-3 years"></option>
+          <option value="3-5" data-es="3-5 a&ntilde;os" data-en="3-5 years"></option>
+          <option value="5-10" data-es="5-10 a&ntilde;os" data-en="5-10 years"></option>
+          <option value="10+" data-es="10+ a&ntilde;os" data-en="10+ years"></option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== INDUSTRY: GENERAL LABOUR ==================== -->
+<div class="industry-block" id="ind-general_labour">
+  <div class="section">
+    <div class="section-title"><span data-es="Trabajo General" data-en="General Labour"></span></div>
+    <div class="card">
+      <div class="field">
+        <div class="field-label" data-es="Capacidad de carga" data-en="Lifting capacity"></div>
+        <div class="segmented" id="general_lifting">
+          <div class="seg-option" onclick="selectSeg(this)">25 lbs</div>
+          <div class="seg-option" onclick="selectSeg(this)">50 lbs</div>
+          <div class="seg-option" onclick="selectSeg(this)">75+ lbs</div>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="C&oacute;modo trabajando al aire libre" data-en="Comfortable working outdoors"></div>
+        <div class="segmented" id="general_outdoors">
+          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
+          <div class="seg-option" onclick="selectSeg(this)">No</div>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Familiaridad con herramientas" data-en="Tool familiarity"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+          <label class="check-pill"><input type="checkbox" value="hand_tools" data-ind="general_labour" data-field="tools"> <span data-es="Manuales" data-en="Hand Tools"></span></label>
+          <label class="check-pill"><input type="checkbox" value="power_tools" data-ind="general_labour" data-field="tools"> <span data-es="El&eacute;ctricas" data-en="Power Tools"></span></label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Botas de seguridad propias" data-en="Own safety boots"></div>
+        <div class="segmented" id="general_boots">
+          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
+          <div class="seg-option" onclick="selectSeg(this)">No</div>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Transporte al sitio" data-en="Transportation to site"></div>
+        <div class="segmented" id="general_transport">
+          <div class="seg-option" onclick="selectSeg(this)" data-es="Auto propio" data-en="Own car"></div>
+          <div class="seg-option" onclick="selectSeg(this)" data-es="Transporte p&uacute;blico" data-en="Transit"></div>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="Disponibilidad" data-en="Availability"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+          <label class="check-pill"><input type="checkbox" value="days" data-ind="general_labour" data-field="availability"> <span data-es="D&iacute;as" data-en="Days"></span></label>
+          <label class="check-pill"><input type="checkbox" value="nights" data-ind="general_labour" data-field="availability"> <span data-es="Noches" data-en="Nights"></span></label>
+          <label class="check-pill"><input type="checkbox" value="weekends" data-ind="general_labour" data-field="availability"> <span data-es="Fines de semana" data-en="Weekends"></span></label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== STEP 3: DOCUMENTS ==================== -->
+<div class="section">
+  <div class="section-title"><span class="step-num">3</span> <span data-es="Documentos" data-en="Documents"></span></div>
   <div class="card">
     <div class="field">
-      <div class="field-label"><span data-es="Licencia de Conducir — Frente" data-en="Driver's License — Front"></span> <span class="optional" data-es="(Opcional)" data-en="(Optional)"></span></div>
+      <div class="field-label"><span data-es="Licencia de Conducir" data-en="Driver's License"></span> <span class="optional" data-es="(Opcional)" data-en="(Optional)"></span></div>
       <div class="upload-area">
         <button type="button" class="upload-btn" onclick="this.nextElementSibling.click()">
           <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="14" r="4"/></svg>
@@ -667,7 +1233,7 @@
     </div>
     <div class="field">
       <div class="field-label" data-es="Certificaciones Relevantes" data-en="Relevant Certifications"></div>
-      <div class="field-note" data-es="First Aid, JHSC, WHMIS, u otras — si tienes alguna" data-en="First Aid, JHSC, WHMIS, or others — if you have any"></div>
+      <div class="field-note" data-es="First Aid, WHMIS, Smart Serve, Food Handler, u otras" data-en="First Aid, WHMIS, Smart Serve, Food Handler, or others"></div>
       <div class="upload-area">
         <button type="button" class="upload-btn" onclick="this.nextElementSibling.click()">
           <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
@@ -680,23 +1246,23 @@
   </div>
 </div>
 
-<!-- PASO 3: Contacto de Emergencia -->
+<!-- ==================== STEP 4: EMERGENCY CONTACT ==================== -->
 <div class="section">
-  <div class="section-title"><span class="step-num">3</span> <span data-es="Contacto de Emergencia" data-en="Emergency Contact"></span></div>
+  <div class="section-title"><span class="step-num">4</span> <span data-es="Contacto de Emergencia" data-en="Emergency Contact"></span></div>
   <div class="card">
     <div class="field-split">
       <div class="field">
         <div class="field-label" data-es="Nombre" data-en="First Name"></div>
-        <input class="field-input" type="text" data-ph-es="María" data-ph-en="Mary">
+        <input id="emg_fname" class="field-input" type="text" data-ph-es="Mar&iacute;a" data-ph-en="Mary">
       </div>
       <div class="field">
         <div class="field-label" data-es="Apellido" data-en="Last Name"></div>
-        <input class="field-input" type="text" data-ph-es="García" data-ph-en="Garcia">
+        <input id="emg_lname" class="field-input" type="text" data-ph-es="Garc&iacute;a" data-ph-en="Garcia">
       </div>
     </div>
     <div class="field ac-wrap">
-      <div class="field-label"><span data-es="Dirección" data-en="Street Address"></span></div>
-      <input id="address2" class="field-input" type="text" data-ph-es="Empieza a escribir la dirección..." data-ph-en="Start typing the address..." autocomplete="off">
+      <div class="field-label"><span data-es="Direcci&oacute;n" data-en="Street Address"></span></div>
+      <input id="address2" class="field-input" type="text" data-ph-es="Empieza a escribir la direcci&oacute;n..." data-ph-en="Start typing the address..." autocomplete="off">
       <div id="ac-dropdown2" class="ac-dropdown"></div>
     </div>
     <div class="field-split">
@@ -706,224 +1272,39 @@
       </div>
       <div class="field">
         <div class="field-label"><span data-es="Ciudad" data-en="City"></span> <span class="auto-tag">AUTO</span></div>
-        <input id="city2" class="field-input" type="text" data-ph-es="Se llena automático" data-ph-en="Auto-filled">
+        <input id="city2" class="field-input" type="text" data-ph-es="Se llena autom&aacute;tico" data-ph-en="Auto-filled">
       </div>
     </div>
     <div class="field-split">
       <div class="field">
         <div class="field-label"><span data-es="Provincia" data-en="Province"></span> <span class="auto-tag">AUTO</span></div>
-        <input id="province2" class="field-input" type="text" data-ph-es="Se llena automático" data-ph-en="Auto-filled">
+        <input id="province2" class="field-input" type="text" data-ph-es="Se llena autom&aacute;tico" data-ph-en="Auto-filled">
       </div>
       <div class="field">
-        <div class="field-label"><span data-es="Código Postal" data-en="Postal Code"></span> <span class="auto-tag">AUTO</span></div>
-        <input id="postal2" class="field-input" type="text" data-ph-es="Se llena automático" data-ph-en="Auto-filled">
+        <div class="field-label"><span data-es="C&oacute;digo Postal" data-en="Postal Code"></span> <span class="auto-tag">AUTO</span></div>
+        <input id="postal2" class="field-input" type="text" data-ph-es="Se llena autom&aacute;tico" data-ph-en="Auto-filled">
       </div>
     </div>
     <div class="field-split">
       <div class="field">
-        <div class="field-label" data-es="Teléfono Principal" data-en="Primary Phone"></div>
-        <input class="field-input" type="tel" placeholder="(905) 555-6789">
+        <div class="field-label" data-es="Tel&eacute;fono Principal" data-en="Primary Phone"></div>
+        <input id="emg_phone" class="field-input" type="tel" placeholder="(905) 555-6789">
       </div>
       <div class="field">
-        <div class="field-label" data-es="Teléfono Alterno" data-en="Alternate Phone"></div>
-        <input class="field-input" type="tel" placeholder="(416) 555-0000">
+        <div class="field-label" data-es="Tel&eacute;fono Alterno" data-en="Alternate Phone"></div>
+        <input id="emg_phone_alt" class="field-input" type="tel" placeholder="(416) 555-0000">
       </div>
     </div>
     <div class="field">
-      <div class="field-label" data-es="Relación" data-en="Relationship"></div>
-      <input class="field-input" type="text" data-ph-es="Esposa, Hermano, Madre..." data-ph-en="Wife, Brother, Mother...">
+      <div class="field-label" data-es="Relaci&oacute;n" data-en="Relationship"></div>
+      <input id="emg_relationship" class="field-input" type="text" data-ph-es="Esposa, Hermano, Madre..." data-ph-en="Wife, Brother, Mother...">
     </div>
   </div>
 </div>
 
-<!-- PASO 4: Salud y Seguridad -->
+<!-- ==================== STEP 5: EDUCATION ==================== -->
 <div class="section">
-  <div class="section-title"><span class="step-num">4</span> <span data-es="Salud y Seguridad" data-en="Health &amp; Safety"></span></div>
-  <div class="card">
-    <div class="field">
-      <div class="policy-text" id="policyHS">
-        <!-- filled by language -->
-      </div>
-      <div class="field-label" data-es="Firma" data-en="Signature"></div>
-      <div class="sig-container">
-        <canvas class="sig-canvas"></canvas>
-        <span class="sig-placeholder" data-es="Dibuja tu firma aquí" data-en="Draw your signature here"></span>
-        <button type="button" class="sig-clear" onclick="clearSig(this)" data-es="Borrar" data-en="Clear"></button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- PASO 5: Conductor -->
-<div class="section">
-  <div class="section-title"><span class="step-num">5</span> <span data-es="Sección de Conductor" data-en="Driver Section"></span> <span class="optional" data-es="(Opcional)" data-en="(Optional)"></span></div>
-  <div class="card">
-    <div class="field">
-      <div class="section-note" data-es="Solo completa esta sección si tienes experiencia manejando camiones o equipo pesado." data-en="Only fill this section if you have truck or heavy equipment experience."></div>
-    </div>
-    <div class="field">
-      <div class="field-label" data-es="¿Involucrado en operaciones de quitanieves?" data-en="Currently involved with Snow Plowing?"></div>
-      <div class="segmented">
-        <div class="seg-option" onclick="selectSeg(this)" data-es="Sí" data-en="Yes"></div>
-        <div class="seg-option" onclick="selectSeg(this)">No</div>
-      </div>
-    </div>
-    <div class="field">
-      <div class="field-label" data-es="¿Disponible para quitanieves 24/7?" data-en="Available for Snow Plow on call 24/7?"></div>
-      <div class="segmented">
-        <div class="seg-option" onclick="selectSeg(this)" data-es="Sí" data-en="Yes"></div>
-        <div class="seg-option" onclick="selectSeg(this)">No</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Truck Experience -->
-<div class="section">
-  <div class="section-title"><span data-es="Experiencia con Camiones" data-en="Truck Experience"></span> <span class="optional" data-es="(Opcional)" data-en="(Optional)"></span></div>
-  <div class="card" id="truckList">
-    <!-- filled by JS -->
-  </div>
-</div>
-
-<!-- Heavy Equipment -->
-<div class="section">
-  <div class="section-title"><span data-es="Equipo Pesado" data-en="Heavy Equipment"></span> <span class="optional" data-es="(Opcional)" data-en="(Optional)"></span></div>
-  <div class="card" id="equipList">
-    <!-- filled by JS -->
-  </div>
-</div>
-
-<!-- Driver Signatures -->
-<div class="section">
-  <div class="section-title"><span data-es="Reconocimientos del Conductor" data-en="Driver Acknowledgements"></span> <span class="optional" data-es="(Opcional)" data-en="(Optional)"></span></div>
-  <div class="card">
-    <div class="field">
-      <div class="policy-text" id="policyDriver">
-        <!-- filled by language -->
-      </div>
-      <div class="field-label" data-es="Firma" data-en="Signature"></div>
-      <div class="sig-container">
-        <canvas class="sig-canvas"></canvas>
-        <span class="sig-placeholder" data-es="Dibuja tu firma aquí" data-en="Draw your signature here"></span>
-        <button type="button" class="sig-clear" onclick="clearSig(this)" data-es="Borrar" data-en="Clear"></button>
-      </div>
-    </div>
-    <div class="field">
-      <div class="policy-text" id="policyDrug">
-        <!-- filled by language -->
-      </div>
-      <div class="field-label" data-es="Firma" data-en="Signature"></div>
-      <div class="sig-container">
-        <canvas class="sig-canvas"></canvas>
-        <span class="sig-placeholder" data-es="Dibuja tu firma aquí" data-en="Draw your signature here"></span>
-        <button type="button" class="sig-clear" onclick="clearSig(this)" data-es="Borrar" data-en="Clear"></button>
-      </div>
-    </div>
-    <div class="field">
-      <div class="policy-text" id="policyHandbook">
-        <!-- filled by language -->
-      </div>
-      <div class="field-label" data-es="Firma" data-en="Signature"></div>
-      <div class="sig-container">
-        <canvas class="sig-canvas"></canvas>
-        <span class="sig-placeholder" data-es="Dibuja tu firma aquí" data-en="Draw your signature here"></span>
-        <button type="button" class="sig-clear" onclick="clearSig(this)" data-es="Borrar" data-en="Clear"></button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- PAGE 1 NEXT BUTTON -->
-<div class="section" id="page1Next">
-  <button type="button" class="submit-btn" onclick="goToPage2()">
-    <span data-es="Siguiente — Aplicación Rafat" data-en="Next — Rafat Application"></span>
-  </button>
-</div>
-</div><!-- end page1 -->
-
-<!-- ==================== PAGE 2: RAFAT APPLICATION ==================== -->
-<div id="page2" style="display:none;">
-
-<!-- PASO 6: Position -->
-<div class="section">
-  <div class="section-title"><span class="step-num">6</span> <span data-es="Posición" data-en="Position"></span></div>
-  <div class="card">
-    <div class="field">
-      <div class="field-label" data-es="Posición a la que aplica" data-en="Position Applied For"></div>
-      <div class="field-note" data-es="Selecciona todas las que apliquen" data-en="Select all that apply"></div>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;" id="positionChecks">
-        <label class="check-pill"><input type="checkbox" value="Operator"> <span>Operator</span></label>
-        <label class="check-pill"><input type="checkbox" value="Driver"> <span>Driver</span></label>
-        <label class="check-pill"><input type="checkbox" value="Labour"> <span>Labour</span></label>
-        <label class="check-pill"><input type="checkbox" value="Mechanic"> <span>Mechanic</span></label>
-        <label class="check-pill"><input type="checkbox" value="Administration"> <span>Administration</span></label>
-        <label class="check-pill"><input type="checkbox" value="Fleet"> <span>Fleet</span></label>
-        <label class="check-pill"><input type="checkbox" value="Other"> <span>Other</span></label>
-      </div>
-    </div>
-    <div class="field-split">
-      <div class="field">
-        <div class="field-label" data-es="Fecha disponible para empezar" data-en="Date Available to Start"></div>
-        <input class="field-input date-input" id="dateAvailable" type="text" placeholder="dd/mm/aaaa" maxlength="10" oninput="formatDate(this)">
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="Tipo de posición" data-en="Position Type"></div>
-        <div class="segmented">
-          <div class="seg-option" onclick="selectSeg(this)">Full Time</div>
-          <div class="seg-option" onclick="selectSeg(this)">Part Time</div>
-          <div class="seg-option" onclick="selectSeg(this)">Seasonal</div>
-        </div>
-      </div>
-    </div>
-    <div class="field">
-      <div class="field-label" data-es="¿Referido por alguien?" data-en="Referred by anyone?"></div>
-      <input class="field-input" id="referredBy" type="text" data-ph-es="Nombre de quien te refirió" data-ph-en="Name of who referred you">
-    </div>
-  </div>
-</div>
-
-<!-- PASO 7: Legal -->
-<div class="section">
-  <div class="section-title"><span class="step-num">7</span> <span data-es="Información Legal" data-en="Legal Information"></span></div>
-  <div class="card">
-    <div class="field">
-      <div class="field-label" data-es="¿Estás legalmente autorizado para trabajar en Canadá?" data-en="Are you legally entitled to work in Canada?"></div>
-      <div class="segmented" id="legallyEntitled">
-        <div class="seg-option" onclick="selectSeg(this)" data-es="Sí" data-en="Yes"></div>
-        <div class="seg-option" onclick="selectSeg(this)">No</div>
-      </div>
-    </div>
-    <div class="field">
-      <div class="field-label" data-es="¿Has sido condenado por un delito sin perdón?" data-en="Criminal conviction without pardon?"></div>
-      <div class="segmented" id="criminalConviction">
-        <div class="seg-option" onclick="selectSeg(this)" data-es="Sí" data-en="Yes"></div>
-        <div class="seg-option" onclick="selectSeg(this)">No</div>
-      </div>
-    </div>
-    <div class="field">
-      <div class="field-label" data-es="¿Tienes familiares trabajando para Rafat?" data-en="Do you have relatives working for Rafat?"></div>
-      <div class="segmented" id="relativesRafat">
-        <div class="seg-option" onclick="selectSeg(this)" data-es="Sí" data-en="Yes"></div>
-        <div class="seg-option" onclick="selectSeg(this)">No</div>
-      </div>
-      <input class="field-input" id="relativesDetails" type="text" style="margin-top:8px;" data-ph-es="Nombre y relación" data-ph-en="Name and relationship">
-    </div>
-    <div class="field">
-      <div class="field-label" data-es="Tipo de Licencia de Conducir" data-en="Driver's License Type"></div>
-      <div class="segmented" id="licenseType">
-        <div class="seg-option" onclick="selectSeg(this)">AZ</div>
-        <div class="seg-option" onclick="selectSeg(this)">DZ</div>
-        <div class="seg-option" onclick="selectSeg(this)" data-es="Otra" data-en="Other"></div>
-        <div class="seg-option" onclick="selectSeg(this)" data-es="Ninguna" data-en="None"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- PASO 8: Education -->
-<div class="section">
-  <div class="section-title"><span class="step-num">8</span> <span data-es="Educación" data-en="Education"></span></div>
+  <div class="section-title"><span class="step-num">5</span> <span data-es="Educaci&oacute;n" data-en="Education"></span></div>
   <div class="card">
     <div class="field">
       <div class="field-label">High School / Secundaria</div>
@@ -931,243 +1312,137 @@
     </div>
     <div class="field">
       <div class="field-label">College</div>
-      <input class="field-input" id="eduCollege" type="text" data-ph-es="Nombre de la institución" data-ph-en="Institution name">
+      <input class="field-input" id="eduCollege" type="text" data-ph-es="Nombre de la instituci&oacute;n" data-ph-en="Institution name">
     </div>
     <div class="field">
       <div class="field-label" data-es="Universidad" data-en="University"></div>
       <input class="field-input" id="eduUni" type="text" data-ph-es="Nombre de la universidad" data-ph-en="University name">
     </div>
-    <div class="field">
-      <div class="field-label" data-es="Cursos o certificaciones adicionales" data-en="Additional courses or certifications"></div>
-      <input class="field-input" id="eduExtra" type="text" data-ph-es="Cursos, seminarios, etc." data-ph-en="Courses, seminars, etc.">
-    </div>
   </div>
 </div>
 
-<!-- PASO 9: Work Experience -->
+<!-- ==================== STEP 6: WORK EXPERIENCE ==================== -->
 <div class="section">
-  <div class="section-title"><span class="step-num">9</span> <span data-es="Experiencia Laboral" data-en="Work Experience"></span></div>
+  <div class="section-title"><span class="step-num">6</span> <span data-es="Experiencia Laboral" data-en="Work Experience"></span></div>
   <div class="card">
     <div class="field">
-      <div class="field-label" data-es="Último Empleador" data-en="Last Employer"></div>
+      <div class="field-label" data-es="Empleador anterior" data-en="Previous Employer"></div>
       <input class="field-input" id="workEmployer" type="text" data-ph-es="Nombre de la empresa" data-ph-en="Company name">
     </div>
     <div class="field">
-      <div class="field-label" data-es="Tipo de Negocio" data-en="Type of Business"></div>
-      <input class="field-input" id="workBusiness" type="text" data-ph-es="Construcción, transporte, etc." data-ph-en="Construction, transport, etc.">
+      <div class="field-label" data-es="Puesto" data-en="Job Title"></div>
+      <input class="field-input" id="workTitle" type="text" data-ph-es="&iquest;Cu&aacute;l era tu puesto?" data-ph-en="What was your role?">
     </div>
     <div class="field-split">
       <div class="field">
-        <div class="field-label" data-es="Tu Puesto" data-en="Your Job Title"></div>
-        <input class="field-input" id="workTitle" type="text" data-ph-es="Operador, conductor..." data-ph-en="Operator, driver...">
+        <div class="field-label" data-es="Per&iacute;odo" data-en="Period"></div>
+        <input class="field-input" id="workPeriod" type="text" data-ph-es="Ej: 2022-2024" data-ph-en="E.g. 2022-2024">
       </div>
       <div class="field">
-        <div class="field-label" data-es="Período" data-en="Period"></div>
-        <input class="field-input" id="workPeriod" type="text" data-ph-es="Ej: 2020-2024" data-ph-en="E.g: 2020-2024">
+        <div class="field-label" data-es="Raz&oacute;n de salida" data-en="Reason for leaving"></div>
+        <input class="field-input" id="workReason" type="text" data-ph-es="&iquest;Por qu&eacute; saliste?" data-ph-en="Why did you leave?">
       </div>
-    </div>
-    <div class="field">
-      <div class="field-label" data-es="Supervisor" data-en="Supervisor Name"></div>
-      <input class="field-input" id="workSupervisor" type="text" data-ph-es="Nombre del supervisor" data-ph-en="Supervisor name">
-    </div>
-    <div class="field">
-      <div class="field-label" data-es="Razón de salida" data-en="Reason for Leaving"></div>
-      <input class="field-input" id="workReason" type="text" data-ph-es="¿Por qué dejaste ese trabajo?" data-ph-en="Why did you leave?">
     </div>
   </div>
 </div>
 
-<!-- PASO 10: Reference -->
+<!-- ==================== STEP 7: REFERENCE ==================== -->
 <div class="section">
-  <div class="section-title"><span class="step-num">10</span> <span data-es="Referencia" data-en="Reference"></span></div>
+  <div class="section-title"><span class="step-num">7</span> <span data-es="Referencia" data-en="Reference"></span></div>
   <div class="card">
     <div class="field">
-      <div class="field-label" data-es="Nombre" data-en="Name"></div>
-      <input class="field-input" id="refName" type="text" data-ph-es="Nombre completo" data-ph-en="Full name">
+      <div class="field-label" data-es="Nombre completo" data-en="Full Name"></div>
+      <input class="field-input" id="refName" type="text" data-ph-es="Nombre de tu referencia" data-ph-en="Reference name">
     </div>
     <div class="field-split">
       <div class="field">
-        <div class="field-label" data-es="Teléfono" data-en="Phone"></div>
-        <input class="field-input" id="refPhone" type="tel" placeholder="(416) 555-1234">
+        <div class="field-label" data-es="Tel&eacute;fono" data-en="Phone"></div>
+        <input class="field-input" id="refPhone" type="tel" placeholder="(416) 555-0000">
       </div>
       <div class="field">
-        <div class="field-label" data-es="Relación" data-en="Relationship"></div>
-        <input class="field-input" id="refRelationship" type="text" data-ph-es="Compañero, jefe, amigo..." data-ph-en="Coworker, boss, friend...">
+        <div class="field-label" data-es="Relaci&oacute;n" data-en="Relationship"></div>
+        <input class="field-input" id="refRelationship" type="text" data-ph-es="Ex-jefe, colega..." data-ph-en="Ex-boss, colleague...">
       </div>
     </div>
   </div>
 </div>
 
-<!-- PASO 11: Consent -->
+<!-- ==================== STEP 8: CONSENT ==================== -->
 <div class="section">
-  <div class="section-title"><span class="step-num">11</span> <span data-es="Consentimiento" data-en="Consent"></span></div>
+  <div class="section-title"><span class="step-num">8</span> <span data-es="Consentimiento" data-en="Consent"></span></div>
   <div class="card">
     <div class="field">
       <div class="policy-text" id="policyConsent"></div>
       <div class="field-label" data-es="Firma" data-en="Signature"></div>
       <div class="sig-container">
         <canvas class="sig-canvas"></canvas>
-        <span class="sig-placeholder" data-es="Dibuja tu firma aquí" data-en="Draw your signature here"></span>
+        <span class="sig-placeholder" data-es="Dibuja tu firma aqu&iacute;" data-en="Draw your signature here"></span>
         <button type="button" class="sig-clear" onclick="clearSig(this)" data-es="Borrar" data-en="Clear"></button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- SUBMIT -->
+<!-- ==================== SUBMIT ==================== -->
 <div class="section">
   <button type="button" id="submitBtn" class="submit-btn" onclick="submitForm()">
     <span id="submitText" data-es="Enviar Formulario" data-en="Submit Form"></span>
   </button>
-  <p style="text-align:center;margin-top:8px;">
-    <button type="button" onclick="goToPage1()" style="background:none;border:none;color:#8e8e93;font-size:13px;font-family:inherit;cursor:pointer;" data-es="← Volver a página anterior" data-en="← Back to previous page"></button>
-  </p>
   <div id="submitStatus" class="submit-status"></div>
 </div>
-</div><!-- end page2 -->
 
 <div class="footer">GoodWorkers Equipment LTD.</div>
 
 <script>
-// ========== DATA ==========
-var trucks = [
-  { en: 'Dump Truck', es: 'Camión de volteo', img: '/machines/01-dump-truck.png' },
-  { en: 'Roll-Off', es: 'Contenedor rodante', img: '/machines/02-roll-off-container-truck.png' },
-  { en: 'Snow Plow', es: 'Quitanieves', img: '/machines/03-snow-plow-truck.png' },
-  { en: 'Tow Snow', es: 'Remolque de nieve', img: '/machines/04-tow-snow-truck.png' },
-  { en: 'Water Truck', es: 'Camión cisterna', img: '/machines/05-water-tank-truck.png' },
-  { en: 'Vac Truck', es: 'Camión de vacío', img: '/machines/06-vacuum-truck.png' },
-  { en: 'Slinger', es: 'Lanzadora de material', img: '/machines/07-slinger-truck.png' },
-  { en: 'Live Bottom', es: 'Camión de fondo móvil', img: '/machines/08-live-bottom-trailer.png' },
-  { en: 'Rock Truck', es: 'Camión de roca', img: '/machines/09-rock-truck.png' },
-  { en: 'Sweeper', es: 'Barredora', img: '/machines/10-street-sweeper.png' },
-  { en: 'Cement Truck', es: 'Camión revolvedora', img: '/machines/11-cement-mixer-truck.png' },
-  { en: 'Fuel Truck', es: 'Camión de combustible', img: '/machines/12-fuel-tanker-truck.png' },
-  { en: 'Crane Truck', es: 'Camión grúa', img: '/machines/13-crane-truck.png' },
-  { en: 'Line Painting', es: 'Pintura de líneas', img: '/machines/14-line-painting-truck.png' },
-  { en: 'Crash Truck', es: 'Camión de impacto', img: '/machines/15-crash-attenuator-truck.png' },
-  { en: 'Float Equipment', es: 'Plataforma de transporte', img: '/machines/16-flatbed-float-truck.png' },
-  { en: 'Tow Truck', es: 'Grúa de remolque', img: '/machines/17-tow-truck.png' },
-  { en: 'Pickup Plow', es: 'Camioneta quitanieves', img: '/machines/18-pickup-snow-plow.png' }
-];
-
-var equips = [
-  { en: 'Excavator', es: 'Excavadora', img: '/machines/19-excavator.png' },
-  { en: 'Front Loader', es: 'Cargador frontal', img: '/machines/20-front-loader.png' },
-  { en: 'Bobcat', es: 'Minicargador', img: '/machines/21-bobcat-skid-steer.png' },
-  { en: 'Backhoe', es: 'Retroexcavadora', img: '/machines/22-backhoe-loader.png' },
-  { en: 'Roller / Packer', es: 'Rodillo compactador', img: '/machines/23-road-roller-compactor.png' },
-  { en: 'Dozer / Blade', es: 'Bulldozer / Topadora', img: '/machines/24-bulldozer.png' },
-  { en: 'Grader', es: 'Motoniveladora', img: '/machines/25-motor-grader.png' },
-  { en: 'Trencher', es: 'Zanjadora', img: '/machines/26-trencher-machine.png' },
-  { en: 'Spreader', es: 'Esparcidora', img: '/machines/27-material-spreader.png' },
-  { en: 'Forklift', es: 'Montacargas', img: '/machines/28-forklift.png' }
-];
-
-var policies = {
-  hs: {
-    es: '<strong>GoodWorkers</strong> se compromete a proporcionar y mantener un lugar de trabajo seguro y saludable para todos los empleados, así como a proporcionar la información, capacitación y supervisión necesarias para lograrlo.<br><br>Se alienta a cada empleado a desempeñar un papel vital y responsable en el mantenimiento de un lugar de trabajo seguro y saludable mediante:<br><br>&bull; Comprender y seguir las pautas y reglas de la empresa<br>&bull; Participar en la salud y seguridad en el lugar de trabajo<br>&bull; Usar el equipo y dispositivos de protección según lo requiera la empresa<br>&bull; Reportar inmediatamente cualquier peligro, accidente o incidente<br>&bull; Reportar equipo de protección faltante o defectuoso<br>&bull; Realizar tareas de manera segura<br>&bull; Mantener orden y limpieza en el área de trabajo<br>&bull; No remover dispositivos de protección<br>&bull; No operar equipo de manera peligrosa<br>&bull; No participar en conducta brusca o imprudente<br><br><strong>Al firmar, reconozco que he leído y entendido las Políticas de Salud y Seguridad. Cualquier violación será causa de disciplina y/o despido.</strong>',
-    en: '<strong>GoodWorkers</strong> is committed to providing and maintaining a safe and healthy workplace for all employees, as well as providing the information, training and supervision necessary to achieve this.<br><br>Each employee is encouraged to play a vital and responsible role in maintaining a safe and healthy workplace by:<br><br>&bull; Understanding and following company guidelines and rules<br>&bull; Participating in workplace health and safety<br>&bull; Using equipment and protective devices as required<br>&bull; Immediately reporting any hazards, accidents or incidents<br>&bull; Reporting missing or defective protective equipment<br>&bull; Performing tasks safely<br>&bull; Maintaining good housekeeping<br>&bull; Not removing protective devices<br>&bull; Not operating equipment dangerously<br>&bull; Not engaging in rough or reckless conduct<br><br><strong>By signing below, I acknowledge that I have read and understood the Health and Safety Policies. Any violation will be cause for discipline and/or dismissal.</strong>'
-  },
-  driver: {
-    es: 'Certifico que mis respuestas son verdaderas y completas a mi mejor conocimiento. Si esta solicitud lleva a empleo, entiendo que información falsa o engañosa puede resultar en mi despido.',
-    en: 'I certify that my answers are true and complete to the best of my knowledge. If this application leads to employment, I understand that false or misleading information may result in my release.'
-  },
-  drug: {
-    es: 'Por medio de la presente reconozco y acepto que he recibido, leído y entendido la Política de Uso de Drogas y Alcohol de GoodWorkers y acepto cumplir con sus términos. Entiendo que mi cumplimiento con la Política es un término esencial de mi empleo. Cualquier falta de firma resultará en la terminación inmediata de mi empleo.',
-    en: 'I hereby acknowledge and agree that I have received, read, and understand the Drug and Alcohol Use Policy of GoodWorkers and agree to abide by its terms. My compliance with the Policy is an essential term of my employment. Any failure to sign will result in immediate termination.'
-  },
-  handbook: {
-    es: 'Acuso recibo de este Manual del Empleado. Entiendo y acepto que este Manual describe las políticas y procedimientos aplicables a mi empleo con GoodWorkers. Certifico que entiendo completamente su contenido y acepto cumplirlo en su totalidad. Cualquier incumplimiento está sujeto a medidas disciplinarias.',
-    en: 'I acknowledge receipt of this Employee Handbook. I understand and agree that this Handbook describes the policies and procedures applicable to my employment with GoodWorkers. I certify that I fully understand its content and agree to comply. Any failure to comply is liable to disciplinary measures.'
-  },
-  consent: {
-    es: 'Autorizo a Rafat General Contractor Inc. y cualquier otra firma a contactar a mis empleadores anteriores y cualquier otra fuente para obtener información necesaria para la evaluación de esta solicitud.<br><br>Certifico que toda la información proporcionada en este formulario es verdadera y completa. Reconozco que cualquier declaración falsa o engañosa puede resultar en la imposibilidad de ser empleado o en mi despido.<br><br>Yo, el abajo firmante, he leído y entendido lo anterior y he dado mi consentimiento libre y voluntariamente.',
-    en: 'I authorize Rafat General Contractor Inc. and any other firm to contact my former employers and any other source to obtain information necessary for the evaluation of this application.<br><br>I certify that all information supplied in this form is true and complete. I recognize that any false or misleading statement may render me unable to be employed or result in my dismissal.<br><br>I, the undersigned, have read and understood the above and have freely and knowingly given my consent.'
-  }
-};
-
 // ========== LANGUAGE ==========
 var currentLang = 'es';
+
+var policies = {
+  consent: {
+    es: 'Autorizo a GoodWorkers Equipment LTD. a contactar a mis empleadores anteriores y cualquier otra fuente para obtener informaci\u00f3n necesaria para la evaluaci\u00f3n de esta solicitud.<br><br>Certifico que toda la informaci\u00f3n proporcionada en este formulario es verdadera y completa. Reconozco que cualquier declaraci\u00f3n falsa o enga\u00f1osa puede resultar en la imposibilidad de ser empleado o en mi despido.<br><br>Yo, el abajo firmante, he le\u00eddo y entendido lo anterior y he dado mi consentimiento libre y voluntariamente.',
+    en: 'I authorize GoodWorkers Equipment LTD. to contact my former employers and any other source to obtain information necessary for the evaluation of this application.<br><br>I certify that all information supplied in this form is true and complete. I recognize that any false or misleading statement may render me unable to be employed or result in my dismissal.<br><br>I, the undersigned, have read and understood the above and have freely and knowingly given my consent.'
+  }
+};
 
 function setLang(lang) {
   currentLang = lang;
   document.getElementById('langScreen').classList.add('hidden');
   applyLang();
+  initSignatures();
 }
 
 function applyLang() {
-  // Text content
   document.querySelectorAll('[data-' + currentLang + ']').forEach(function(el) {
-    if (el.tagName === 'INPUT') return;
+    if (el.tagName === 'INPUT' || el.tagName === 'OPTION') return;
     var text = el.getAttribute('data-' + currentLang);
     if (text) el.innerHTML = text;
   });
-
-  // Placeholders
   document.querySelectorAll('[data-ph-' + currentLang + ']').forEach(function(el) {
     el.placeholder = el.getAttribute('data-ph-' + currentLang);
   });
-
-  // Policies
-  document.getElementById('policyHS').innerHTML = policies.hs[currentLang];
-  document.getElementById('policyDriver').innerHTML = policies.driver[currentLang];
-  document.getElementById('policyDrug').innerHTML = policies.drug[currentLang];
-  document.getElementById('policyHandbook').innerHTML = policies.handbook[currentLang];
-  if (document.getElementById('policyConsent')) document.getElementById('policyConsent').innerHTML = policies.consent[currentLang];
-
-  // Equipment lists
-  buildEquipList('truckList', trucks);
-  buildEquipList('equipList', equips);
-}
-
-// ========== EQUIPMENT LISTS ==========
-function buildEquipList(containerId, items) {
-  var container = document.getElementById(containerId);
-  container.innerHTML = '';
-  var yearsLabel = currentLang === 'es' ? ['1-5 años', '5-10 años', '10+ años'] : ['1-5 years', '5-10 years', '10+ years'];
-  var selectLabel = currentLang === 'es' ? 'Años' : 'Years';
-
-  items.forEach(function(item) {
-    var div = document.createElement('div');
-    div.className = 'equip-item';
-    div.innerHTML =
-      '<div class="equip-toggle" onclick="toggleEquip(this)"></div>' +
-      '<img src="' + item.img + '" alt="" class="equip-img">' +
-      '<div class="equip-name" onclick="toggleEquip(this.parentElement.querySelector(\'.equip-toggle\'))">' +
-        (currentLang === 'es' ? item.es + '<small>' + item.en + '</small>' : item.en + '<small>' + item.es + '</small>') +
-      '</div>' +
-      '<div class="equip-years">' +
-        '<select><option value="" disabled selected>' + selectLabel + '</option>' +
-        '<option>' + yearsLabel[0] + '</option>' +
-        '<option>' + yearsLabel[1] + '</option>' +
-        '<option>' + yearsLabel[2] + '</option>' +
-        '</select>' +
-      '</div>';
-    container.appendChild(div);
+  // Update select options text
+  document.querySelectorAll('select option[data-' + currentLang + ']').forEach(function(opt) {
+    opt.textContent = opt.getAttribute('data-' + currentLang);
   });
+  document.getElementById('policyConsent').innerHTML = policies.consent[currentLang];
 }
 
-function toggleEquip(toggleEl) {
-  var item = toggleEl.closest('.equip-item');
-  var isChecked = toggleEl.classList.toggle('checked');
-  item.classList.toggle('active', isChecked);
-  if (!isChecked) {
-    item.querySelector('select').selectedIndex = 0;
+// ========== INDUSTRY SELECTOR ==========
+var selectedIndustries = [];
+
+function toggleIndustry(el) {
+  var ind = el.getAttribute('data-industry');
+  el.classList.toggle('selected');
+  var block = document.getElementById('ind-' + ind);
+
+  if (el.classList.contains('selected')) {
+    if (selectedIndustries.indexOf(ind) === -1) selectedIndustries.push(ind);
+    block.classList.add('visible');
+  } else {
+    selectedIndustries = selectedIndustries.filter(function(i) { return i !== ind; });
+    block.classList.remove('visible');
   }
-}
-
-// ========== AUTO-FILL NAME ==========
-function syncFullName() {
-  var f = document.getElementById('fname').value.trim();
-  var m = document.getElementById('mname').value.trim();
-  var l = document.getElementById('lname').value.trim();
-  var full = [f, m, l].filter(Boolean).join(' ');
-  document.querySelectorAll('.fullname-auto').forEach(function(el) {
-    el.value = full;
-    if (full) el.classList.add('autofilled');
-    else el.classList.remove('autofilled');
-  });
+  applyLang();
 }
 
 // ========== SEGMENTED CONTROL ==========
@@ -1194,7 +1469,6 @@ function handleUpload(input) {
   for (var i = 0; i < files.length; i++) {
     addFilePreview(previewContainer, files[i]);
   }
-  // Reset input so same file can be re-selected
   input.value = '';
 }
 
@@ -1204,10 +1478,8 @@ function addFilePreview(container, file) {
 
   var removeBtn = document.createElement('div');
   removeBtn.className = 'remove-btn';
-  removeBtn.textContent = '×';
-  removeBtn.onclick = function() {
-    thumb.remove();
-  };
+  removeBtn.textContent = '\u00d7';
+  removeBtn.onclick = function() { thumb.remove(); };
 
   if (file.type.startsWith('image/')) {
     var img = document.createElement('img');
@@ -1217,184 +1489,136 @@ function addFilePreview(container, file) {
   } else {
     var icon = document.createElement('div');
     icon.className = 'file-icon';
-    icon.textContent = file.name.length > 20 ? file.name.substring(0, 17) + '...' : file.name;
+    icon.textContent = file.name;
     thumb.appendChild(icon);
   }
 
   thumb.appendChild(removeBtn);
-  // Store file reference for later submission
   thumb._file = file;
   container.appendChild(thumb);
 }
 
-// ========== SIGNATURE PAD ==========
+// ========== SIGNATURE ==========
 function initSignatures() {
   document.querySelectorAll('.sig-canvas').forEach(function(canvas) {
-    var container = canvas.parentElement;
-    var drawing = false;
-    var lastX, lastY;
-    var savedImage = null;
-    var dpr = window.devicePixelRatio || 1;
+    if (canvas._initialized) return;
+    canvas._initialized = true;
 
-    function setupCtx() {
-      var ctx = canvas.getContext('2d');
+    var ctx = canvas.getContext('2d');
+    var container = canvas.closest('.sig-container');
+    var drawing = false;
+    canvas._sigData = null;
+
+    function resize() {
+      var rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * 2;
+      canvas.height = rect.height * 2;
+      ctx.scale(2, 2);
       ctx.strokeStyle = '#1c1c1e';
-      ctx.lineWidth = 2.5;
+      ctx.lineWidth = 2;
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
-      return ctx;
     }
-
-    function sizeCanvas() {
-      var rect = canvas.getBoundingClientRect();
-      dpr = window.devicePixelRatio || 1;
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
-      var ctx = canvas.getContext('2d');
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      setupCtx();
-      if (savedImage) {
-        var img = new Image();
-        img.onload = function() {
-          canvas.getContext('2d').drawImage(img, 0, 0, rect.width, rect.height);
-        };
-        img.src = savedImage;
-      }
-    }
-
-    sizeCanvas();
-    window.addEventListener('resize', sizeCanvas);
+    resize();
 
     function getPos(e) {
       var rect = canvas.getBoundingClientRect();
-      if (e.touches && e.touches.length > 0) {
-        return { x: e.touches[0].clientX - rect.left, y: e.touches[0].clientY - rect.top };
-      }
-      return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+      var t = e.touches ? e.touches[0] : e;
+      return { x: t.clientX - rect.left, y: t.clientY - rect.top };
     }
 
-    function startDraw(e) {
+    function start(e) {
       e.preventDefault();
-      e.stopPropagation();
       drawing = true;
       container.classList.add('signing');
-      container.classList.add('has-sig');
-      document.body.style.overflow = 'hidden';
-      var ctx = setupCtx();
-      var pos = getPos(e);
-      lastX = pos.x;
-      lastY = pos.y;
+      var p = getPos(e);
+      ctx.beginPath();
+      ctx.moveTo(p.x, p.y);
     }
 
-    function draw(e) {
+    function move(e) {
       if (!drawing) return;
       e.preventDefault();
-      e.stopPropagation();
-      var ctx = canvas.getContext('2d');
-      setupCtx();
-      var pos = getPos(e);
-      ctx.beginPath();
-      ctx.moveTo(lastX, lastY);
-      ctx.lineTo(pos.x, pos.y);
+      var p = getPos(e);
+      ctx.lineTo(p.x, p.y);
       ctx.stroke();
-      lastX = pos.x;
-      lastY = pos.y;
+      container.classList.add('has-sig');
+      canvas._sigData = canvas.toDataURL();
     }
 
-    function stopDraw(e) {
-      if (!drawing) return;
-      if (e) { e.preventDefault(); e.stopPropagation(); }
+    function end() {
       drawing = false;
       container.classList.remove('signing');
-      document.body.style.overflow = '';
-      savedImage = canvas.toDataURL('image/png');
-      canvas._sigData = savedImage;
     }
 
-    canvas.addEventListener('touchstart', startDraw, { passive: false });
-    canvas.addEventListener('touchmove', draw, { passive: false });
-    canvas.addEventListener('touchend', stopDraw, { passive: false });
-    canvas.addEventListener('touchcancel', stopDraw, { passive: false });
-
-    canvas.addEventListener('mousedown', startDraw);
-    canvas.addEventListener('mousemove', draw);
-    canvas.addEventListener('mouseup', stopDraw);
-    canvas.addEventListener('mouseleave', function(e) { if (drawing) stopDraw(e); });
-
-    canvas._clearSig = function() {
-      drawing = false;
-      savedImage = null;
-      canvas._sigData = null;
-      container.classList.remove('has-sig');
-      container.classList.remove('signing');
-      document.body.style.overflow = '';
-      // Full reset — resize recreates a fresh context
-      sizeCanvas();
-    };
+    canvas.addEventListener('mousedown', start);
+    canvas.addEventListener('mousemove', move);
+    canvas.addEventListener('mouseup', end);
+    canvas.addEventListener('mouseleave', end);
+    canvas.addEventListener('touchstart', start, { passive: false });
+    canvas.addEventListener('touchmove', move, { passive: false });
+    canvas.addEventListener('touchend', end);
   });
 }
 
 function clearSig(btn) {
-  var canvas = btn.parentElement.querySelector('.sig-canvas');
-  canvas._clearSig();
+  var container = btn.closest('.sig-container');
+  var canvas = container.querySelector('.sig-canvas');
+  var ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  container.classList.remove('has-sig');
+  canvas._sigData = null;
 }
 
-// ========== GOOGLE PLACES (Custom Inline Dropdown) ==========
-var _acSessionToken = null;
-var _acDebounceTimers = {};
-
-async function initAutocomplete() {
-  // Load Google Maps JS API
-  var script = document.createElement('script');
-  script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBHXeyL9vYMa6EbDgWhxHC7oLySEYR497Y&libraries=places&v=weekly';
-  script.async = true;
-  script.defer = true;
-  script.onload = async function() {
-    var lib = await google.maps.importLibrary('places');
-    _acSessionToken = new lib.AutocompleteSessionToken();
-    setupInlineAutocomplete('address1', 'ac-dropdown1', 'city1', 'province1', 'postal1');
-    setupInlineAutocomplete('address2', 'ac-dropdown2', 'city2', 'province2', 'postal2');
-  };
-  document.head.appendChild(script);
+// ========== ADDRESS AUTOCOMPLETE ==========
+function initAutocomplete() {
+  setupAC('address1', 'ac-dropdown1', 'city1', 'province1', 'postal1');
+  setupAC('address2', 'ac-dropdown2', 'city2', 'province2', 'postal2');
 }
 
-function setupInlineAutocomplete(inputId, dropdownId, cityId, provinceId, postalId) {
+function setupAC(inputId, dropdownId, cityId, provinceId, postalId) {
   var input = document.getElementById(inputId);
   var dropdown = document.getElementById(dropdownId);
+  if (!input || !dropdown) return;
+
+  var _acSessionToken = null;
   var currentSuggestions = [];
-
-  input.addEventListener('input', function() {
-    clearTimeout(_acDebounceTimers[inputId]);
-    var query = input.value.trim();
-    if (query.length < 3) { closeDD(); return; }
-    _acDebounceTimers[inputId] = setTimeout(function() { fetchSugg(query); }, 300);
-  });
-
-  document.addEventListener('click', function(e) {
-    if (!e.target.closest('#' + inputId) && !e.target.closest('#' + dropdownId)) closeDD();
-  });
+  var debounceTimer = null;
 
   function closeDD() {
     dropdown.classList.remove('open');
     dropdown.innerHTML = '';
-    currentSuggestions = [];
   }
 
-  async function fetchSugg(query) {
+  document.addEventListener('click', function(e) {
+    if (!input.contains(e.target) && !dropdown.contains(e.target)) closeDD();
+  });
+
+  input.addEventListener('input', function() {
+    clearTimeout(debounceTimer);
+    var q = input.value.trim();
+    if (q.length < 3) { closeDD(); return; }
+    debounceTimer = setTimeout(function() { fetchSuggestions(q); }, 300);
+  });
+
+  async function fetchSuggestions(query) {
     try {
-      var result = await google.maps.places.AutocompleteSuggestion.fetchAutocompleteSuggestions({
+      var lib = await google.maps.importLibrary('places');
+      if (!_acSessionToken) _acSessionToken = new lib.AutocompleteSessionToken();
+      var request = {
         input: query,
         sessionToken: _acSessionToken,
         includedRegionCodes: ['ca'],
-        language: currentLang
-      });
+        language: currentLang === 'es' ? 'es' : 'en'
+      };
+      var result = await lib.AutocompleteSuggestion.fetchAutocompleteSuggestions(request);
       currentSuggestions = result.suggestions || [];
       renderDD();
-    } catch(e) { console.error(e); closeDD(); }
+    } catch(e) { console.error(e); }
   }
 
   function renderDD() {
-    if (currentSuggestions.length === 0) { closeDD(); return; }
+    if (!currentSuggestions.length) { closeDD(); return; }
     var html = '';
     currentSuggestions.forEach(function(s, i) {
       var p = s.placePrediction;
@@ -1445,7 +1669,6 @@ function setupInlineAutocomplete(inputId, dropdownId, cityId, provinceId, postal
       postalEl.classList.add('autofilled');
     } catch(e) { console.error(e); }
 
-    // New session token for billing
     var lib = await google.maps.importLibrary('places');
     _acSessionToken = new lib.AutocompleteSessionToken();
   }
@@ -1453,26 +1676,139 @@ function setupInlineAutocomplete(inputId, dropdownId, cityId, provinceId, postal
 
 function escHtml(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
 
-// ========== PAGE NAVIGATION ==========
-function goToPage2() {
-  // Validate page 1
-  var fname = document.getElementById('fname').value.trim();
-  var lname = document.getElementById('lname').value.trim();
-  if (!fname || !lname) {
-    alert(currentLang === 'es' ? 'Por favor ingresa tu nombre y apellido.' : 'Please enter your first and last name.');
-    return;
-  }
-  document.getElementById('page1').style.display = 'none';
-  document.getElementById('page2').style.display = 'block';
-  window.scrollTo({ top: 0 });
-  applyLang();
-  initSignatures();
+// ========== COLLECT INDUSTRY DATA ==========
+function getSegValue(id) {
+  var el = document.getElementById(id);
+  if (!el) return null;
+  var sel = el.querySelector('.selected');
+  if (!sel) return null;
+  var txt = sel.textContent.trim();
+  if (txt === 'S\u00ed' || txt === 'Yes') return true;
+  if (txt === 'No') return false;
+  return txt;
 }
 
-function goToPage1() {
-  document.getElementById('page2').style.display = 'none';
-  document.getElementById('page1').style.display = 'block';
-  window.scrollTo({ top: 0 });
+function getCheckedValues(ind, field) {
+  var checked = [];
+  document.querySelectorAll('input[data-ind="' + ind + '"][data-field="' + field + '"]:checked').forEach(function(cb) {
+    checked.push(cb.value);
+  });
+  return checked.length > 0 ? checked : null;
+}
+
+function getRadioValue(name) {
+  var el = document.querySelector('input[name="' + name + '"]:checked');
+  return el ? el.value : null;
+}
+
+function collectIndustryData() {
+  var data = {};
+
+  if (selectedIndustries.indexOf('construction') !== -1) {
+    data.construction = {
+      years: document.getElementById('construction_years').value || null,
+      type: getCheckedValues('construction', 'type'),
+      certs: getCheckedValues('construction', 'certs'),
+      equipment: getCheckedValues('construction', 'equipment'),
+      ppe: getCheckedValues('construction', 'ppe'),
+      own_transport: getSegValue('construction_transport')
+    };
+  }
+
+  if (selectedIndustries.indexOf('mechanic') !== -1) {
+    data.mechanic = {
+      type: getCheckedValues('mechanic', 'type'),
+      certs: getCheckedValues('mechanic', 'certs'),
+      trade_license: document.getElementById('mechanic_license').value.trim() || null,
+      own_tools: getSegValue('mechanic_tools'),
+      years: document.getElementById('mechanic_years').value || null
+    };
+  }
+
+  if (selectedIndustries.indexOf('cleaning') !== -1) {
+    data.cleaning = {
+      type: getCheckedValues('cleaning', 'type'),
+      whmis: getSegValue('cleaning_whmis'),
+      floor_machines: getSegValue('cleaning_machines'),
+      own_transport: getSegValue('cleaning_transport'),
+      years: document.getElementById('cleaning_years').value || null
+    };
+  }
+
+  if (selectedIndustries.indexOf('kitchen') !== -1) {
+    data.kitchen = {
+      food_handler_cert: getSegValue('kitchen_food_handler'),
+      smart_serve: getSegValue('kitchen_smart_serve'),
+      position: getCheckedValues('kitchen', 'position'),
+      own_knives: getSegValue('kitchen_knives'),
+      years: document.getElementById('kitchen_years').value || null
+    };
+  }
+
+  if (selectedIndustries.indexOf('electrical') !== -1) {
+    data.electrical = {
+      license: getRadioValue('electrical_license'),
+      esa_number: document.getElementById('electrical_esa').value.trim() || null,
+      type: getCheckedValues('electrical', 'type'),
+      blueprints: getSegValue('electrical_blueprints'),
+      years: document.getElementById('electrical_years').value || null
+    };
+  }
+
+  if (selectedIndustries.indexOf('painting') !== -1) {
+    data.painting = {
+      type: getCheckedValues('painting', 'type'),
+      scale: getCheckedValues('painting', 'scale'),
+      own_equipment: getSegValue('painting_equipment'),
+      comfortable_heights: getSegValue('painting_heights'),
+      years: document.getElementById('painting_years').value || null
+    };
+  }
+
+  if (selectedIndustries.indexOf('service') !== -1) {
+    data.service = {
+      smart_serve: getSegValue('service_smart_serve'),
+      food_handler: getSegValue('service_food_handler'),
+      type: getCheckedValues('service', 'type'),
+      pos_systems: getCheckedValues('service', 'pos'),
+      years: document.getElementById('service_years').value || null
+    };
+  }
+
+  if (selectedIndustries.indexOf('warehouse') !== -1) {
+    data.warehouse = {
+      forklift_cert: getSegValue('warehouse_forklift'),
+      forklift_type: getCheckedValues('warehouse', 'forklift_type'),
+      rf_scanner: getSegValue('warehouse_rf'),
+      cold_storage: getSegValue('warehouse_cold'),
+      lifting: getSegValue('warehouse_lifting'),
+      shift: getCheckedValues('warehouse', 'shift'),
+      years: document.getElementById('warehouse_years').value || null
+    };
+  }
+
+  if (selectedIndustries.indexOf('maintenance') !== -1) {
+    data.maintenance = {
+      building_type: getCheckedValues('maintenance', 'building_type'),
+      systems: getCheckedValues('maintenance', 'systems'),
+      oncall: getSegValue('maintenance_oncall'),
+      drivers_license: getSegValue('maintenance_license'),
+      years: document.getElementById('maintenance_years').value || null
+    };
+  }
+
+  if (selectedIndustries.indexOf('general_labour') !== -1) {
+    data.general_labour = {
+      lifting: getSegValue('general_lifting'),
+      comfortable_outdoors: getSegValue('general_outdoors'),
+      tools: getCheckedValues('general_labour', 'tools'),
+      own_boots: getSegValue('general_boots'),
+      transport: getSegValue('general_transport'),
+      availability: getCheckedValues('general_labour', 'availability')
+    };
+  }
+
+  return data;
 }
 
 // ========== SUPABASE ==========
@@ -1509,7 +1845,6 @@ async function submitForm() {
     return;
   }
 
-  // Validate required fields
   var fname = document.getElementById('fname').value.trim();
   var lname = document.getElementById('lname').value.trim();
   if (!fname || !lname) {
@@ -1518,13 +1853,18 @@ async function submitForm() {
     return;
   }
 
+  if (selectedIndustries.length === 0) {
+    status.textContent = currentLang === 'es' ? 'Por favor selecciona al menos una industria.' : 'Please select at least one industry.';
+    status.className = 'submit-status show error';
+    return;
+  }
+
   btn.disabled = true;
   btn.querySelector('span').textContent = currentLang === 'es' ? 'Enviando...' : 'Submitting...';
 
   try {
-    // Get english level
-    var englishSeg = document.querySelectorAll('.section')[0].querySelector('.segmented');
-    var englishSelected = englishSeg ? englishSeg.querySelector('.selected') : null;
+    // English level
+    var englishSelected = document.querySelector('#englishLevel .selected');
     var englishMap = { 'Bajo': 'poor', 'Poor': 'poor', 'Bueno': 'good', 'Good': 'good', 'Excelente': 'excellent', 'Excellent': 'excellent' };
     var englishLevel = englishSelected ? (englishMap[englishSelected.textContent.trim()] || null) : null;
 
@@ -1547,24 +1887,14 @@ async function submitForm() {
       }
     }
 
-    // Get signatures
-    var sigCanvases = document.querySelectorAll('.sig-canvas');
-    var sigHS = sigCanvases[0] ? sigCanvases[0]._sigData : null;
-    var sigDriver = sigCanvases[1] ? sigCanvases[1]._sigData : null;
-    var sigDrug = sigCanvases[2] ? sigCanvases[2]._sigData : null;
-    var sigHandbook = sigCanvases[3] ? sigCanvases[3]._sigData : null;
+    // Consent signature
+    var sigCanvas = document.querySelector('.sig-canvas');
+    var sigConsent = sigCanvas ? sigCanvas._sigData : null;
 
-    // Get snow plow answers
-    var driverSection = document.querySelectorAll('.segmented');
-    var snowPlowing = null, snowOncall = null;
-    if (driverSection.length >= 3) {
-      var sp = driverSection[1].querySelector('.selected');
-      if (sp) snowPlowing = sp.textContent.trim() === 'Sí' || sp.textContent.trim() === 'Yes';
-      var so = driverSection[2].querySelector('.selected');
-      if (so) snowOncall = so.textContent.trim() === 'Sí' || so.textContent.trim() === 'Yes';
-    }
+    // Industry data
+    var industryData = collectIndustryData();
 
-    // Insert employee
+    // Insert
     var { data: employee, error: empError } = await supabase.from('employees').insert({
       first_name: fname,
       middle_name: document.getElementById('mname').value.trim() || null,
@@ -1574,88 +1904,48 @@ async function submitForm() {
       city: document.getElementById('city1').value.trim() || null,
       province: document.getElementById('province1').value.trim() || null,
       postal_code: document.getElementById('postal1').value.trim() || null,
-      phone: document.querySelector('input[type="tel"]').value.trim() || null,
-      email: document.querySelector('input[type="email"]').value.trim() || null,
-      birth_date: document.querySelector('.date-input').value.trim() || null,
+      phone: document.getElementById('phone').value.trim() || null,
+      email: document.getElementById('email').value.trim() || null,
+      birth_date: document.getElementById('birthDate').value.trim() || null,
       english_level: englishLevel,
       language: currentLang,
-      emergency_first_name: document.querySelectorAll('.section')[2] ? document.querySelectorAll('.section')[2].querySelectorAll('.field-input')[0].value.trim() || null : null,
-      emergency_last_name: document.querySelectorAll('.section')[2] ? document.querySelectorAll('.section')[2].querySelectorAll('.field-input')[1].value.trim() || null : null,
+      emergency_first_name: document.getElementById('emg_fname').value.trim() || null,
+      emergency_last_name: document.getElementById('emg_lname').value.trim() || null,
       emergency_address: document.getElementById('address2').value.trim() || null,
       emergency_apt_unit: document.getElementById('apt2').value.trim() || null,
       emergency_city: document.getElementById('city2').value.trim() || null,
       emergency_province: document.getElementById('province2').value.trim() || null,
       emergency_postal_code: document.getElementById('postal2').value.trim() || null,
-      emergency_phone: document.querySelectorAll('.section')[2] ? document.querySelectorAll('.section')[2].querySelectorAll('input[type="tel"]')[0].value.trim() || null : null,
-      emergency_phone_alt: document.querySelectorAll('.section')[2] ? document.querySelectorAll('.section')[2].querySelectorAll('input[type="tel"]')[1].value.trim() || null : null,
-      emergency_relationship: document.querySelectorAll('.section')[2] ? document.querySelectorAll('.section')[2].querySelectorAll('.field-input')[6].value.trim() || null : null,
+      emergency_phone: document.getElementById('emg_phone').value.trim() || null,
+      emergency_phone_alt: document.getElementById('emg_phone_alt').value.trim() || null,
+      emergency_relationship: document.getElementById('emg_relationship').value.trim() || null,
       license_photo: licensePath,
       certifications: certPaths.length > 0 ? certPaths : null,
-      signature_hs: sigHS,
-      signature_driver: sigDriver,
-      signature_drug: sigDrug,
-      signature_handbook: sigHandbook,
-      snow_plowing: snowPlowing,
-      snow_plow_oncall: snowOncall,
-
-      // Page 2: Rafat Application
-      position_applied: Array.from(document.querySelectorAll('#positionChecks input:checked')).map(function(cb) { return cb.value; }),
-      date_available: (document.getElementById('dateAvailable') || {}).value || null,
-      position_type: (function() { var s = document.querySelectorAll('#page2 .segmented')[0]; var sel = s ? s.querySelector('.selected') : null; return sel ? sel.textContent.trim().toLowerCase().replace(' ', '_') : null; })(),
-      referred_by: (document.getElementById('referredBy') || {}).value || null,
-      legally_entitled: (function() { var s = document.getElementById('legallyEntitled'); var sel = s ? s.querySelector('.selected') : null; return sel ? (sel.textContent.trim() === 'Sí' || sel.textContent.trim() === 'Yes') : null; })(),
-      criminal_conviction: (function() { var s = document.getElementById('criminalConviction'); var sel = s ? s.querySelector('.selected') : null; return sel ? (sel.textContent.trim() === 'Sí' || sel.textContent.trim() === 'Yes') : null; })(),
-      relatives_at_rafat: (function() { var s = document.getElementById('relativesRafat'); var sel = s ? s.querySelector('.selected') : null; return sel ? (sel.textContent.trim() === 'Sí' || sel.textContent.trim() === 'Yes') : null; })(),
-      relatives_at_rafat_details: (document.getElementById('relativesDetails') || {}).value || null,
-      license_type: (function() { var s = document.getElementById('licenseType'); var sel = s ? s.querySelector('.selected') : null; return sel ? sel.textContent.trim() : null; })(),
       education: {
-        high_school: (document.getElementById('eduHS') || {}).value || null,
-        college: (document.getElementById('eduCollege') || {}).value || null,
-        university: (document.getElementById('eduUni') || {}).value || null,
-        additional: (document.getElementById('eduExtra') || {}).value || null
+        high_school: document.getElementById('eduHS').value.trim() || null,
+        college: document.getElementById('eduCollege').value.trim() || null,
+        university: document.getElementById('eduUni').value.trim() || null
       },
       work_experience: {
-        employer: (document.getElementById('workEmployer') || {}).value || null,
-        business_type: (document.getElementById('workBusiness') || {}).value || null,
-        job_title: (document.getElementById('workTitle') || {}).value || null,
-        period: (document.getElementById('workPeriod') || {}).value || null,
-        supervisor: (document.getElementById('workSupervisor') || {}).value || null,
-        reason_leaving: (document.getElementById('workReason') || {}).value || null
+        employer: document.getElementById('workEmployer').value.trim() || null,
+        job_title: document.getElementById('workTitle').value.trim() || null,
+        period: document.getElementById('workPeriod').value.trim() || null,
+        reason_leaving: document.getElementById('workReason').value.trim() || null
       },
-      reference_name: (document.getElementById('refName') || {}).value || null,
-      reference_phone: (document.getElementById('refPhone') || {}).value || null,
-      reference_relationship: (document.getElementById('refRelationship') || {}).value || null,
-      signature_consent: (function() { var canvases = document.querySelectorAll('#page2 .sig-canvas'); return canvases.length > 0 && canvases[0]._sigData ? canvases[0]._sigData : null; })()
+      reference_name: document.getElementById('refName').value.trim() || null,
+      reference_phone: document.getElementById('refPhone').value.trim() || null,
+      reference_relationship: document.getElementById('refRelationship').value.trim() || null,
+      signature_consent: sigConsent,
+      industry: selectedIndustries,
+      industry_data: Object.keys(industryData).length > 0 ? industryData : null
     }).select().single();
 
     if (empError) throw empError;
 
-    // Insert equipment experience
-    var equipItems = document.querySelectorAll('.equip-item.active');
-    for (var j = 0; j < equipItems.length; j++) {
-      var item = equipItems[j];
-      var select = item.querySelector('select');
-      if (!select || !select.value) continue;
-      var nameEl = item.querySelector('.equip-name');
-      var equipName = nameEl.textContent.split('\n')[0].trim();
-      var isTruck = item.closest('#truckList') !== null;
-      var yearsVal = select.value.replace(/[^0-9+\-]/g, '');
-      if (yearsVal.startsWith('1')) yearsVal = '1-5';
-      else if (yearsVal.startsWith('5')) yearsVal = '5-10';
-      else yearsVal = '10+';
-
-      await supabase.from('equipment_experience').insert({
-        employee_id: employee.id,
-        equipment_type: equipName,
-        category: isTruck ? 'truck' : 'heavy_equipment',
-        years: yearsVal
-      });
-    }
-
     // Success
     btn.querySelector('span').textContent = currentLang === 'es' ? 'Enviado' : 'Submitted';
     btn.style.background = '#34c759';
-    status.textContent = currentLang === 'es' ? '¡Registro completado! Gracias.' : 'Registration complete! Thank you.';
+    status.textContent = currentLang === 'es' ? '\u00a1Registro completado! Gracias.' : 'Registration complete! Thank you.';
     status.className = 'submit-status show';
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
@@ -1671,8 +1961,14 @@ async function submitForm() {
 // ========== INIT ==========
 applyLang();
 initAutocomplete();
-initSignatures();
 initSupabase();
+</script>
+<script>
+(function() {
+  var s = document.createElement('script');
+  s.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBHXeyL9vYMa6EbDgWhxHC7oLySEYR497Y&libraries=places&v=weekly';
+  document.head.appendChild(s);
+})();
 </script>
 </body>
 </html>
