@@ -1007,23 +1007,18 @@ function escHtml(s) { var d = document.createElement('div'); d.textContent = s; 
 // ========== SUPABASE ==========
 var SUPABASE_URL = 'https://fcgxxxxazyggnxkjswjs.supabase.co';
 var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZjZ3h4eHhhenlnZ254a2pzd2pzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUxNTc1MzAsImV4cCI6MjA5MDczMzUzMH0.8fbm8o1m913Ysc-v_D1Y51xCJ4m4GEoNwdI_BBC0gTg';
-var supabase = null;
+var sbClient = null;
 
 function initSupabase() {
   var script = document.createElement('script');
   script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
   script.onload = function() {
-    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  };
+  script.onerror = function() {
+    console.error('Failed to load Supabase');
   };
   document.head.appendChild(script);
-}
-
-async function uploadFile(file, folder) {
-  var ext = file.name.split('.').pop();
-  var path = folder + '/' + Date.now() + '-' + Math.random().toString(36).slice(2) + '.' + ext;
-  var { data, error } = await supabase.storage.from('documents').upload(path, file);
-  if (error) { console.error('Upload error:', error); return null; }
-  return path;
 }
 
 // ========== SUBMIT ==========
@@ -1032,8 +1027,8 @@ async function submitForm() {
   var status = document.getElementById('submitStatus');
   status.className = 'submit-status';
 
-  if (!supabase) {
-    status.textContent = currentLang === 'es' ? 'Error: cargando...' : 'Error: loading...';
+  if (!sbClient) {
+    status.textContent = currentLang === 'es' ? 'Error: cargando, intenta de nuevo en unos segundos...' : 'Error: loading, try again in a few seconds...';
     status.className = 'submit-status show error';
     return;
   }
@@ -1062,7 +1057,7 @@ async function submitForm() {
     var englishLevel = englishSelected ? (englishMap[englishSelected.textContent.trim()] || null) : null;
 
     // Insert
-    var { data: employee, error: empError } = await supabase.from('employees').insert({
+    var { data: employee, error: empError } = await sbClient.from('employees').insert({
       first_name: fname,
       middle_name: document.getElementById('mname').value.trim() || null,
       last_name: lname,
