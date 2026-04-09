@@ -750,7 +750,8 @@ function applyLang() {
   document.querySelectorAll('select option[data-' + currentLang + ']').forEach(function(opt) {
     opt.textContent = opt.getAttribute('data-' + currentLang);
   });
-  document.getElementById('policyConsent').innerHTML = policies.consent[currentLang];
+  var pc = document.getElementById('policyConsent');
+  if (pc) pc.innerHTML = policies.consent[currentLang];
 }
 
 // ========== INDUSTRY SELECTOR ==========
