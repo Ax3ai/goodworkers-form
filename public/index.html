@@ -678,8 +678,31 @@
 <!-- ==================== INDUSTRY: CONSTRUCTION ==================== -->
 <div class="industry-block" id="ind-construction">
   <div class="section">
-    <div class="section-title"><span data-es="Construcci&oacute;n" data-en="Construction"></span></div>
+    <div class="section-title"><span data-es="Construcci&oacute;n &mdash; &iquest;Qu&eacute; sabes hacer?" data-en="Construction &mdash; What can you do?"></span></div>
     <div class="card">
+      <div class="field">
+        <div class="field-label" data-es="Selecciona tus habilidades" data-en="Select your skills"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+          <label class="check-pill"><input type="checkbox" value="demolition" data-ind="construction" data-field="skills"> <span data-es="Demolici&oacute;n" data-en="Demolition"></span></label>
+          <label class="check-pill"><input type="checkbox" value="drywall" data-ind="construction" data-field="skills"> <span>Drywall</span></label>
+          <label class="check-pill"><input type="checkbox" value="roofing" data-ind="construction" data-field="skills"> <span data-es="Techos" data-en="Roofing"></span></label>
+          <label class="check-pill"><input type="checkbox" value="framing" data-ind="construction" data-field="skills"> <span data-es="Estructura" data-en="Framing"></span></label>
+          <label class="check-pill"><input type="checkbox" value="concrete" data-ind="construction" data-field="skills"> <span data-es="Concreto" data-en="Concrete"></span></label>
+          <label class="check-pill"><input type="checkbox" value="flooring" data-ind="construction" data-field="skills"> <span data-es="Pisos" data-en="Flooring"></span></label>
+          <label class="check-pill"><input type="checkbox" value="tiling" data-ind="construction" data-field="skills"> <span data-es="Azulejo" data-en="Tiling"></span></label>
+          <label class="check-pill"><input type="checkbox" value="painting" data-ind="construction" data-field="skills"> <span data-es="Pintura" data-en="Painting"></span></label>
+          <label class="check-pill"><input type="checkbox" value="plumbing" data-ind="construction" data-field="skills"> <span data-es="Plomer&iacute;a" data-en="Plumbing"></span></label>
+          <label class="check-pill"><input type="checkbox" value="electrical" data-ind="construction" data-field="skills"> <span data-es="El&eacute;ctrico" data-en="Electrical"></span></label>
+          <label class="check-pill"><input type="checkbox" value="welding" data-ind="construction" data-field="skills"> <span data-es="Soldadura" data-en="Welding"></span></label>
+          <label class="check-pill"><input type="checkbox" value="excavation" data-ind="construction" data-field="skills"> <span data-es="Excavaci&oacute;n" data-en="Excavation"></span></label>
+          <label class="check-pill"><input type="checkbox" value="landscaping" data-ind="construction" data-field="skills"> <span data-es="Jardiner&iacute;a" data-en="Landscaping"></span></label>
+          <label class="check-pill"><input type="checkbox" value="heavy_equipment" data-ind="construction" data-field="skills"> <span data-es="Equipo pesado" data-en="Heavy Equipment"></span></label>
+          <label class="check-pill"><input type="checkbox" value="carpentry" data-ind="construction" data-field="skills"> <span data-es="Carpinter&iacute;a" data-en="Carpentry"></span></label>
+          <label class="check-pill"><input type="checkbox" value="masonry" data-ind="construction" data-field="skills"> <span data-es="Alba&ntilde;iler&iacute;a" data-en="Masonry"></span></label>
+          <label class="check-pill"><input type="checkbox" value="insulation" data-ind="construction" data-field="skills"> <span data-es="Aislamiento" data-en="Insulation"></span></label>
+          <label class="check-pill"><input type="checkbox" value="siding" data-ind="construction" data-field="skills"> <span data-es="Revestimiento" data-en="Siding"></span></label>
+        </div>
+      </div>
       <div class="field">
         <div class="field-label" data-es="A&ntilde;os de experiencia" data-en="Years of experience"></div>
         <select class="years-select" id="construction_years">
@@ -691,55 +714,6 @@
           <option value="10+" data-es="10+ a&ntilde;os" data-en="10+ years"></option>
         </select>
       </div>
-      <div class="field">
-        <div class="field-label" data-es="Tipo de construcci&oacute;n" data-en="Construction type"></div>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
-          <label class="check-pill"><input type="checkbox" value="residential" data-ind="construction" data-field="type"> <span data-es="Residencial" data-en="Residential"></span></label>
-          <label class="check-pill"><input type="checkbox" value="commercial" data-ind="construction" data-field="type"> <span data-es="Comercial" data-en="Commercial"></span></label>
-          <label class="check-pill"><input type="checkbox" value="industrial" data-ind="construction" data-field="type"> <span>Industrial</span></label>
-          <label class="check-pill"><input type="checkbox" value="civil" data-ind="construction" data-field="type"> <span>Civil</span></label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="Certificaciones" data-en="Certifications"></div>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
-          <label class="check-pill"><input type="checkbox" value="working_at_heights" data-ind="construction" data-field="certs"> <span>Working at Heights</span></label>
-          <label class="check-pill"><input type="checkbox" value="whmis" data-ind="construction" data-field="certs"> <span>WHMIS</span></label>
-          <label class="check-pill"><input type="checkbox" value="first_aid_cpr" data-ind="construction" data-field="certs"> <span>First Aid / CPR</span></label>
-          <label class="check-pill"><input type="checkbox" value="ohsa" data-ind="construction" data-field="certs"> <span>OHSA</span></label>
-          <label class="check-pill"><input type="checkbox" value="confined_space" data-ind="construction" data-field="certs"> <span>Confined Space</span></label>
-          <label class="check-pill"><input type="checkbox" value="fall_arrest" data-ind="construction" data-field="certs"> <span>Fall Arrest</span></label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="Equipo que puedes operar" data-en="Equipment you can operate"></div>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
-          <label class="check-pill"><input type="checkbox" value="excavator" data-ind="construction" data-field="equipment"> <span data-es="Excavadora" data-en="Excavator"></span></label>
-          <label class="check-pill"><input type="checkbox" value="backhoe" data-ind="construction" data-field="equipment"> <span data-es="Retroexcavadora" data-en="Backhoe"></span></label>
-          <label class="check-pill"><input type="checkbox" value="skid_steer" data-ind="construction" data-field="equipment"> <span>Skid Steer / Bobcat</span></label>
-          <label class="check-pill"><input type="checkbox" value="bulldozer" data-ind="construction" data-field="equipment"> <span>Bulldozer</span></label>
-          <label class="check-pill"><input type="checkbox" value="front_loader" data-ind="construction" data-field="equipment"> <span data-es="Cargador frontal" data-en="Front Loader"></span></label>
-          <label class="check-pill"><input type="checkbox" value="boom_lift" data-ind="construction" data-field="equipment"> <span>Boom Lift</span></label>
-          <label class="check-pill"><input type="checkbox" value="scissor_lift" data-ind="construction" data-field="equipment"> <span>Scissor Lift</span></label>
-          <label class="check-pill"><input type="checkbox" value="forklift" data-ind="construction" data-field="equipment"> <span data-es="Montacargas" data-en="Forklift"></span></label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="PPE propio" data-en="Own PPE"></div>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
-          <label class="check-pill"><input type="checkbox" value="hard_hat" data-ind="construction" data-field="ppe"> <span data-es="Casco" data-en="Hard Hat"></span></label>
-          <label class="check-pill"><input type="checkbox" value="safety_boots" data-ind="construction" data-field="ppe"> <span data-es="Botas" data-en="Safety Boots"></span></label>
-          <label class="check-pill"><input type="checkbox" value="safety_glasses" data-ind="construction" data-field="ppe"> <span data-es="Lentes" data-en="Safety Glasses"></span></label>
-          <label class="check-pill"><input type="checkbox" value="hi_vis" data-ind="construction" data-field="ppe"> <span data-es="Chaleco" data-en="Hi-Vis Vest"></span></label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="Transporte propio al sitio" data-en="Own transportation to site"></div>
-        <div class="segmented" id="construction_transport">
-          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
-          <div class="seg-option" onclick="selectSeg(this)">No</div>
-        </div>
-      </div>
     </div>
   </div>
 </div>
@@ -747,34 +721,23 @@
 <!-- ==================== INDUSTRY: MECHANIC ==================== -->
 <div class="industry-block" id="ind-mechanic">
   <div class="section">
-    <div class="section-title"><span data-es="Mec&aacute;nica" data-en="Mechanic"></span></div>
+    <div class="section-title"><span data-es="Mec&aacute;nica &mdash; &iquest;Qu&eacute; sabes hacer?" data-en="Mechanic &mdash; What can you do?"></span></div>
     <div class="card">
       <div class="field">
-        <div class="field-label" data-es="Tipo de mec&aacute;nica" data-en="Mechanic type"></div>
+        <div class="field-label" data-es="Selecciona tus habilidades" data-en="Select your skills"></div>
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
-          <label class="check-pill"><input type="checkbox" value="automotive" data-ind="mechanic" data-field="type"> <span data-es="Automotriz" data-en="Automotive"></span></label>
-          <label class="check-pill"><input type="checkbox" value="heavy_duty" data-ind="mechanic" data-field="type"> <span>Heavy Duty</span></label>
-          <label class="check-pill"><input type="checkbox" value="industrial" data-ind="mechanic" data-field="type"> <span>Industrial</span></label>
-          <label class="check-pill"><input type="checkbox" value="diesel" data-ind="mechanic" data-field="type"> <span>Diesel</span></label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="Certificaciones" data-en="Certifications"></div>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
-          <label class="check-pill"><input type="checkbox" value="310S" data-ind="mechanic" data-field="certs"> <span>310S (Auto)</span></label>
-          <label class="check-pill"><input type="checkbox" value="310T" data-ind="mechanic" data-field="certs"> <span>310T (Truck)</span></label>
-          <label class="check-pill"><input type="checkbox" value="421A" data-ind="mechanic" data-field="certs"> <span>421A (Millwright)</span></label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="N&uacute;mero de licencia de oficio" data-en="Trade licence number"></div>
-        <input class="field-input" type="text" id="mechanic_license" data-ph-es="N&uacute;mero (si aplica)" data-ph-en="Number (if applicable)">
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="Herramientas propias" data-en="Own tools"></div>
-        <div class="segmented" id="mechanic_tools">
-          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
-          <div class="seg-option" onclick="selectSeg(this)">No</div>
+          <label class="check-pill"><input type="checkbox" value="oil_change" data-ind="mechanic" data-field="skills"> <span data-es="Cambio de aceite" data-en="Oil Change"></span></label>
+          <label class="check-pill"><input type="checkbox" value="brakes" data-ind="mechanic" data-field="skills"> <span data-es="Frenos" data-en="Brakes"></span></label>
+          <label class="check-pill"><input type="checkbox" value="engine" data-ind="mechanic" data-field="skills"> <span data-es="Motor" data-en="Engine"></span></label>
+          <label class="check-pill"><input type="checkbox" value="transmission" data-ind="mechanic" data-field="skills"> <span data-es="Transmisi&oacute;n" data-en="Transmission"></span></label>
+          <label class="check-pill"><input type="checkbox" value="suspension" data-ind="mechanic" data-field="skills"> <span data-es="Suspensi&oacute;n" data-en="Suspension"></span></label>
+          <label class="check-pill"><input type="checkbox" value="electrical" data-ind="mechanic" data-field="skills"> <span data-es="El&eacute;ctrico" data-en="Electrical"></span></label>
+          <label class="check-pill"><input type="checkbox" value="diesel" data-ind="mechanic" data-field="skills"> <span>Diesel</span></label>
+          <label class="check-pill"><input type="checkbox" value="heavy_duty" data-ind="mechanic" data-field="skills"> <span>Heavy Duty</span></label>
+          <label class="check-pill"><input type="checkbox" value="tires" data-ind="mechanic" data-field="skills"> <span data-es="Llantas" data-en="Tires"></span></label>
+          <label class="check-pill"><input type="checkbox" value="diagnostics" data-ind="mechanic" data-field="skills"> <span data-es="Diagn&oacute;stico" data-en="Diagnostics"></span></label>
+          <label class="check-pill"><input type="checkbox" value="welding" data-ind="mechanic" data-field="skills"> <span data-es="Soldadura" data-en="Welding"></span></label>
+          <label class="check-pill"><input type="checkbox" value="hydraulics" data-ind="mechanic" data-field="skills"> <span data-es="Hidr&aacute;ulica" data-en="Hydraulics"></span></label>
         </div>
       </div>
       <div class="field">
@@ -795,36 +758,18 @@
 <!-- ==================== INDUSTRY: CLEANING ==================== -->
 <div class="industry-block" id="ind-cleaning">
   <div class="section">
-    <div class="section-title"><span data-es="Limpieza" data-en="Cleaning"></span></div>
+    <div class="section-title"><span data-es="Limpieza &mdash; &iquest;Qu&eacute; sabes hacer?" data-en="Cleaning &mdash; What can you do?"></span></div>
     <div class="card">
       <div class="field">
-        <div class="field-label" data-es="Tipo de limpieza" data-en="Cleaning type"></div>
+        <div class="field-label" data-es="Selecciona tus habilidades" data-en="Select your skills"></div>
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
-          <label class="check-pill"><input type="checkbox" value="residential" data-ind="cleaning" data-field="type"> <span data-es="Residencial" data-en="Residential"></span></label>
-          <label class="check-pill"><input type="checkbox" value="commercial" data-ind="cleaning" data-field="type"> <span data-es="Comercial" data-en="Commercial"></span></label>
-          <label class="check-pill"><input type="checkbox" value="industrial" data-ind="cleaning" data-field="type"> <span>Industrial</span></label>
-          <label class="check-pill"><input type="checkbox" value="post_construction" data-ind="cleaning" data-field="type"> <span data-es="Post-construcci&oacute;n" data-en="Post-construction"></span></label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="Entrenamiento WHMIS" data-en="WHMIS training"></div>
-        <div class="segmented" id="cleaning_whmis">
-          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
-          <div class="seg-option" onclick="selectSeg(this)">No</div>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="Experiencia con m&aacute;quinas de piso" data-en="Floor machine experience"></div>
-        <div class="segmented" id="cleaning_machines">
-          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
-          <div class="seg-option" onclick="selectSeg(this)">No</div>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="Transporte propio" data-en="Own transportation"></div>
-        <div class="segmented" id="cleaning_transport">
-          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
-          <div class="seg-option" onclick="selectSeg(this)">No</div>
+          <label class="check-pill"><input type="checkbox" value="residential" data-ind="cleaning" data-field="skills"> <span data-es="Residencial" data-en="Residential"></span></label>
+          <label class="check-pill"><input type="checkbox" value="commercial" data-ind="cleaning" data-field="skills"> <span data-es="Comercial / Oficinas" data-en="Commercial / Offices"></span></label>
+          <label class="check-pill"><input type="checkbox" value="industrial" data-ind="cleaning" data-field="skills"> <span>Industrial</span></label>
+          <label class="check-pill"><input type="checkbox" value="post_construction" data-ind="cleaning" data-field="skills"> <span data-es="Post-construcci&oacute;n" data-en="Post-construction"></span></label>
+          <label class="check-pill"><input type="checkbox" value="windows" data-ind="cleaning" data-field="skills"> <span data-es="Ventanas" data-en="Windows"></span></label>
+          <label class="check-pill"><input type="checkbox" value="carpet" data-ind="cleaning" data-field="skills"> <span data-es="Alfombras" data-en="Carpet"></span></label>
+          <label class="check-pill"><input type="checkbox" value="floor_machines" data-ind="cleaning" data-field="skills"> <span data-es="M&aacute;quinas de piso" data-en="Floor Machines"></span></label>
         </div>
       </div>
       <div class="field">
@@ -845,39 +790,20 @@
 <!-- ==================== INDUSTRY: KITCHEN ==================== -->
 <div class="industry-block" id="ind-kitchen">
   <div class="section">
-    <div class="section-title"><span data-es="Cocina" data-en="Kitchen"></span></div>
+    <div class="section-title"><span data-es="Cocina &mdash; &iquest;Qu&eacute; sabes hacer?" data-en="Kitchen &mdash; What can you do?"></span></div>
     <div class="card">
       <div class="field">
-        <div class="field-label" data-es="Certificado de Manipulaci&oacute;n de Alimentos" data-en="Food Handler Certificate"></div>
-        <div class="segmented" id="kitchen_food_handler">
-          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
-          <div class="seg-option" onclick="selectSeg(this)">No</div>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label">Smart Serve</div>
-        <div class="segmented" id="kitchen_smart_serve">
-          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
-          <div class="seg-option" onclick="selectSeg(this)">No</div>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="Tipo de posici&oacute;n" data-en="Position type"></div>
+        <div class="field-label" data-es="Selecciona tus habilidades" data-en="Select your skills"></div>
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
-          <label class="check-pill"><input type="checkbox" value="prep_cook" data-ind="kitchen" data-field="position"> <span data-es="Preparaci&oacute;n" data-en="Prep Cook"></span></label>
-          <label class="check-pill"><input type="checkbox" value="line_cook" data-ind="kitchen" data-field="position"> <span data-es="L&iacute;nea" data-en="Line Cook"></span></label>
-          <label class="check-pill"><input type="checkbox" value="grill" data-ind="kitchen" data-field="position"> <span data-es="Parrilla" data-en="Grill"></span></label>
-          <label class="check-pill"><input type="checkbox" value="dishwasher" data-ind="kitchen" data-field="position"> <span data-es="Lavaplatos" data-en="Dishwasher"></span></label>
-          <label class="check-pill"><input type="checkbox" value="sous_chef" data-ind="kitchen" data-field="position"> <span>Sous Chef</span></label>
-          <label class="check-pill"><input type="checkbox" value="chef" data-ind="kitchen" data-field="position"> <span>Chef</span></label>
-          <label class="check-pill"><input type="checkbox" value="pastry" data-ind="kitchen" data-field="position"> <span data-es="Reposter&iacute;a" data-en="Pastry"></span></label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="Cuchillos propios" data-en="Own knife kit"></div>
-        <div class="segmented" id="kitchen_knives">
-          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
-          <div class="seg-option" onclick="selectSeg(this)">No</div>
+          <label class="check-pill"><input type="checkbox" value="prep_cook" data-ind="kitchen" data-field="skills"> <span data-es="Preparaci&oacute;n" data-en="Prep Cook"></span></label>
+          <label class="check-pill"><input type="checkbox" value="line_cook" data-ind="kitchen" data-field="skills"> <span data-es="L&iacute;nea" data-en="Line Cook"></span></label>
+          <label class="check-pill"><input type="checkbox" value="grill" data-ind="kitchen" data-field="skills"> <span data-es="Parrilla" data-en="Grill"></span></label>
+          <label class="check-pill"><input type="checkbox" value="dishwasher" data-ind="kitchen" data-field="skills"> <span data-es="Lavaplatos" data-en="Dishwasher"></span></label>
+          <label class="check-pill"><input type="checkbox" value="sous_chef" data-ind="kitchen" data-field="skills"> <span>Sous Chef</span></label>
+          <label class="check-pill"><input type="checkbox" value="chef" data-ind="kitchen" data-field="skills"> <span>Chef</span></label>
+          <label class="check-pill"><input type="checkbox" value="pastry" data-ind="kitchen" data-field="skills"> <span data-es="Reposter&iacute;a" data-en="Pastry"></span></label>
+          <label class="check-pill"><input type="checkbox" value="bakery" data-ind="kitchen" data-field="skills"> <span data-es="Panader&iacute;a" data-en="Bakery"></span></label>
+          <label class="check-pill"><input type="checkbox" value="catering" data-ind="kitchen" data-field="skills"> <span>Catering</span></label>
         </div>
       </div>
       <div class="field">
@@ -898,34 +824,18 @@
 <!-- ==================== INDUSTRY: ELECTRICAL ==================== -->
 <div class="industry-block" id="ind-electrical">
   <div class="section">
-    <div class="section-title"><span data-es="Electricidad" data-en="Electrical"></span></div>
+    <div class="section-title"><span data-es="Electricidad &mdash; &iquest;Qu&eacute; sabes hacer?" data-en="Electrical &mdash; What can you do?"></span></div>
     <div class="card">
       <div class="field">
-        <div class="field-label" data-es="Licencia" data-en="License"></div>
+        <div class="field-label" data-es="Selecciona tus habilidades" data-en="Select your skills"></div>
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
-          <label class="check-pill"><input type="radio" name="electrical_license" value="309A" data-ind="electrical" data-field="license"> <span>309A</span></label>
-          <label class="check-pill"><input type="radio" name="electrical_license" value="442A" data-ind="electrical" data-field="license"> <span>442A</span></label>
-          <label class="check-pill"><input type="radio" name="electrical_license" value="apprentice" data-ind="electrical" data-field="license"> <span data-es="Aprendiz" data-en="Apprentice"></span></label>
-          <label class="check-pill"><input type="radio" name="electrical_license" value="none" data-ind="electrical" data-field="license"> <span data-es="Ninguna" data-en="None"></span></label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="N&uacute;mero de licencia ESA" data-en="ESA licence number"></div>
-        <input class="field-input" type="text" id="electrical_esa" data-ph-es="N&uacute;mero (si aplica)" data-ph-en="Number (if applicable)">
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="Tipo de experiencia" data-en="Experience type"></div>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
-          <label class="check-pill"><input type="checkbox" value="residential" data-ind="electrical" data-field="type"> <span data-es="Residencial" data-en="Residential"></span></label>
-          <label class="check-pill"><input type="checkbox" value="commercial" data-ind="electrical" data-field="type"> <span data-es="Comercial" data-en="Commercial"></span></label>
-          <label class="check-pill"><input type="checkbox" value="industrial" data-ind="electrical" data-field="type"> <span>Industrial</span></label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="Lectura de planos" data-en="Blueprint reading"></div>
-        <div class="segmented" id="electrical_blueprints">
-          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
-          <div class="seg-option" onclick="selectSeg(this)">No</div>
+          <label class="check-pill"><input type="checkbox" value="residential_wiring" data-ind="electrical" data-field="skills"> <span data-es="Cableado residencial" data-en="Residential Wiring"></span></label>
+          <label class="check-pill"><input type="checkbox" value="commercial_wiring" data-ind="electrical" data-field="skills"> <span data-es="Cableado comercial" data-en="Commercial Wiring"></span></label>
+          <label class="check-pill"><input type="checkbox" value="industrial" data-ind="electrical" data-field="skills"> <span>Industrial</span></label>
+          <label class="check-pill"><input type="checkbox" value="panels" data-ind="electrical" data-field="skills"> <span data-es="Paneles" data-en="Panels"></span></label>
+          <label class="check-pill"><input type="checkbox" value="lighting" data-ind="electrical" data-field="skills"> <span data-es="Iluminaci&oacute;n" data-en="Lighting"></span></label>
+          <label class="check-pill"><input type="checkbox" value="conduit" data-ind="electrical" data-field="skills"> <span data-es="Tuber&iacute;a/Conduit" data-en="Conduit"></span></label>
+          <label class="check-pill"><input type="checkbox" value="troubleshooting" data-ind="electrical" data-field="skills"> <span data-es="Diagn&oacute;stico" data-en="Troubleshooting"></span></label>
         </div>
       </div>
       <div class="field">
@@ -946,36 +856,18 @@
 <!-- ==================== INDUSTRY: PAINTING ==================== -->
 <div class="industry-block" id="ind-painting">
   <div class="section">
-    <div class="section-title"><span data-es="Pintura" data-en="Painting"></span></div>
+    <div class="section-title"><span data-es="Pintura &mdash; &iquest;Qu&eacute; sabes hacer?" data-en="Painting &mdash; What can you do?"></span></div>
     <div class="card">
       <div class="field">
-        <div class="field-label" data-es="Tipo de pintura" data-en="Painting type"></div>
+        <div class="field-label" data-es="Selecciona tus habilidades" data-en="Select your skills"></div>
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
-          <label class="check-pill"><input type="checkbox" value="interior" data-ind="painting" data-field="type"> <span>Interior</span></label>
-          <label class="check-pill"><input type="checkbox" value="exterior" data-ind="painting" data-field="type"> <span>Exterior</span></label>
-          <label class="check-pill"><input type="checkbox" value="spray" data-ind="painting" data-field="type"> <span>Spray</span></label>
-          <label class="check-pill"><input type="checkbox" value="industrial" data-ind="painting" data-field="type"> <span>Industrial</span></label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="Escala" data-en="Scale"></div>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
-          <label class="check-pill"><input type="checkbox" value="residential" data-ind="painting" data-field="scale"> <span data-es="Residencial" data-en="Residential"></span></label>
-          <label class="check-pill"><input type="checkbox" value="commercial" data-ind="painting" data-field="scale"> <span data-es="Comercial" data-en="Commercial"></span></label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="Equipo propio" data-en="Own equipment"></div>
-        <div class="segmented" id="painting_equipment">
-          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
-          <div class="seg-option" onclick="selectSeg(this)">No</div>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="C&oacute;modo trabajando en alturas" data-en="Comfortable working at heights"></div>
-        <div class="segmented" id="painting_heights">
-          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
-          <div class="seg-option" onclick="selectSeg(this)">No</div>
+          <label class="check-pill"><input type="checkbox" value="interior" data-ind="painting" data-field="skills"> <span>Interior</span></label>
+          <label class="check-pill"><input type="checkbox" value="exterior" data-ind="painting" data-field="skills"> <span>Exterior</span></label>
+          <label class="check-pill"><input type="checkbox" value="spray" data-ind="painting" data-field="skills"> <span>Spray</span></label>
+          <label class="check-pill"><input type="checkbox" value="residential" data-ind="painting" data-field="skills"> <span data-es="Residencial" data-en="Residential"></span></label>
+          <label class="check-pill"><input type="checkbox" value="commercial" data-ind="painting" data-field="skills"> <span data-es="Comercial" data-en="Commercial"></span></label>
+          <label class="check-pill"><input type="checkbox" value="drywall_finishing" data-ind="painting" data-field="skills"> <span data-es="Acabado de Drywall" data-en="Drywall Finishing"></span></label>
+          <label class="check-pill"><input type="checkbox" value="staining" data-ind="painting" data-field="skills"> <span data-es="Tintes/Barniz" data-en="Staining/Varnish"></span></label>
         </div>
       </div>
       <div class="field">
@@ -996,39 +888,18 @@
 <!-- ==================== INDUSTRY: SERVICE ==================== -->
 <div class="industry-block" id="ind-service">
   <div class="section">
-    <div class="section-title"><span data-es="Mesero / Servicio" data-en="Server / Service"></span></div>
+    <div class="section-title"><span data-es="Mesero / Servicio &mdash; &iquest;Qu&eacute; sabes hacer?" data-en="Server / Service &mdash; What can you do?"></span></div>
     <div class="card">
       <div class="field">
-        <div class="field-label">Smart Serve <span class="optional" data-es="(obligatorio en Ontario)" data-en="(required in Ontario)"></span></div>
-        <div class="segmented" id="service_smart_serve">
-          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
-          <div class="seg-option" onclick="selectSeg(this)">No</div>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="Certificado de Manipulaci&oacute;n de Alimentos" data-en="Food Handler Certificate"></div>
-        <div class="segmented" id="service_food_handler">
-          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
-          <div class="seg-option" onclick="selectSeg(this)">No</div>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="Tipo de establecimiento" data-en="Establishment type"></div>
+        <div class="field-label" data-es="Selecciona tus habilidades" data-en="Select your skills"></div>
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
-          <label class="check-pill"><input type="checkbox" value="fine_dining" data-ind="service" data-field="type"> <span>Fine Dining</span></label>
-          <label class="check-pill"><input type="checkbox" value="casual" data-ind="service" data-field="type"> <span>Casual</span></label>
-          <label class="check-pill"><input type="checkbox" value="bar" data-ind="service" data-field="type"> <span>Bar</span></label>
-          <label class="check-pill"><input type="checkbox" value="catering" data-ind="service" data-field="type"> <span>Catering</span></label>
-          <label class="check-pill"><input type="checkbox" value="hotel" data-ind="service" data-field="type"> <span>Hotel</span></label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="Sistemas POS que conoces" data-en="POS systems you know"></div>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
-          <label class="check-pill"><input type="checkbox" value="toast" data-ind="service" data-field="pos"> <span>Toast</span></label>
-          <label class="check-pill"><input type="checkbox" value="square" data-ind="service" data-field="pos"> <span>Square</span></label>
-          <label class="check-pill"><input type="checkbox" value="lightspeed" data-ind="service" data-field="pos"> <span>Lightspeed</span></label>
-          <label class="check-pill"><input type="checkbox" value="other_pos" data-ind="service" data-field="pos"> <span data-es="Otro" data-en="Other"></span></label>
+          <label class="check-pill"><input type="checkbox" value="waiter" data-ind="service" data-field="skills"> <span data-es="Mesero" data-en="Waiter"></span></label>
+          <label class="check-pill"><input type="checkbox" value="bartender" data-ind="service" data-field="skills"> <span>Bartender</span></label>
+          <label class="check-pill"><input type="checkbox" value="host" data-ind="service" data-field="skills"> <span data-es="Host / Recepci&oacute;n" data-en="Host"></span></label>
+          <label class="check-pill"><input type="checkbox" value="barista" data-ind="service" data-field="skills"> <span>Barista</span></label>
+          <label class="check-pill"><input type="checkbox" value="catering" data-ind="service" data-field="skills"> <span>Catering</span></label>
+          <label class="check-pill"><input type="checkbox" value="fine_dining" data-ind="service" data-field="skills"> <span>Fine Dining</span></label>
+          <label class="check-pill"><input type="checkbox" value="fast_food" data-ind="service" data-field="skills"> <span data-es="Comida r&aacute;pida" data-en="Fast Food"></span></label>
         </div>
       </div>
       <div class="field">
@@ -1049,51 +920,17 @@
 <!-- ==================== INDUSTRY: WAREHOUSE ==================== -->
 <div class="industry-block" id="ind-warehouse">
   <div class="section">
-    <div class="section-title"><span data-es="Almac&eacute;n" data-en="Warehouse"></span></div>
+    <div class="section-title"><span data-es="Almac&eacute;n &mdash; &iquest;Qu&eacute; sabes hacer?" data-en="Warehouse &mdash; What can you do?"></span></div>
     <div class="card">
       <div class="field">
-        <div class="field-label" data-es="Certificado de montacargas" data-en="Forklift certificate"></div>
-        <div class="segmented" id="warehouse_forklift">
-          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
-          <div class="seg-option" onclick="selectSeg(this)">No</div>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="Tipo de montacargas" data-en="Forklift type"></div>
+        <div class="field-label" data-es="Selecciona tus habilidades" data-en="Select your skills"></div>
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
-          <label class="check-pill"><input type="checkbox" value="counterbalance" data-ind="warehouse" data-field="forklift_type"> <span>Counterbalance</span></label>
-          <label class="check-pill"><input type="checkbox" value="reach_truck" data-ind="warehouse" data-field="forklift_type"> <span>Reach Truck</span></label>
-          <label class="check-pill"><input type="checkbox" value="order_picker" data-ind="warehouse" data-field="forklift_type"> <span>Order Picker</span></label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="Experiencia con RF Scanner" data-en="RF Scanner experience"></div>
-        <div class="segmented" id="warehouse_rf">
-          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
-          <div class="seg-option" onclick="selectSeg(this)">No</div>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="Experiencia en cuarto fr&iacute;o" data-en="Cold storage experience"></div>
-        <div class="segmented" id="warehouse_cold">
-          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
-          <div class="seg-option" onclick="selectSeg(this)">No</div>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="Capacidad de carga" data-en="Lifting capacity"></div>
-        <div class="segmented" id="warehouse_lifting">
-          <div class="seg-option" onclick="selectSeg(this)">25 lbs</div>
-          <div class="seg-option" onclick="selectSeg(this)">50 lbs</div>
-          <div class="seg-option" onclick="selectSeg(this)">75+ lbs</div>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="Turno preferido" data-en="Preferred shift"></div>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
-          <label class="check-pill"><input type="checkbox" value="day" data-ind="warehouse" data-field="shift"> <span data-es="D&iacute;a" data-en="Day"></span></label>
-          <label class="check-pill"><input type="checkbox" value="night" data-ind="warehouse" data-field="shift"> <span data-es="Noche" data-en="Night"></span></label>
-          <label class="check-pill"><input type="checkbox" value="rotating" data-ind="warehouse" data-field="shift"> <span data-es="Rotativo" data-en="Rotating"></span></label>
+          <label class="check-pill"><input type="checkbox" value="forklift" data-ind="warehouse" data-field="skills"> <span data-es="Montacargas" data-en="Forklift"></span></label>
+          <label class="check-pill"><input type="checkbox" value="picking_packing" data-ind="warehouse" data-field="skills"> <span>Picking / Packing</span></label>
+          <label class="check-pill"><input type="checkbox" value="shipping_receiving" data-ind="warehouse" data-field="skills"> <span data-es="Env&iacute;o / Recepci&oacute;n" data-en="Shipping / Receiving"></span></label>
+          <label class="check-pill"><input type="checkbox" value="inventory" data-ind="warehouse" data-field="skills"> <span data-es="Inventario" data-en="Inventory"></span></label>
+          <label class="check-pill"><input type="checkbox" value="loading" data-ind="warehouse" data-field="skills"> <span data-es="Carga / Descarga" data-en="Loading / Unloading"></span></label>
+          <label class="check-pill"><input type="checkbox" value="cold_storage" data-ind="warehouse" data-field="skills"> <span data-es="Cuarto fr&iacute;o" data-en="Cold Storage"></span></label>
         </div>
       </div>
       <div class="field">
@@ -1114,38 +951,20 @@
 <!-- ==================== INDUSTRY: MAINTENANCE ==================== -->
 <div class="industry-block" id="ind-maintenance">
   <div class="section">
-    <div class="section-title"><span data-es="Mantenimiento" data-en="Maintenance"></span></div>
+    <div class="section-title"><span data-es="Mantenimiento &mdash; &iquest;Qu&eacute; sabes hacer?" data-en="Maintenance &mdash; What can you do?"></span></div>
     <div class="card">
       <div class="field">
-        <div class="field-label" data-es="Tipo de edificio" data-en="Building type"></div>
+        <div class="field-label" data-es="Selecciona tus habilidades" data-en="Select your skills"></div>
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
-          <label class="check-pill"><input type="checkbox" value="residential" data-ind="maintenance" data-field="building_type"> <span data-es="Residencial" data-en="Residential"></span></label>
-          <label class="check-pill"><input type="checkbox" value="commercial" data-ind="maintenance" data-field="building_type"> <span data-es="Comercial" data-en="Commercial"></span></label>
-          <label class="check-pill"><input type="checkbox" value="institutional" data-ind="maintenance" data-field="building_type"> <span data-es="Institucional" data-en="Institutional"></span></label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="Sistemas que conoces" data-en="Systems you know"></div>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
-          <label class="check-pill"><input type="checkbox" value="hvac" data-ind="maintenance" data-field="systems"> <span>HVAC</span></label>
-          <label class="check-pill"><input type="checkbox" value="plumbing" data-ind="maintenance" data-field="systems"> <span data-es="Plomer&iacute;a" data-en="Plumbing"></span></label>
-          <label class="check-pill"><input type="checkbox" value="electrical" data-ind="maintenance" data-field="systems"> <span data-es="El&eacute;ctrico" data-en="Electrical"></span></label>
-          <label class="check-pill"><input type="checkbox" value="painting" data-ind="maintenance" data-field="systems"> <span data-es="Pintura" data-en="Painting"></span></label>
-          <label class="check-pill"><input type="checkbox" value="general" data-ind="maintenance" data-field="systems"> <span>General</span></label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="Disponibilidad on-call" data-en="On-call availability"></div>
-        <div class="segmented" id="maintenance_oncall">
-          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
-          <div class="seg-option" onclick="selectSeg(this)">No</div>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="Licencia de conducir" data-en="Driver's license"></div>
-        <div class="segmented" id="maintenance_license">
-          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
-          <div class="seg-option" onclick="selectSeg(this)">No</div>
+          <label class="check-pill"><input type="checkbox" value="plumbing" data-ind="maintenance" data-field="skills"> <span data-es="Plomer&iacute;a" data-en="Plumbing"></span></label>
+          <label class="check-pill"><input type="checkbox" value="electrical" data-ind="maintenance" data-field="skills"> <span data-es="El&eacute;ctrico" data-en="Electrical"></span></label>
+          <label class="check-pill"><input type="checkbox" value="hvac" data-ind="maintenance" data-field="skills"> <span>HVAC</span></label>
+          <label class="check-pill"><input type="checkbox" value="painting" data-ind="maintenance" data-field="skills"> <span data-es="Pintura" data-en="Painting"></span></label>
+          <label class="check-pill"><input type="checkbox" value="drywall" data-ind="maintenance" data-field="skills"> <span>Drywall</span></label>
+          <label class="check-pill"><input type="checkbox" value="flooring" data-ind="maintenance" data-field="skills"> <span data-es="Pisos" data-en="Flooring"></span></label>
+          <label class="check-pill"><input type="checkbox" value="landscaping" data-ind="maintenance" data-field="skills"> <span data-es="Jardiner&iacute;a" data-en="Landscaping"></span></label>
+          <label class="check-pill"><input type="checkbox" value="snow_removal" data-ind="maintenance" data-field="skills"> <span data-es="Remoci&oacute;n de nieve" data-en="Snow Removal"></span></label>
+          <label class="check-pill"><input type="checkbox" value="general_repairs" data-ind="maintenance" data-field="skills"> <span data-es="Reparaciones generales" data-en="General Repairs"></span></label>
         </div>
       </div>
       <div class="field">
@@ -1166,51 +985,30 @@
 <!-- ==================== INDUSTRY: GENERAL LABOUR ==================== -->
 <div class="industry-block" id="ind-general_labour">
   <div class="section">
-    <div class="section-title"><span data-es="Trabajo General" data-en="General Labour"></span></div>
+    <div class="section-title"><span data-es="Trabajo General &mdash; &iquest;Qu&eacute; sabes hacer?" data-en="General Labour &mdash; What can you do?"></span></div>
     <div class="card">
       <div class="field">
-        <div class="field-label" data-es="Capacidad de carga" data-en="Lifting capacity"></div>
-        <div class="segmented" id="general_lifting">
-          <div class="seg-option" onclick="selectSeg(this)">25 lbs</div>
-          <div class="seg-option" onclick="selectSeg(this)">50 lbs</div>
-          <div class="seg-option" onclick="selectSeg(this)">75+ lbs</div>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="C&oacute;modo trabajando al aire libre" data-en="Comfortable working outdoors"></div>
-        <div class="segmented" id="general_outdoors">
-          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
-          <div class="seg-option" onclick="selectSeg(this)">No</div>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="Familiaridad con herramientas" data-en="Tool familiarity"></div>
+        <div class="field-label" data-es="Selecciona tus habilidades" data-en="Select your skills"></div>
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
-          <label class="check-pill"><input type="checkbox" value="hand_tools" data-ind="general_labour" data-field="tools"> <span data-es="Manuales" data-en="Hand Tools"></span></label>
-          <label class="check-pill"><input type="checkbox" value="power_tools" data-ind="general_labour" data-field="tools"> <span data-es="El&eacute;ctricas" data-en="Power Tools"></span></label>
+          <label class="check-pill"><input type="checkbox" value="shoveling" data-ind="general_labour" data-field="skills"> <span data-es="Palear" data-en="Shoveling"></span></label>
+          <label class="check-pill"><input type="checkbox" value="lifting" data-ind="general_labour" data-field="skills"> <span data-es="Carga pesada" data-en="Heavy Lifting"></span></label>
+          <label class="check-pill"><input type="checkbox" value="flagging" data-ind="general_labour" data-field="skills"> <span data-es="Se&ntilde;alizaci&oacute;n" data-en="Flagging"></span></label>
+          <label class="check-pill"><input type="checkbox" value="cleanup" data-ind="general_labour" data-field="skills"> <span data-es="Limpieza de sitio" data-en="Site Cleanup"></span></label>
+          <label class="check-pill"><input type="checkbox" value="landscaping" data-ind="general_labour" data-field="skills"> <span data-es="Jardiner&iacute;a" data-en="Landscaping"></span></label>
+          <label class="check-pill"><input type="checkbox" value="moving" data-ind="general_labour" data-field="skills"> <span data-es="Mudanzas" data-en="Moving"></span></label>
+          <label class="check-pill"><input type="checkbox" value="snow_removal" data-ind="general_labour" data-field="skills"> <span data-es="Remoci&oacute;n de nieve" data-en="Snow Removal"></span></label>
         </div>
       </div>
       <div class="field">
-        <div class="field-label" data-es="Botas de seguridad propias" data-en="Own safety boots"></div>
-        <div class="segmented" id="general_boots">
-          <div class="seg-option" onclick="selectSeg(this)" data-es="S&iacute;" data-en="Yes"></div>
-          <div class="seg-option" onclick="selectSeg(this)">No</div>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="Transporte al sitio" data-en="Transportation to site"></div>
-        <div class="segmented" id="general_transport">
-          <div class="seg-option" onclick="selectSeg(this)" data-es="Auto propio" data-en="Own car"></div>
-          <div class="seg-option" onclick="selectSeg(this)" data-es="Transporte p&uacute;blico" data-en="Transit"></div>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label" data-es="Disponibilidad" data-en="Availability"></div>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
-          <label class="check-pill"><input type="checkbox" value="days" data-ind="general_labour" data-field="availability"> <span data-es="D&iacute;as" data-en="Days"></span></label>
-          <label class="check-pill"><input type="checkbox" value="nights" data-ind="general_labour" data-field="availability"> <span data-es="Noches" data-en="Nights"></span></label>
-          <label class="check-pill"><input type="checkbox" value="weekends" data-ind="general_labour" data-field="availability"> <span data-es="Fines de semana" data-en="Weekends"></span></label>
-        </div>
+        <div class="field-label" data-es="A&ntilde;os de experiencia" data-en="Years of experience"></div>
+        <select class="years-select" id="general_labour_years">
+          <option value="" disabled selected data-es="Seleccionar" data-en="Select"></option>
+          <option value="0-1" data-es="Menos de 1 a&ntilde;o" data-en="Less than 1 year"></option>
+          <option value="1-3" data-es="1-3 a&ntilde;os" data-en="1-3 years"></option>
+          <option value="3-5" data-es="3-5 a&ntilde;os" data-en="3-5 years"></option>
+          <option value="5-10" data-es="5-10 a&ntilde;os" data-en="5-10 years"></option>
+          <option value="10+" data-es="10+ a&ntilde;os" data-en="10+ years"></option>
+        </select>
       </div>
     </div>
   </div>
@@ -1703,110 +1501,16 @@ function getRadioValue(name) {
 
 function collectIndustryData() {
   var data = {};
+  var industries = ['construction', 'mechanic', 'cleaning', 'kitchen', 'electrical', 'painting', 'service', 'warehouse', 'maintenance', 'general_labour'];
 
-  if (selectedIndustries.indexOf('construction') !== -1) {
-    data.construction = {
-      years: document.getElementById('construction_years').value || null,
-      type: getCheckedValues('construction', 'type'),
-      certs: getCheckedValues('construction', 'certs'),
-      equipment: getCheckedValues('construction', 'equipment'),
-      ppe: getCheckedValues('construction', 'ppe'),
-      own_transport: getSegValue('construction_transport')
+  industries.forEach(function(ind) {
+    if (selectedIndustries.indexOf(ind) === -1) return;
+    var yearsEl = document.getElementById(ind + '_years');
+    data[ind] = {
+      skills: getCheckedValues(ind, 'skills'),
+      years: yearsEl ? yearsEl.value || null : null
     };
-  }
-
-  if (selectedIndustries.indexOf('mechanic') !== -1) {
-    data.mechanic = {
-      type: getCheckedValues('mechanic', 'type'),
-      certs: getCheckedValues('mechanic', 'certs'),
-      trade_license: document.getElementById('mechanic_license').value.trim() || null,
-      own_tools: getSegValue('mechanic_tools'),
-      years: document.getElementById('mechanic_years').value || null
-    };
-  }
-
-  if (selectedIndustries.indexOf('cleaning') !== -1) {
-    data.cleaning = {
-      type: getCheckedValues('cleaning', 'type'),
-      whmis: getSegValue('cleaning_whmis'),
-      floor_machines: getSegValue('cleaning_machines'),
-      own_transport: getSegValue('cleaning_transport'),
-      years: document.getElementById('cleaning_years').value || null
-    };
-  }
-
-  if (selectedIndustries.indexOf('kitchen') !== -1) {
-    data.kitchen = {
-      food_handler_cert: getSegValue('kitchen_food_handler'),
-      smart_serve: getSegValue('kitchen_smart_serve'),
-      position: getCheckedValues('kitchen', 'position'),
-      own_knives: getSegValue('kitchen_knives'),
-      years: document.getElementById('kitchen_years').value || null
-    };
-  }
-
-  if (selectedIndustries.indexOf('electrical') !== -1) {
-    data.electrical = {
-      license: getRadioValue('electrical_license'),
-      esa_number: document.getElementById('electrical_esa').value.trim() || null,
-      type: getCheckedValues('electrical', 'type'),
-      blueprints: getSegValue('electrical_blueprints'),
-      years: document.getElementById('electrical_years').value || null
-    };
-  }
-
-  if (selectedIndustries.indexOf('painting') !== -1) {
-    data.painting = {
-      type: getCheckedValues('painting', 'type'),
-      scale: getCheckedValues('painting', 'scale'),
-      own_equipment: getSegValue('painting_equipment'),
-      comfortable_heights: getSegValue('painting_heights'),
-      years: document.getElementById('painting_years').value || null
-    };
-  }
-
-  if (selectedIndustries.indexOf('service') !== -1) {
-    data.service = {
-      smart_serve: getSegValue('service_smart_serve'),
-      food_handler: getSegValue('service_food_handler'),
-      type: getCheckedValues('service', 'type'),
-      pos_systems: getCheckedValues('service', 'pos'),
-      years: document.getElementById('service_years').value || null
-    };
-  }
-
-  if (selectedIndustries.indexOf('warehouse') !== -1) {
-    data.warehouse = {
-      forklift_cert: getSegValue('warehouse_forklift'),
-      forklift_type: getCheckedValues('warehouse', 'forklift_type'),
-      rf_scanner: getSegValue('warehouse_rf'),
-      cold_storage: getSegValue('warehouse_cold'),
-      lifting: getSegValue('warehouse_lifting'),
-      shift: getCheckedValues('warehouse', 'shift'),
-      years: document.getElementById('warehouse_years').value || null
-    };
-  }
-
-  if (selectedIndustries.indexOf('maintenance') !== -1) {
-    data.maintenance = {
-      building_type: getCheckedValues('maintenance', 'building_type'),
-      systems: getCheckedValues('maintenance', 'systems'),
-      oncall: getSegValue('maintenance_oncall'),
-      drivers_license: getSegValue('maintenance_license'),
-      years: document.getElementById('maintenance_years').value || null
-    };
-  }
-
-  if (selectedIndustries.indexOf('general_labour') !== -1) {
-    data.general_labour = {
-      lifting: getSegValue('general_lifting'),
-      comfortable_outdoors: getSegValue('general_outdoors'),
-      tools: getCheckedValues('general_labour', 'tools'),
-      own_boots: getSegValue('general_boots'),
-      transport: getSegValue('general_transport'),
-      availability: getCheckedValues('general_labour', 'availability')
-    };
-  }
+  });
 
   return data;
 }
