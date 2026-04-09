@@ -667,6 +667,30 @@
         <span class="ind-icon">&#x1F6E0;&#xFE0F;</span>
         <span class="ind-label" data-es="Mantenimiento" data-en="Maintenance"></span>
       </div>
+      <div class="industry-pill" onclick="toggleIndustry(this)" data-industry="carpentry">
+        <span class="ind-icon">&#x1FA9A;</span>
+        <span class="ind-label" data-es="Carpinter&iacute;a" data-en="Carpentry"></span>
+      </div>
+      <div class="industry-pill" onclick="toggleIndustry(this)" data-industry="plumbing">
+        <span class="ind-icon">&#x1F6BF;</span>
+        <span class="ind-label" data-es="Plomer&iacute;a" data-en="Plumbing"></span>
+      </div>
+      <div class="industry-pill" onclick="toggleIndustry(this)" data-industry="welding">
+        <span class="ind-icon">&#x1F525;</span>
+        <span class="ind-label" data-es="Soldadura" data-en="Welding"></span>
+      </div>
+      <div class="industry-pill" onclick="toggleIndustry(this)" data-industry="landscaping">
+        <span class="ind-icon">&#x1F333;</span>
+        <span class="ind-label" data-es="Jardiner&iacute;a / Landscaping" data-en="Landscaping"></span>
+      </div>
+      <div class="industry-pill" onclick="toggleIndustry(this)" data-industry="moving">
+        <span class="ind-icon">&#x1F69A;</span>
+        <span class="ind-label" data-es="Mudanzas" data-en="Moving"></span>
+      </div>
+      <div class="industry-pill" onclick="toggleIndustry(this)" data-industry="delivery">
+        <span class="ind-icon">&#x1F4E8;</span>
+        <span class="ind-label" data-es="Delivery / Conductor" data-en="Delivery / Driver"></span>
+      </div>
       <div class="industry-pill" onclick="toggleIndustry(this)" data-industry="general_labour">
         <span class="ind-icon">&#x1F4AA;</span>
         <span class="ind-label" data-es="Trabajo General" data-en="General Labour"></span>
@@ -970,6 +994,206 @@
       <div class="field">
         <div class="field-label" data-es="A&ntilde;os de experiencia" data-en="Years of experience"></div>
         <select class="years-select" id="maintenance_years">
+          <option value="" disabled selected data-es="Seleccionar" data-en="Select"></option>
+          <option value="0-1" data-es="Menos de 1 a&ntilde;o" data-en="Less than 1 year"></option>
+          <option value="1-3" data-es="1-3 a&ntilde;os" data-en="1-3 years"></option>
+          <option value="3-5" data-es="3-5 a&ntilde;os" data-en="3-5 years"></option>
+          <option value="5-10" data-es="5-10 a&ntilde;os" data-en="5-10 years"></option>
+          <option value="10+" data-es="10+ a&ntilde;os" data-en="10+ years"></option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== INDUSTRY: CARPENTRY ==================== -->
+<div class="industry-block" id="ind-carpentry">
+  <div class="section">
+    <div class="section-title"><span data-es="Carpinter&iacute;a &mdash; &iquest;Qu&eacute; sabes hacer?" data-en="Carpentry &mdash; What can you do?"></span></div>
+    <div class="card">
+      <div class="field">
+        <div class="field-label" data-es="Selecciona tus habilidades" data-en="Select your skills"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+          <label class="check-pill"><input type="checkbox" value="framing" data-ind="carpentry" data-field="skills"> <span data-es="Estructura / Framing" data-en="Framing"></span></label>
+          <label class="check-pill"><input type="checkbox" value="trim" data-ind="carpentry" data-field="skills"> <span data-es="Molduras / Trim" data-en="Trim / Molding"></span></label>
+          <label class="check-pill"><input type="checkbox" value="cabinets" data-ind="carpentry" data-field="skills"> <span data-es="Gabinetes" data-en="Cabinets"></span></label>
+          <label class="check-pill"><input type="checkbox" value="doors_windows" data-ind="carpentry" data-field="skills"> <span data-es="Puertas / Ventanas" data-en="Doors / Windows"></span></label>
+          <label class="check-pill"><input type="checkbox" value="decks" data-ind="carpentry" data-field="skills"> <span>Decks / Patios</span></label>
+          <label class="check-pill"><input type="checkbox" value="stairs" data-ind="carpentry" data-field="skills"> <span data-es="Escaleras" data-en="Stairs"></span></label>
+          <label class="check-pill"><input type="checkbox" value="furniture" data-ind="carpentry" data-field="skills"> <span data-es="Muebles" data-en="Furniture"></span></label>
+          <label class="check-pill"><input type="checkbox" value="flooring" data-ind="carpentry" data-field="skills"> <span data-es="Pisos de madera" data-en="Hardwood Flooring"></span></label>
+          <label class="check-pill"><input type="checkbox" value="drywall" data-ind="carpentry" data-field="skills"> <span>Drywall</span></label>
+          <label class="check-pill"><input type="checkbox" value="finishing" data-ind="carpentry" data-field="skills"> <span data-es="Acabados finos" data-en="Finishing"></span></label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="A&ntilde;os de experiencia" data-en="Years of experience"></div>
+        <select class="years-select" id="carpentry_years">
+          <option value="" disabled selected data-es="Seleccionar" data-en="Select"></option>
+          <option value="0-1" data-es="Menos de 1 a&ntilde;o" data-en="Less than 1 year"></option>
+          <option value="1-3" data-es="1-3 a&ntilde;os" data-en="1-3 years"></option>
+          <option value="3-5" data-es="3-5 a&ntilde;os" data-en="3-5 years"></option>
+          <option value="5-10" data-es="5-10 a&ntilde;os" data-en="5-10 years"></option>
+          <option value="10+" data-es="10+ a&ntilde;os" data-en="10+ years"></option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== INDUSTRY: PLUMBING ==================== -->
+<div class="industry-block" id="ind-plumbing">
+  <div class="section">
+    <div class="section-title"><span data-es="Plomer&iacute;a &mdash; &iquest;Qu&eacute; sabes hacer?" data-en="Plumbing &mdash; What can you do?"></span></div>
+    <div class="card">
+      <div class="field">
+        <div class="field-label" data-es="Selecciona tus habilidades" data-en="Select your skills"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+          <label class="check-pill"><input type="checkbox" value="residential" data-ind="plumbing" data-field="skills"> <span data-es="Residencial" data-en="Residential"></span></label>
+          <label class="check-pill"><input type="checkbox" value="commercial" data-ind="plumbing" data-field="skills"> <span data-es="Comercial" data-en="Commercial"></span></label>
+          <label class="check-pill"><input type="checkbox" value="drains" data-ind="plumbing" data-field="skills"> <span data-es="Drenaje" data-en="Drains"></span></label>
+          <label class="check-pill"><input type="checkbox" value="water_heaters" data-ind="plumbing" data-field="skills"> <span data-es="Calentadores" data-en="Water Heaters"></span></label>
+          <label class="check-pill"><input type="checkbox" value="fixtures" data-ind="plumbing" data-field="skills"> <span data-es="Accesorios / Fixtures" data-en="Fixtures"></span></label>
+          <label class="check-pill"><input type="checkbox" value="rough_in" data-ind="plumbing" data-field="skills"> <span>Rough-in</span></label>
+          <label class="check-pill"><input type="checkbox" value="gas_fitting" data-ind="plumbing" data-field="skills"> <span data-es="Gas" data-en="Gas Fitting"></span></label>
+          <label class="check-pill"><input type="checkbox" value="backflow" data-ind="plumbing" data-field="skills"> <span>Backflow</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="A&ntilde;os de experiencia" data-en="Years of experience"></div>
+        <select class="years-select" id="plumbing_years">
+          <option value="" disabled selected data-es="Seleccionar" data-en="Select"></option>
+          <option value="0-1" data-es="Menos de 1 a&ntilde;o" data-en="Less than 1 year"></option>
+          <option value="1-3" data-es="1-3 a&ntilde;os" data-en="1-3 years"></option>
+          <option value="3-5" data-es="3-5 a&ntilde;os" data-en="3-5 years"></option>
+          <option value="5-10" data-es="5-10 a&ntilde;os" data-en="5-10 years"></option>
+          <option value="10+" data-es="10+ a&ntilde;os" data-en="10+ years"></option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== INDUSTRY: WELDING ==================== -->
+<div class="industry-block" id="ind-welding">
+  <div class="section">
+    <div class="section-title"><span data-es="Soldadura &mdash; &iquest;Qu&eacute; sabes hacer?" data-en="Welding &mdash; What can you do?"></span></div>
+    <div class="card">
+      <div class="field">
+        <div class="field-label" data-es="Selecciona tus habilidades" data-en="Select your skills"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+          <label class="check-pill"><input type="checkbox" value="mig" data-ind="welding" data-field="skills"> <span>MIG</span></label>
+          <label class="check-pill"><input type="checkbox" value="tig" data-ind="welding" data-field="skills"> <span>TIG</span></label>
+          <label class="check-pill"><input type="checkbox" value="stick" data-ind="welding" data-field="skills"> <span>Stick / SMAW</span></label>
+          <label class="check-pill"><input type="checkbox" value="flux_core" data-ind="welding" data-field="skills"> <span>Flux Core</span></label>
+          <label class="check-pill"><input type="checkbox" value="structural" data-ind="welding" data-field="skills"> <span data-es="Estructural" data-en="Structural"></span></label>
+          <label class="check-pill"><input type="checkbox" value="pipe" data-ind="welding" data-field="skills"> <span data-es="Tuber&iacute;a" data-en="Pipe"></span></label>
+          <label class="check-pill"><input type="checkbox" value="aluminum" data-ind="welding" data-field="skills"> <span data-es="Aluminio" data-en="Aluminum"></span></label>
+          <label class="check-pill"><input type="checkbox" value="stainless" data-ind="welding" data-field="skills"> <span data-es="Acero inoxidable" data-en="Stainless Steel"></span></label>
+          <label class="check-pill"><input type="checkbox" value="fabrication" data-ind="welding" data-field="skills"> <span data-es="Fabricaci&oacute;n" data-en="Fabrication"></span></label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="A&ntilde;os de experiencia" data-en="Years of experience"></div>
+        <select class="years-select" id="welding_years">
+          <option value="" disabled selected data-es="Seleccionar" data-en="Select"></option>
+          <option value="0-1" data-es="Menos de 1 a&ntilde;o" data-en="Less than 1 year"></option>
+          <option value="1-3" data-es="1-3 a&ntilde;os" data-en="1-3 years"></option>
+          <option value="3-5" data-es="3-5 a&ntilde;os" data-en="3-5 years"></option>
+          <option value="5-10" data-es="5-10 a&ntilde;os" data-en="5-10 years"></option>
+          <option value="10+" data-es="10+ a&ntilde;os" data-en="10+ years"></option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== INDUSTRY: LANDSCAPING ==================== -->
+<div class="industry-block" id="ind-landscaping">
+  <div class="section">
+    <div class="section-title"><span data-es="Landscaping &mdash; &iquest;Qu&eacute; sabes hacer?" data-en="Landscaping &mdash; What can you do?"></span></div>
+    <div class="card">
+      <div class="field">
+        <div class="field-label" data-es="Selecciona tus habilidades" data-en="Select your skills"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+          <label class="check-pill"><input type="checkbox" value="lawn_care" data-ind="landscaping" data-field="skills"> <span data-es="Cortar pasto" data-en="Lawn Care"></span></label>
+          <label class="check-pill"><input type="checkbox" value="garden" data-ind="landscaping" data-field="skills"> <span data-es="Jardiner&iacute;a" data-en="Garden / Planting"></span></label>
+          <label class="check-pill"><input type="checkbox" value="tree_trimming" data-ind="landscaping" data-field="skills"> <span data-es="Poda de &aacute;rboles" data-en="Tree Trimming"></span></label>
+          <label class="check-pill"><input type="checkbox" value="irrigation" data-ind="landscaping" data-field="skills"> <span data-es="Irrigaci&oacute;n" data-en="Irrigation"></span></label>
+          <label class="check-pill"><input type="checkbox" value="hardscape" data-ind="landscaping" data-field="skills"> <span data-es="Hardscape / Piedra" data-en="Hardscape / Stone"></span></label>
+          <label class="check-pill"><input type="checkbox" value="fencing" data-ind="landscaping" data-field="skills"> <span data-es="Cercas" data-en="Fencing"></span></label>
+          <label class="check-pill"><input type="checkbox" value="snow_removal" data-ind="landscaping" data-field="skills"> <span data-es="Remoci&oacute;n de nieve" data-en="Snow Removal"></span></label>
+          <label class="check-pill"><input type="checkbox" value="interlock" data-ind="landscaping" data-field="skills"> <span>Interlock / Paving</span></label>
+          <label class="check-pill"><input type="checkbox" value="sod" data-ind="landscaping" data-field="skills"> <span data-es="C&eacute;sped / Sod" data-en="Sod Installation"></span></label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="A&ntilde;os de experiencia" data-en="Years of experience"></div>
+        <select class="years-select" id="landscaping_years">
+          <option value="" disabled selected data-es="Seleccionar" data-en="Select"></option>
+          <option value="0-1" data-es="Menos de 1 a&ntilde;o" data-en="Less than 1 year"></option>
+          <option value="1-3" data-es="1-3 a&ntilde;os" data-en="1-3 years"></option>
+          <option value="3-5" data-es="3-5 a&ntilde;os" data-en="3-5 years"></option>
+          <option value="5-10" data-es="5-10 a&ntilde;os" data-en="5-10 years"></option>
+          <option value="10+" data-es="10+ a&ntilde;os" data-en="10+ years"></option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== INDUSTRY: MOVING ==================== -->
+<div class="industry-block" id="ind-moving">
+  <div class="section">
+    <div class="section-title"><span data-es="Mudanzas &mdash; &iquest;Qu&eacute; sabes hacer?" data-en="Moving &mdash; What can you do?"></span></div>
+    <div class="card">
+      <div class="field">
+        <div class="field-label" data-es="Selecciona tus habilidades" data-en="Select your skills"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+          <label class="check-pill"><input type="checkbox" value="residential" data-ind="moving" data-field="skills"> <span data-es="Residencial" data-en="Residential"></span></label>
+          <label class="check-pill"><input type="checkbox" value="commercial" data-ind="moving" data-field="skills"> <span data-es="Comercial / Oficinas" data-en="Commercial / Office"></span></label>
+          <label class="check-pill"><input type="checkbox" value="packing" data-ind="moving" data-field="skills"> <span data-es="Empaque" data-en="Packing"></span></label>
+          <label class="check-pill"><input type="checkbox" value="heavy_items" data-ind="moving" data-field="skills"> <span data-es="Objetos pesados" data-en="Heavy Items"></span></label>
+          <label class="check-pill"><input type="checkbox" value="piano" data-ind="moving" data-field="skills"> <span data-es="Piano / Especiales" data-en="Piano / Specialty"></span></label>
+          <label class="check-pill"><input type="checkbox" value="driving" data-ind="moving" data-field="skills"> <span data-es="Manejo de cami&oacute;n" data-en="Truck Driving"></span></label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="A&ntilde;os de experiencia" data-en="Years of experience"></div>
+        <select class="years-select" id="moving_years">
+          <option value="" disabled selected data-es="Seleccionar" data-en="Select"></option>
+          <option value="0-1" data-es="Menos de 1 a&ntilde;o" data-en="Less than 1 year"></option>
+          <option value="1-3" data-es="1-3 a&ntilde;os" data-en="1-3 years"></option>
+          <option value="3-5" data-es="3-5 a&ntilde;os" data-en="3-5 years"></option>
+          <option value="5-10" data-es="5-10 a&ntilde;os" data-en="5-10 years"></option>
+          <option value="10+" data-es="10+ a&ntilde;os" data-en="10+ years"></option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== INDUSTRY: DELIVERY ==================== -->
+<div class="industry-block" id="ind-delivery">
+  <div class="section">
+    <div class="section-title"><span data-es="Delivery / Conductor &mdash; &iquest;Qu&eacute; sabes hacer?" data-en="Delivery / Driver &mdash; What can you do?"></span></div>
+    <div class="card">
+      <div class="field">
+        <div class="field-label" data-es="Selecciona tus habilidades" data-en="Select your skills"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+          <label class="check-pill"><input type="checkbox" value="own_car" data-ind="delivery" data-field="skills"> <span data-es="Auto propio" data-en="Own Car"></span></label>
+          <label class="check-pill"><input type="checkbox" value="own_van" data-ind="delivery" data-field="skills"> <span data-es="Van propia" data-en="Own Van"></span></label>
+          <label class="check-pill"><input type="checkbox" value="truck" data-ind="delivery" data-field="skills"> <span data-es="Cami&oacute;n" data-en="Truck"></span></label>
+          <label class="check-pill"><input type="checkbox" value="food_delivery" data-ind="delivery" data-field="skills"> <span data-es="Comida" data-en="Food Delivery"></span></label>
+          <label class="check-pill"><input type="checkbox" value="packages" data-ind="delivery" data-field="skills"> <span data-es="Paquetes" data-en="Packages"></span></label>
+          <label class="check-pill"><input type="checkbox" value="route" data-ind="delivery" data-field="skills"> <span data-es="Ruta fija" data-en="Fixed Route"></span></label>
+          <label class="check-pill"><input type="checkbox" value="long_haul" data-ind="delivery" data-field="skills"> <span data-es="Larga distancia" data-en="Long Haul"></span></label>
+          <label class="check-pill"><input type="checkbox" value="gta_knowledge" data-ind="delivery" data-field="skills"> <span data-es="Conozco el GTA" data-en="GTA Knowledge"></span></label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label" data-es="A&ntilde;os de experiencia" data-en="Years of experience"></div>
+        <select class="years-select" id="delivery_years">
           <option value="" disabled selected data-es="Seleccionar" data-en="Select"></option>
           <option value="0-1" data-es="Menos de 1 a&ntilde;o" data-en="Less than 1 year"></option>
           <option value="1-3" data-es="1-3 a&ntilde;os" data-en="1-3 years"></option>
@@ -1405,7 +1629,7 @@ function getRadioValue(name) {
 
 function collectIndustryData() {
   var data = {};
-  var industries = ['construction', 'mechanic', 'cleaning', 'kitchen', 'electrical', 'painting', 'service', 'warehouse', 'maintenance', 'general_labour'];
+  var industries = ['construction', 'mechanic', 'cleaning', 'kitchen', 'electrical', 'painting', 'service', 'warehouse', 'maintenance', 'carpentry', 'plumbing', 'welding', 'landscaping', 'moving', 'delivery', 'general_labour'];
 
   industries.forEach(function(ind) {
     if (selectedIndustries.indexOf(ind) === -1) return;
