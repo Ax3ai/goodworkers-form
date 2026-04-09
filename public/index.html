@@ -900,8 +900,14 @@ function clearSig(btn) {
 
 // ========== ADDRESS AUTOCOMPLETE ==========
 function initAutocomplete() {
-  setupAC('address1', 'ac-dropdown1', 'city1', 'province1', 'postal1');
-  // address2 autocomplete removed (no emergency contact section)
+  var script = document.createElement('script');
+  script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBHXeyL9vYMa6EbDgWhxHC7oLySEYR497Y&libraries=places&v=weekly';
+  script.async = true;
+  script.defer = true;
+  script.onload = function() {
+    setupAC('address1', 'ac-dropdown1', 'city1', 'province1', 'postal1');
+  };
+  document.head.appendChild(script);
 }
 
 function setupAC(inputId, dropdownId, cityId, provinceId, postalId) {
@@ -1010,6 +1016,10 @@ var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSI
 var sbClient = null;
 
 function initSupabase() {
+  if (typeof window.supabase !== 'undefined' && window.supabase.createClient) {
+    sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    return;
+  }
   var script = document.createElement('script');
   script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
   script.onload = function() {
@@ -1097,13 +1107,6 @@ async function submitForm() {
 applyLang();
 initAutocomplete();
 initSupabase();
-</script>
-<script>
-(function() {
-  var s = document.createElement('script');
-  s.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBHXeyL9vYMa6EbDgWhxHC7oLySEYR497Y&libraries=places&v=weekly';
-  document.head.appendChild(s);
-})();
 </script>
 </body>
 </html>
