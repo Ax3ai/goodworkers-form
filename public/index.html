@@ -982,7 +982,7 @@ function setupAC(inputId, dropdownId, cityId, provinceId, postalId) {
 
     try {
       var place = pred.toPlace();
-      await place.fetchFields({ fields: ['addressComponents'] });
+      await place.fetchFields({ fields: ['addressComponents', 'location'] });
       var comps = place.addressComponents || [];
       var streetNum = '', route = '', city = '', prov = '', postal = '';
       comps.forEach(function(c) {
@@ -1002,6 +1002,10 @@ function setupAC(inputId, dropdownId, cityId, provinceId, postalId) {
       cityEl.classList.add('autofilled');
       provEl.classList.add('autofilled');
       postalEl.classList.add('autofilled');
+      if (inputId === 'address1' && place.location) {
+        window._empLat = place.location.lat();
+        window._empLng = place.location.lng();
+      }
     } catch(e) { console.error(e); }
 
     var lib = await google.maps.importLibrary('places');
@@ -1073,6 +1077,8 @@ async function submitForm() {
       middle_name: document.getElementById('mname').value.trim() || null,
       last_name: lname,
       address: document.getElementById('address1').value.trim() || null,
+      latitude: window._empLat || null,
+      longitude: window._empLng || null,
       apt_unit: document.getElementById('apt1').value.trim() || null,
       city: document.getElementById('city1').value.trim() || null,
       province: document.getElementById('province1').value.trim() || null,
